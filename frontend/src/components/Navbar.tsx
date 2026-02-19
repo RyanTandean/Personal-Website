@@ -1,69 +1,72 @@
-import { useLayoutEffect, useState, useRef } from "react";
+import { useLayoutEffect, useState, useRef, useMemo } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { Home, Briefcase, BookOpen } from "lucide-react";
+import { NavItem } from "./NavItem"; // Assuming it's in the same folder
 
 const navItems = [
-  { label: "Home", path: "/" },
-  { label: "Projects", path: "/projects" },
-  { label: "Experience", path: "/experience" },
+  { label: "Home", path: "/", icon: Home },
+  { label: "Projects", path: "/projects", icon: BookOpen },
+  { label: "Experience", path: "/experience", icon: Briefcase },
 ];
 
 export default function Navbar() {
-  const [selected, setSelected] = useState(0);
   const navigate = useNavigate();
   const location = useLocation();
-  const btnRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const [selectorStyle, setSelectorStyle] = useState({
-    left: 0,
-    width: 0,
-    opacity: 0,
-    transition: "left 120ms cubic-bezier(.4,0,.2,1)",
-  });
-
-  useLayoutEffect(() => {
+  const containerRefs = useRef<(HTMLDivElement | null)[]>([]);
+  
+  const activeIndex = useMemo(() => {
     const idx = navItems.findIndex((item) => item.path === location.pathname);
-    if (idx !== -1 && idx !== selected) setSelected(idx);
-    // eslint-disable-next-line
+    return idx === -1 ? 0 : idx;
   }, [location.pathname]);
 
+  const [selectorStyle, setSelectorStyle] = useState({ left: 0, width: 0, opacity: 0 });
+  const [isLoaded, setIsLoaded] = useState(false);
+
   useLayoutEffect(() => {
-    const activeBtn = btnRefs.current[selected];
-    if (activeBtn) {
-      setSelectorStyle((style) => ({
-        ...style,
-        left: activeBtn.offsetLeft,
-        width: activeBtn.offsetWidth,
-        opacity: 1,
-      }));
-    }
-  }, [selected]);
+    const updatePill = () => {
+      const activeItem = containerRefs.current[activeIndex];
+      if (activeItem) {
+        setSelectorStyle({
+          left: activeItem.offsetLeft,
+          width: activeItem.offsetWidth,
+          opacity: 1,
+        });
+      }
+    };
+
+    updatePill();
+    // Re-calculate if the window resizes
+    const timer = setTimeout(() => setIsLoaded(true), 50);
+    window.addEventListener("resize", updatePill);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", updatePill);
+    };
+  }, [activeIndex]);
 
   return (
-    <nav className="fixed top-8 right-10 z-20">
-      <div className="relative flex items-center bg-black/60 border border-white/10 backdrop-blur-md p-1 rounded-full shadow-md">
+    <nav className="fixed bottom-10 left-1/2 -translate-x-1/2 z-1001 antialiased">
+      {/* Container: We keep px-1.5 constant to avoid math shifts */}
+      <div className="relative flex items-center gap-1 bg-white/5 border border-white/10 backdrop-blur-2xl p-1.5 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.4)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-110 will-change-transform">
+        
         <div
-          className="absolute h-[calc(100%-8px)] bg-white/10 rounded-full transition-all duration-300 ease-[cubic-bezier(0.2,0,0,1)] will-change-[left,width]"
+          className="absolute top-1.5 bottom-1.5 rounded-full bg-white/10 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[left,width]"
           style={{
             left: selectorStyle.left,
             width: selectorStyle.width,
-            opacity: selectorStyle.opacity,
+            opacity: isLoaded ? 1 : 0,
+            transition: 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
           }}
         />
+        
         {navItems.map((item, idx) => (
-          <button
+          <NavItem
             key={item.label}
-            ref={(el) => {
-              btnRefs.current[idx] = el;
-            }}
-            onClick={() => {
-              setSelected(idx);
-              navigate(item.path);
-            }}
-            className={`relative z-10 px-6 py-2 text-lg font-semibold transition-opacity duration-200 ${
-              selected === idx ? "opacity-100" : "opacity-40 hover:opacity-100"
-            }`}
-          >
-            {item.label}
-          </button>
+            {...item}
+            isActive={activeIndex === idx}
+            onClick={() => navigate(item.path)}
+            setRef={(el) => { containerRefs.current[idx] = el; }}
+          />
         ))}
       </div>
     </nav>

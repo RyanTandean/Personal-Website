@@ -1,188 +1,18 @@
-@keyframes moteDriftSvg {
-  0% {
-    transform: translate3d(0, 0, 0);
-    opacity: 0;
-  }
-  20% {
-    opacity: 0.6;
-  }
-  80% {
-    opacity: 0.6;
-  }
-  100% {
-    transform: translate3d(12px, -100px, 0);
-    opacity: 0;
-  }
-}
-.mote {
-  position: absolute;
-  border-radius: 9999px;
-  background: radial-gradient(
-    circle,
-    rgba(224, 242, 254, 0.9) 0%,
-    rgba(125, 211, 252, 0.45) 55%,
-    transparent 100%
-  );
-  box-shadow: 0 0 8px rgba(125, 211, 252, 0.24);
-  will-change: transform, opacity;
-}
-
-/* Generic Drift: Subtle side-to-side and upward movement */
-@keyframes moteDrift {
-  0% {
-    transform: translate3d(0, 0, 0);
-    opacity: 0;
-  }
-  20% {
-    opacity: 0.6;
-  }
-  80% {
-    opacity: 0.6;
-  }
-  100% {
-    transform: translate3d(20px, -100px, 0);
-    opacity: 0;
-  }
-}
-
-.mote-1 {
-  animation: moteDrift 18s linear infinite;
-}
-.mote-2 {
-  animation: moteDrift 22s linear infinite;
-  animation-direction: reverse;
-}
-/* Add more variations as needed for .mote-3, .mote-4, etc. with different durations/directions for natural effect */
-@keyframes bubbleRiseA {
-  0% {
-    transform: translate3d(0, 0, 0);
-    opacity: 0;
-  }
-  5% {
-    opacity: 0.5;
-  }
-  100% {
-    transform: translate3d(10px, -5000px, 0);
-    opacity: 0;
-  }
-}
-
-.bubble-rise {
-  position: absolute;
-  width: 32px;
-  height: 32px;
-  border-radius: 9999px;
-  background: radial-gradient(
-    circle at 30% 30%,
-    rgba(255, 255, 255, 0.28),
-    rgba(186, 230, 253, 0.12) 62%,
-    transparent 100%
-  );
-  box-shadow: 0 0 18px 6px rgba(125, 211, 252, 0.18);
-  opacity: 0.92;
-  z-index: 20;
-  animation-name: bubbleRiseA;
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  animation-iteration-count: infinite;
-}
-html,
-body {
-  background: #000;
-  color: #fff;
-}
-
-@keyframes fadein-slideup {
-  from {
-    opacity: 0;
-    transform: translateY(32px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.animate-fadein-slideup {
-  animation: fadein-slideup 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
-}
-.drop-hero-animate {
-  animation:
-    dropHeroIn 1.1s cubic-bezier(0.7, 0.2, 0.2, 1) forwards,
-    dropHeroFade 0.7s 1.1s ease-out forwards;
-}
-
-@keyframes dropHeroIn {
-  0% {
-    transform: translateY(-48vh) scale(0.98);
-    opacity: 0.7;
-  }
-  60% {
-    transform: translateY(0) scale(1.04);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes dropHeroFade {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.splash-bubble-radiate {
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  border-radius: 9999px;
-  background: radial-gradient(
-    circle at 30% 30%,
-    rgba(255, 255, 255, 0.18),
-    rgba(186, 230, 253, 0.08) 62%,
-    transparent 100%
-  );
-  box-shadow: 0 0 12px 2px rgba(125, 211, 252, 0.12);
-  opacity: 0.92;
-  z-index: 21;
-  animation:
-    splashBubbleRadiate 1.1s cubic-bezier(0.7, 0.2, 0.2, 1) forwards,
-    splashBubbleFade 0.7s 1.1s ease-out forwards;
-}
-
-@keyframes splashBubbleRadiate {
-  0% {
-    scale: 0.7;
-    opacity: 0.92;
-  }
-  60% {
-    scale: 1.18;
-    opacity: 1;
-  }
-  100% {
-    scale: 1.32;
-    opacity: 0.98;
-  }
-}
-
-@keyframes splashBubbleFade {
-  0% {
-    opacity: 0.98;
-  }
-  100% {
-    opacity: 0;
-  }
-}
 @import "tailwindcss";
 
 :root {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #020617;
 }
 
+html,
+body {
+  background-color: #020617;
+  color: #fff;
+}
+
+/* --- CORE BACKGROUND --- */
 .beams-bg {
   position: absolute;
   inset: 0;
@@ -191,308 +21,42 @@ body {
   min-height: 100%;
 }
 
-.splash-bubble {
-  position: absolute;
-  left: 50%;
-  top: -32px;
-  width: 32px;
-  height: 32px;
-  border-radius: 9999px;
-  background: radial-gradient(
-    circle at 30% 30%,
-    rgba(255, 255, 255, 0.28),
-    rgba(186, 230, 253, 0.12) 62%,
-    transparent 100%
-  );
-  box-shadow: 0 0 18px 6px rgba(125, 211, 252, 0.18);
-  opacity: 0.92;
-  transform: translateX(-50%);
-  z-index: 20;
-  animation:
-    splashDrop 1.1s cubic-bezier(0.7, 0.2, 0.2, 1) forwards,
-    splashFade 0.7s 1.1s ease-out forwards;
+.mote-element {
+  /* This curve (Ease-in-out) makes the sway feel weighted */
+  animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
 }
 
-.splash-ripple {
-  position: absolute;
-  left: 50%;
-  top: 100%;
-  width: 0px;
-  height: 0px;
-  border-radius: 9999px;
-  background: rgba(186, 230, 253, 0.18);
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  z-index: 21;
-  animation: splashRipple 0.7s 1.1s cubic-bezier(0.7, 0.2, 0.2, 1) forwards;
-}
-
-@keyframes splashDrop1 {
+@keyframes orbitalDrift {
   0% {
-    top: -32px;
-    opacity: 0.92;
-    scale: 1;
-  }
-  60% {
-    top: 4vh;
-    opacity: 1;
-    scale: 1.12;
-  }
-  80% {
-    top: 6vh;
-    opacity: 0.98;
-    scale: 1.18;
-  }
-  100% {
-    top: 8vh;
-    opacity: 0.98;
-    scale: 1.22;
-  }
-}
-@keyframes splashDrop2 {
-  0% {
-    top: -32px;
-    opacity: 0.92;
-    scale: 1;
-  }
-  60% {
-    top: 5vh;
-    opacity: 1;
-    scale: 1.12;
-  }
-  80% {
-    top: 7vh;
-    opacity: 0.98;
-    scale: 1.18;
-  }
-  100% {
-    top: 9vh;
-    opacity: 0.98;
-    scale: 1.22;
-  }
-}
-@keyframes splashDrop3 {
-  0% {
-    top: -32px;
-    opacity: 0.92;
-    scale: 1;
-  }
-  60% {
-    top: 6vh;
-    opacity: 1;
-    scale: 1.12;
-  }
-  80% {
-    top: 8vh;
-    opacity: 0.98;
-    scale: 1.18;
-  }
-  100% {
-    top: 10vh;
-    opacity: 0.98;
-    scale: 1.22;
-  }
-}
-@keyframes splashDrop4 {
-  0% {
-    top: -32px;
-    opacity: 0.92;
-    scale: 1;
-  }
-  60% {
-    top: 7vh;
-    opacity: 1;
-    scale: 1.12;
-  }
-  80% {
-    top: 9vh;
-    opacity: 0.98;
-    scale: 1.18;
-  }
-  100% {
-    top: 11vh;
-    opacity: 0.98;
-    scale: 1.22;
-  }
-}
-@keyframes splashDrop5 {
-  0% {
-    top: -32px;
-    opacity: 0.92;
-    scale: 1;
-  }
-  60% {
-    top: 4vh;
-    opacity: 1;
-    scale: 1.12;
-  }
-  80% {
-    top: 6vh;
-    opacity: 0.98;
-    scale: 1.18;
-  }
-  100% {
-    top: 8vh;
-    opacity: 0.98;
-    scale: 1.22;
-  }
-}
-@keyframes splashDrop6 {
-  0% {
-    top: -32px;
-    opacity: 0.92;
-    scale: 1;
-  }
-  60% {
-    top: 5vh;
-    opacity: 1;
-    scale: 1.12;
-  }
-  80% {
-    top: 7vh;
-    opacity: 0.98;
-    scale: 1.18;
-  }
-  100% {
-    top: 9vh;
-    opacity: 0.98;
-    scale: 1.22;
-  }
-}
-@keyframes splashDrop7 {
-  0% {
-    top: -32px;
-    opacity: 0.92;
-    scale: 1;
-  }
-  60% {
-    top: 6vh;
-    opacity: 1;
-    scale: 1.12;
-  }
-  80% {
-    top: 8vh;
-    opacity: 0.98;
-    scale: 1.18;
-  }
-  100% {
-    top: 10vh;
-    opacity: 0.98;
-    scale: 1.22;
-  }
-}
-@keyframes splashDrop8 {
-  0% {
-    top: -32px;
-    opacity: 0.92;
-    scale: 1;
-  }
-  60% {
-    top: 7vh;
-    opacity: 1;
-    scale: 1.12;
-  }
-  80% {
-    top: 9vh;
-    opacity: 0.98;
-    scale: 1.18;
-  }
-  100% {
-    top: 11vh;
-    opacity: 0.98;
-    scale: 1.22;
-  }
-}
-.bubble-1 {
-  animation-name: splashDrop1, splashFade;
-}
-.bubble-2 {
-  animation-name: splashDrop2, splashFade;
-}
-.bubble-3 {
-  animation-name: splashDrop3, splashFade;
-}
-.bubble-4 {
-  animation-name: splashDrop4, splashFade;
-}
-.bubble-5 {
-  animation-name: splashDrop5, splashFade;
-}
-.bubble-6 {
-  animation-name: splashDrop6, splashFade;
-}
-.bubble-7 {
-  animation-name: splashDrop7, splashFade;
-}
-.bubble-8 {
-  animation-name: splashDrop8, splashFade;
-}
-.bubble-9 {
-  animation-name: splashDrop1, splashFade;
-}
-.bubble-10 {
-  animation-name: splashDrop2, splashFade;
-}
-.bubble-11 {
-  animation-name: splashDrop3, splashFade;
-}
-.bubble-12 {
-  animation-name: splashDrop4, splashFade;
-}
-
-@keyframes splashFade {
-  0% {
-    opacity: 0.98;
-    scale: 1.22;
-  }
-  100% {
+    transform: translate3d(0, 0, 0) scale(1);
     opacity: 0;
-    scale: 1.32;
   }
-}
-
-@keyframes splashRipple {
-  0% {
-    width: 0px;
-    height: 0px;
-    opacity: 0.22;
+  10% { opacity: 1; }
+  /* The Sway points */
+  33% {
+    transform: translate3d(var(--drift-x), -25vh, 0) scale(1.1);
   }
-  60% {
-    width: 44px;
-    height: 44px;
-    opacity: 0.18;
+  66% {
+    transform: translate3d(calc(var(--drift-x) * -1), -50vh, 0) scale(0.9);
   }
+  90% { opacity: 1; }
   100% {
-    width: 72px;
-    height: 72px;
-    opacity: 0.04;
+    /* Ensure this matches the starting X/Scale for a seamless loop */
+    transform: translate3d(0, -75vh, 0) scale(1);
+    opacity: 0;
   }
 }
 
-.surface-ripple {
+
+.motes {
   position: absolute;
-  top: -8%;
-  left: -12%;
-  width: 124%;
-  height: 26vh;
-  background:
-    repeating-linear-gradient(
-      104deg,
-      rgba(186, 230, 253, 0.16) 0 2px,
-      rgba(186, 230, 253, 0) 2px 22px
-    ),
-    linear-gradient(
-      to bottom,
-      rgba(125, 211, 252, 0.26) 0%,
-      rgba(125, 211, 252, 0.08) 46%,
-      transparent 100%
-    );
+  inset: -16%;
   mix-blend-mode: screen;
-  filter: blur(7px);
-  opacity: 0.6;
-  animation: surfaceShimmer 14s ease-in-out infinite alternate;
 }
 
+
+
+/* --- LIGHT BEAMS --- */
 .beam {
   position: absolute;
   top: -36vh;
@@ -514,516 +78,67 @@ body {
   );
 }
 
-.beam-1 {
-  left: -22vw;
-  transform: rotate(-10deg);
-  opacity: 0.48;
-  animation: beamDriftA 12.5s ease-in-out infinite alternate;
+.beam-1 { left: -22vw; transform: rotate(-10deg); opacity: 0.48; animation: beamDriftA 12.5s ease-in-out infinite alternate; }
+.beam-2 { left: 4vw; width: 44vw; transform: rotate(-5deg); opacity: 0.42; animation: beamDriftB 14s ease-in-out infinite alternate; }
+.beam-3 { left: 34vw; width: 46vw; transform: rotate(4deg); opacity: 0.4; animation: beamDriftC 13.5s ease-in-out infinite alternate; }
+.beam-4 { left: 64vw; width: 40vw; transform: rotate(8deg); opacity: 0.36; animation: beamDriftD 15s ease-in-out infinite alternate; }
+
+@keyframes beamDriftA { from { transform: translate3d(-16%, -2%, 0) rotate(-20deg) scaleX(0.92); } to { transform: translate3d(16%, -2%, 0) rotate(-10deg) scaleX(1.08); } }
+@keyframes beamDriftB { from { transform: translate3d(18%, -1%, 0) rotate(-14deg) scaleX(0.9); } to { transform: translate3d(-18%, -1%, 0) rotate(-2deg) scaleX(1.1); } }
+@keyframes beamDriftC { from { transform: translate3d(-17%, -1%, 0) rotate(4deg) scaleX(0.9); } to { transform: translate3d(17%, -1%, 0) rotate(16deg) scaleX(1.09); } }
+@keyframes beamDriftD { from { transform: translate3d(-15%, -2%, 0) rotate(10deg) scaleX(0.9); } to { transform: translate3d(9%, -2%, 0) rotate(22deg) scaleX(1.08); } }
+
+/* --- ATMOSPHERE & WATER --- */
+.surface-ripple {
+  position: absolute;
+  top: -8%;
+  left: -12%;
+  width: 124%;
+  height: 26vh;
+  background:
+    repeating-linear-gradient(104deg, rgba(186, 230, 253, 0.16) 0 2px, transparent 2px 22px),
+    linear-gradient(to bottom, rgba(125, 211, 252, 0.26) 0%, rgba(125, 211, 252, 0.08) 46%, transparent 100%);
+  mix-blend-mode: screen;
+  filter: blur(7px);
+  opacity: 0.6;
+  animation: surfaceShimmer 14s ease-in-out infinite alternate;
 }
 
-.beam-2 {
-  left: 4vw;
-  width: 44vw;
-  transform: rotate(-5deg);
-  opacity: 0.42;
-  animation: beamDriftB 14s ease-in-out infinite alternate;
-}
-
-.beam-3 {
-  left: 34vw;
-  width: 46vw;
-  transform: rotate(4deg);
-  opacity: 0.4;
-  animation: beamDriftC 13.5s ease-in-out infinite alternate;
-}
-
-.beam-4 {
-  left: 64vw;
-  width: 40vw;
-  transform: rotate(8deg);
-  opacity: 0.36;
-  animation: beamDriftD 15s ease-in-out infinite alternate;
+@keyframes surfaceShimmer {
+  from { transform: translate3d(-3%, 0, 0) scaleX(1.02); opacity: 0.5; }
+  to { transform: translate3d(3%, 2%, 0) scaleX(0.98); opacity: 0.68; }
 }
 
 .beam-fog {
   position: absolute;
   inset: -20%;
   background:
-    radial-gradient(
-      62% 40% at 50% 8%,
-      rgba(103, 232, 249, 0.24),
-      transparent 74%
-    ),
-    radial-gradient(
-      54% 38% at 30% 26%,
-      rgba(56, 189, 248, 0.18),
-      transparent 72%
-    ),
-    radial-gradient(
-      50% 34% at 70% 32%,
-      rgba(45, 212, 191, 0.16),
-      transparent 76%
-    );
+    radial-gradient(62% 40% at 50% 8%, rgba(103, 232, 249, 0.24), transparent 74%),
+    radial-gradient(54% 38% at 30% 26%, rgba(56, 189, 248, 0.18), transparent 72%),
+    radial-gradient(50% 34% at 70% 32%, rgba(45, 212, 191, 0.16), transparent 76%);
   mix-blend-mode: screen;
   filter: blur(42px);
   opacity: 0.78;
   animation: beamFog 34s ease-in-out infinite alternate;
 }
 
+@keyframes beamFog { from { transform: scale(1); } to { transform: scale(1.05) translate3d(3%, 2%, 0); } }
+
 .water-tint {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(
-      58% 44% at 50% 12%,
-      rgba(56, 189, 248, 0.1),
-      transparent 72%
-    ),
-    linear-gradient(
-      to bottom,
-      rgba(6, 24, 42, 0.34) 0%,
-      rgba(2, 12, 24, 0.62) 100%
-    );
+    radial-gradient(58% 44% at 50% 12%, rgba(56, 189, 248, 0.1), transparent 72%),
+    linear-gradient(to bottom, rgba(6, 24, 42, 0.34) 0%, rgba(2, 12, 24, 0.62) 100%);
   mix-blend-mode: screen;
   opacity: 0.72;
 }
 
-.motes {
-  position: absolute;
-  inset: -16%;
-  mix-blend-mode: screen;
+/* --- UI ANIMATIONS --- */
+@keyframes fadein-slideup {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
-.mote {
-  position: absolute;
-  border-radius: 9999px;
-  background: radial-gradient(
-    circle,
-    rgba(224, 242, 254, 0.9) 0%,
-    rgba(125, 211, 252, 0.45) 55%,
-    transparent 100%
-  );
-  box-shadow: 0 0 8px rgba(125, 211, 252, 0.24);
-  opacity: 0.42;
-  will-change: transform, opacity;
-}
-
-.mote-1 {
-  left: 10%;
-  top: 78%;
-  width: 4px;
-  height: 4px;
-  animation: moteDriftA 26s ease-in-out infinite;
-}
-
-.mote-2 {
-  left: 24%;
-  top: 66%;
-  width: 3px;
-  height: 3px;
-  opacity: 0.34;
-  animation: moteDriftB 32s ease-in-out infinite;
-}
-
-.mote-3 {
-  left: 38%;
-  top: 84%;
-  width: 5px;
-  height: 5px;
-  opacity: 0.38;
-  animation: moteDriftC 29s ease-in-out infinite;
-}
-
-.mote-4 {
-  left: 54%;
-  top: 72%;
-  width: 3px;
-  height: 3px;
-  opacity: 0.3;
-  animation: moteDriftD 35s ease-in-out infinite;
-}
-
-.mote-5 {
-  left: 66%;
-  top: 82%;
-  width: 4px;
-  height: 4px;
-  opacity: 0.36;
-  animation: moteDriftB 31s ease-in-out infinite;
-}
-
-.mote-6 {
-  left: 79%;
-  top: 70%;
-  width: 5px;
-  height: 5px;
-  opacity: 0.33;
-  animation: moteDriftA 28s ease-in-out infinite;
-}
-
-.mote-7 {
-  left: 88%;
-  top: 86%;
-  width: 3px;
-  height: 3px;
-  opacity: 0.28;
-  animation: moteDriftC 34s ease-in-out infinite;
-}
-
-.mote-8 {
-  left: 15%;
-  top: 90%;
-  width: 4px;
-  height: 4px;
-  opacity: 0.32;
-  animation: moteDriftD 30s ease-in-out infinite;
-}
-
-.bubble {
-  position: absolute;
-  bottom: -20%;
-  border-radius: 9999px;
-  border: 1px solid rgba(186, 230, 253, 0.38);
-  background: radial-gradient(
-    circle at 30% 30%,
-    rgba(255, 255, 255, 0.28),
-    rgba(186, 230, 253, 0.06) 62%,
-    transparent 100%
-  );
-  box-shadow: 0 0 12px rgba(125, 211, 252, 0.2);
-  mix-blend-mode: screen;
-  opacity: 0.5;
-}
-
-.bubble-1 {
-  left: 18%;
-  width: 11px;
-  height: 11px;
-  animation: bubbleRiseA 13s linear infinite;
-}
-
-.bubble-2 {
-  left: 52%;
-  width: 8px;
-  height: 8px;
-  opacity: 0.34;
-  animation: bubbleRiseB 15s linear infinite;
-}
-
-.bubble-3 {
-  left: 76%;
-  width: 13px;
-  height: 13px;
-  opacity: 0.3;
-  animation: bubbleRiseC 17s linear infinite;
-}
-
-.bubble-4 {
-  left: 34%;
-  width: 9px;
-  height: 9px;
-  opacity: 0.27;
-  animation: bubbleRiseB 14s linear infinite;
-  animation-delay: -2s;
-}
-
-.bubble-5 {
-  left: 63%;
-  width: 7px;
-  height: 7px;
-  opacity: 0.22;
-  animation: bubbleRiseA 18s linear infinite;
-  animation-delay: -4s;
-}
-
-.bubble-6 {
-  left: 27%;
-  width: 8px;
-  height: 8px;
-  opacity: 0.2;
-  animation: bubbleRiseC 13s linear infinite;
-  animation-delay: -1.5s;
-}
-
-.bubble-7 {
-  left: 84%;
-  width: 6px;
-  height: 6px;
-  opacity: 0.18;
-  animation: bubbleRiseB 19s linear infinite;
-  animation-delay: -3s;
-}
-
-.bubble-8 {
-  left: 43%;
-  width: 7px;
-  height: 7px;
-  opacity: 0.2;
-  animation: bubbleRiseA 15s linear infinite;
-  animation-delay: -1.5s;
-}
-
-.bubble-9 {
-  left: 71%;
-  width: 6px;
-  height: 6px;
-  opacity: 0.17;
-  animation: bubbleRiseC 20s linear infinite;
-  animation-delay: -4.5s;
-  /* Add more bubbles for 10-12 */
-  .bubble-10 {
-    left: 58%;
-    width: 9px;
-    height: 9px;
-    opacity: 0.19;
-    animation: bubbleRiseB 16s linear infinite;
-    animation-delay: -2.5s;
-  }
-  .bubble-11 {
-    left: 23%;
-    width: 7px;
-    height: 7px;
-    opacity: 0.15;
-    animation: bubbleRiseA 17s linear infinite;
-    animation-delay: -3.5s;
-  }
-  .bubble-12 {
-    left: 67%;
-    width: 8px;
-    height: 8px;
-    opacity: 0.16;
-    animation: bubbleRiseC 14s linear infinite;
-    animation-delay: -2s;
-  }
-}
-
-@keyframes beamDriftA {
-  from {
-    transform: translate3d(-16%, -2%, 0) rotate(-20deg) scaleX(0.92);
-  }
-  to {
-    transform: translate3d(16%, -2%, 0) rotate(-10deg) scaleX(1.08);
-  }
-}
-
-@keyframes beamDriftB {
-  from {
-    transform: translate3d(18%, -1%, 0) rotate(-14deg) scaleX(0.9);
-  }
-  to {
-    transform: translate3d(-18%, -1%, 0) rotate(-2deg) scaleX(1.1);
-  }
-}
-
-@keyframes beamDriftC {
-  from {
-    transform: translate3d(-17%, -1%, 0) rotate(4deg) scaleX(0.9);
-  }
-  to {
-    transform: translate3d(17%, -1%, 0) rotate(16deg) scaleX(1.09);
-  }
-}
-
-@keyframes beamDriftD {
-  from {
-    transform: translate3d(-15%, -2%, 0) rotate(10deg) scaleX(0.9);
-  }
-  to {
-    transform: translate3d(9%, -2%, 0) rotate(22deg) scaleX(1.08);
-  }
-}
-
-@keyframes beamFog {
-  from {
-    transform: translate3d(-2%, 0, 0) scale(1);
-  }
-  to {
-    transform: translate3d(3%, 2%, 0) scale(1.05);
-  }
-}
-
-@keyframes moteDriftA {
-  0% {
-    transform: translate3d(0, 0, 0);
-    opacity: 0.2;
-  }
-  36% {
-    transform: translate3d(8px, -16vh, 0);
-    opacity: 0.38;
-  }
-  70% {
-    transform: translate3d(-4px, -34vh, 0);
-    opacity: 0.24;
-  }
-  100% {
-    transform: translate3d(6px, -52vh, 0);
-    opacity: 0.1;
-  }
-}
-
-@keyframes moteDriftB {
-  0% {
-    transform: translate3d(0, 0, 0);
-    opacity: 0.16;
-  }
-  28% {
-    transform: translate3d(-6px, -14vh, 0);
-    opacity: 0.3;
-  }
-  66% {
-    transform: translate3d(5px, -33vh, 0);
-    opacity: 0.2;
-  }
-  100% {
-    transform: translate3d(-4px, -50vh, 0);
-    opacity: 0.08;
-  }
-}
-
-@keyframes moteDriftC {
-  0% {
-    transform: translate3d(0, 0, 0);
-    opacity: 0.18;
-  }
-  40% {
-    transform: translate3d(4px, -18vh, 0);
-    opacity: 0.3;
-  }
-  74% {
-    transform: translate3d(-7px, -36vh, 0);
-    opacity: 0.19;
-  }
-  100% {
-    transform: translate3d(3px, -54vh, 0);
-    opacity: 0.07;
-  }
-}
-
-@keyframes moteDriftD {
-  0% {
-    transform: translate3d(0, 0, 0);
-    opacity: 0.15;
-  }
-  34% {
-    transform: translate3d(-5px, -15vh, 0);
-    opacity: 0.28;
-  }
-  68% {
-    transform: translate3d(7px, -31vh, 0);
-    opacity: 0.2;
-  }
-  100% {
-    transform: translate3d(-3px, -48vh, 0);
-    opacity: 0.07;
-  }
-}
-
-@keyframes bubbleRiseA {
-  0% {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-  }
-  20% {
-    transform: translate3d(10px, -40vh, 0);
-    opacity: 1;
-  }
-  40% {
-    transform: translate3d(-12px, -80vh, 0);
-    opacity: 1;
-  }
-  60% {
-    transform: translate3d(14px, -120vh, 0);
-    opacity: 1;
-  }
-  80% {
-    transform: translate3d(-16px, -160vh, 0);
-    opacity: 1;
-  }
-  92% {
-    opacity: 0.7;
-  }
-  98% {
-    opacity: 0.2;
-  }
-  100% {
-    transform: translate3d(10px, -200vh, 0);
-    opacity: 0;
-  }
-}
-
-@keyframes bubbleRiseB {
-  0% {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-  }
-  20% {
-    transform: translate3d(-11px, -40vh, 0);
-    opacity: 1;
-  }
-  40% {
-    transform: translate3d(13px, -80vh, 0);
-    opacity: 1;
-  }
-  60% {
-    transform: translate3d(-15px, -120vh, 0);
-    opacity: 1;
-  }
-  80% {
-    transform: translate3d(17px, -160vh, 0);
-    opacity: 1;
-  }
-  92% {
-    opacity: 0.7;
-  }
-  98% {
-    opacity: 0.2;
-  }
-  100% {
-    transform: translate3d(-12px, -200vh, 0);
-    opacity: 0;
-  }
-}
-
-@keyframes bubbleRiseC {
-  0% {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-  }
-  20% {
-    transform: translate3d(14px, -40vh, 0);
-    opacity: 1;
-  }
-  40% {
-    transform: translate3d(-16px, -80vh, 0);
-    opacity: 1;
-  }
-  60% {
-    transform: translate3d(18px, -120vh, 0);
-    opacity: 1;
-  }
-  80% {
-    transform: translate3d(-14px, -160vh, 0);
-    opacity: 1;
-  }
-  92% {
-    opacity: 0.7;
-  }
-  98% {
-    opacity: 0.2;
-  }
-  100% {
-    transform: translate3d(10px, -200vh, 0);
-    opacity: 0;
-  }
-}
-
-@keyframes surfaceShimmer {
-  from {
-    transform: translate3d(-3%, 0, 0) scaleX(1.02);
-    opacity: 0.5;
-  }
-  to {
-    transform: translate3d(3%, 2%, 0) scaleX(0.98);
-    opacity: 0.68;
-  }
+.animate-fadein-slideup {
+  animation: fadein-slideup 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
 }

@@ -1,6 +1,5 @@
 import { memo, useMemo } from "react";
 
-// Deterministic seeded random for stable motes
 function mulberry32(seed: number) {
   return function () {
     let t = (seed += 0x6d2b79f5);
@@ -13,56 +12,40 @@ function mulberry32(seed: number) {
 const MotesLayer = memo(function MotesLayer({ count }: { count: number }) {
   const motes = useMemo(() => {
     const rand = mulberry32(20260216);
-    return Array.from({ length: count }).map((_, i) => {
-      const cx = rand() * 100;
-      const cy = rand() * 100;
-      const r = 0.06 + rand() * 0.14;
-      const opacity = 0.55 + rand() * 0.25;
-      const duration = 120 + rand() * 60;
-      return { cx, cy, r, opacity, duration };
+    return Array.from({ length: count }).map(() => {
+      return {
+        left: rand() * 100,
+        top: rand() * 100,
+        size: 2 + rand() * 4, // Size in pixels
+        opacity: 0.3 + rand() * 0.4,
+        duration: 40 + rand() * 40, // Slower is usually smoother
+      };
     });
   }, [count]);
 
   return (
-    <svg
-      className="motes absolute inset-0 w-full h-full pointer-events-none"
-      viewBox="0 0 100 100"
-      style={{
-        position: "absolute",
-        inset: 0,
-        width: "100%",
-        height: "100%",
-        zIndex: 1,
-      }}
-      aria-hidden="true"
-    >
-      <defs>
-        <radialGradient id="moteGradient" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#fff" stopOpacity="1" />
-          <stop offset="30%" stopColor="#e0f2fe" stopOpacity="0.85" />
-          <stop offset="60%" stopColor="#7dd3fc" stopOpacity="0.35" />
-          <stop offset="90%" stopColor="#7dd3fc" stopOpacity="0.08" />
-          <stop offset="100%" stopColor="#7dd3fc" stopOpacity="0" />
-        </radialGradient>
-      </defs>
+    // Use a DIV container instead of an SVG for DIV motes
+    <div className="motes-container absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 1 }}>
       {motes.map((mote, i) => (
-        <circle
+        <div
           key={i}
-          cx={mote.cx}
-          cy={mote.cy}
-          r={mote.r}
-          fill="url(#moteGradient)"
-          opacity={mote.opacity}
-          stroke="#fff"
-          strokeWidth={0.04}
+          className="mote-element absolute rounded-full"
           style={{
-            animation: `moteDriftSvg ${mote.duration}s linear infinite`,
-            transformOrigin: `${mote.cx}% ${mote.cy}%`,
-            filter: "blur(0.04px)",
-          }}
+            background: 'radial-gradient(circle, #fff 0%, #7dd3fc 40%, transparent 100%)',
+            width: `${mote.size}px`,
+            height: `${mote.size}px`,
+            left: `${mote.left}%`,
+            top: `${mote.top}%`,
+            opacity: mote.opacity,
+            animation: `orbitalDrift ${mote.duration}s infinite linear`,
+            animationDelay: `${-(i * 1.5)}s`,
+            willChange: 'transform, opacity',
+            // @ts-ignore
+            "--drift-x": `${((i * 937) % 30) - 15}px`,
+          } as React.CSSProperties}
         />
       ))}
-    </svg>
+    </div>
   );
 });
 
