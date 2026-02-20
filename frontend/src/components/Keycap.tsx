@@ -1,63 +1,100 @@
-import React from 'react';
+import React from "react";
+import type { ReactNode } from "react";
 
 interface KeycapProps {
-  children: React.ReactNode;
+  children: ReactNode;
   link: string;
-  label: string;
+  rotation?: number;
+  yOffset?: number;
+  xOffset?: number;
 }
 
-export default function Keycap({ children, link, label }: KeycapProps) {
+export default function Keycap({
+  children,
+  link,
+  rotation = 0,
+  yOffset = 0,
+  xOffset = 0,
+}: KeycapProps) {
   return (
-    <div className="flex flex-col items-center gap-6">
-      <a
-        href={link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group relative block w-16 h-16"
-        style={{ perspective: '400px' }}
-      >
-        {/* THE SINGLE PARENT BODY: Handles 3D, Walls, and Shadow */}
-        <div 
-          className="absolute inset-0 rounded-[1.25rem] bg-gradient-to-b from-[#1a1d23] to-[#0a0c10]
-            transition-all duration-150 cubic-bezier(0.23, 1, 0.32, 1)
-            [transform:rotateX(15deg)] [transform-origin:bottom]
-            
-            /* STATIC STATE */
-            shadow-[0_14px_0_0_#0a0c10,0_20px_30px_rgba(0,0,0,0.5)]
+    <a
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group relative block w-16 h-18"
+      style={{
+        transform: `translate(${xOffset}px, ${yOffset}px) rotate(${rotation}deg)`,
+      }}
+    >
+      <div className="absolute inset-0 transition-all duration-100 ease-out group-hover:translate-y-[2px] group-active:translate-y-[6px]">
+        
+        {/* FRONT WALL: Restored Original Deep Tones */}
+        <div
+          className="absolute inset-0"
+          style={{
+            clipPath: "polygon(14% 15%, 86% 15%, 100% 100%, 0% 100%)",
+            background: "linear-gradient(to bottom, #202b36 0%, #0e1820 100%)",
+          }}
+        />
 
-            /* HOVER STATE (Half-press) */
-            group-hover:[transform:rotateX(12deg)_translateY(4px)]
-            group-hover:shadow-[0_10px_0_0_#0a0c10,0_15px_20px_rgba(0,0,0,0.4)]
-            
-            /* ACTIVE STATE (Full-press) */
-            group-active:[transform:rotateX(8deg)_translateY(10px)]
-            group-active:shadow-[0_4px_0_0_#0a0c10,0_8px_10px_rgba(0,0,0,0.3)]"
+        {/* SIDE WALLS: Restored Original Deep Tones */}
+        <div
+          className="absolute inset-0"
+          style={{
+            clipPath: "polygon(0% 25%, 14% 15%, 14% 100%, 0% 100%)",
+            background: "linear-gradient(to bottom, #151e26, #0e1820)",
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            clipPath: "polygon(86% 15%, 100% 25%, 100% 100%, 86% 100%)",
+            background: "linear-gradient(to bottom, #151e26, #0e1820)",
+          }}
+        />
+
+        {/* SUBTLE BLOOM (Behind Face) */}
+        <div 
+          className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-500 blur-lg pointer-events-none"
+          style={{
+            background: "radial-gradient(circle at 50% 40%, #38bdf8 0%, transparent 60%)",
+          }}
+        />
+
+        {/* TOP FACE: Restored Dark Radial Gradient */}
+        <div
+          className="absolute inset-0"
+          style={{
+            clipPath: "polygon(24% 15%, 76% 15%, 76% 78%, 24% 78%)",
+            background: "radial-gradient(ellipse at 45% 35%, #34495a 0%, #22333f 50%, #18262f 100%)",
+          }}
         >
-          {/* THE TOP FACE: Handles the Scoop and Lighting */}
-          <div className="absolute inset-[4px] rounded-[0.9rem] overflow-hidden
-            bg-[#1e232a] border-t-[1.5px] border-white/20 
-            flex items-center justify-center"
-          >
-            {/* 1. Deep Center Shadow */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.8)_0%,transparent_85%)]" />
-            
-            {/* 2. Rear Wall Glow */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.15)_0%,transparent_50%)]" />
-            {/* The "Water Surface" reflection */}
-            <div className="absolute inset-0 opacity-20 pointer-events-none 
-              bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.2)_50%,transparent_75%)] 
-              bg-[length:250%_250%] animate-[shimmer_5s_infinite_linear]" 
-            />
-            {/* 3. Legend (Icon) */}
-            <div className="relative z-10 [transform:rotateX(-15deg)] 
-              text-white/40 group-hover:text-white group-hover:scale-95 
-              transition-all duration-150">
-              {children}
-            </div>
+          {/* Subtle Rim Highlight */}
+          <div
+            className="absolute inset-0 pointer-events-none opacity-20 group-hover:opacity-40 transition-opacity"
+            style={{
+              background: "linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 50%)",
+            }}
+          />
+
+          {/* THE SCOOP */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_70%_at_50%_60%,rgba(0,0,0,0.4)_0%,transparent_100%)] pointer-events-none" />
+
+          {/* LEGEND: White -> Subtle Blue Glow */}
+          <div className="
+            absolute inset-0 flex items-center justify-center 
+            text-white/90 group-hover:text-[#a1dffa] 
+            transition-all duration-300 pb-[22%] 
+            drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]
+            group-hover:drop-shadow-[0_0_10px_rgba(56,189,248,0.5)]
+          ">
+            {children}
           </div>
         </div>
-      </a>
-      
-    </div>
+
+        {/* AMBIENT SHADOW */}
+        <div className="absolute -bottom-1 left-0 right-0 h-4 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.6)_0%,transparent_80%)] blur-md pointer-events-none transition-all" />
+      </div>
+    </a>
   );
 }

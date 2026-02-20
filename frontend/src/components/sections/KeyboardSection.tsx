@@ -3,34 +3,51 @@ import Keycap from "../Keycap";
 
 export default function KeyboardSection() {
   return (
-    <section className="flex flex-col items-center justify-center py-16">
-      {/* Removed the 'case' styling. 
-         The wrapper now only provides the 3D perspective context 
-         and the tight spacing found on real PCBs.
+    <section className="w-full py-6 overflow-visible">
+      {/* Center the key cluster inside the same max-width container as the hero text */}
+      <div className="w-full max-w-5xl px-6 mx-auto">
+      {/* FIX 1: Shared Perspective 
+        By putting perspective: 1200px here, all keys share one vanishing point, 
+        which reduces individual texture distortion.
       */}
       <div 
-        className="flex gap-1.5 p-4" 
-        style={{ perspective: '1200px' }}
+        className="flex gap-2 md:gap-6 items-center"
+        style={{
+          perspective: '1200px',
+          transformStyle: 'preserve-3d'
+        }}
       >
-        <Keycap link="https://github.com" label="Github">
-          <Github size={20} strokeWidth={2.5} />
-        </Keycap>
+        
+        {/* Github */}
+        <div className="animate-[float_6s_infinite_ease-in-out]" style={{ animationDelay: '0s' }}>
+          <Keycap link="https://github.com" rotation={14} yOffset={-4} xOffset={0}>
+            <Github size={24} strokeWidth={2} />
+          </Keycap>
+        </div>
 
-        <Keycap link="https://linkedin.com" label="LinkedIn">
-          <Linkedin size={20} strokeWidth={2.5} className="text-sky-400" />
-        </Keycap>
+        {/* LinkedIn */}
+        <div className="animate-[float_6s_infinite_ease-in-out]" style={{ animationDelay: '1.6s' }}>
+          <Keycap link="https://linkedin.com" rotation={6} yOffset={23} xOffset={0}>
+            <Linkedin size={24} strokeWidth={2} />
+          </Keycap>
+        </div>
 
-        <Keycap link="mailto:your@email.com" label="Email">
-          <Mail size={20} strokeWidth={2.5} className="text-emerald-400" />
-        </Keycap>
+        {/* Mail */}
+        <div className="animate-[float_6s_infinite_ease-in-out]" style={{ animationDelay: '1.8s' }}>
+          <Keycap link="mailto:test@test.com" rotation={-2} yOffset={0} xOffset={0}>
+            <Mail size={24} strokeWidth={2} />
+          </Keycap>
+        </div>
 
-        <Keycap link="/resume.pdf" label="Resume">
-          <FileText size={20} strokeWidth={2.5} className="text-amber-400" />
-        </Keycap>
+        {/* Resume - Added as the 4th "dropped" key */}
+        <div className="animate-[float_6s_infinite_ease-in-out]" style={{ animationDelay: '0.8s' }}>
+          <Keycap link="/resume.pdf" rotation={-17} yOffset={36} xOffset={8}>
+            <FileText size={24} strokeWidth={2} />
+          </Keycap>
+        </div>
+
+        </div>
       </div>
-      
-      {/* Subtle floor shadow to ground the keys since the case is gone */}
-      <div className="mt-[-10px] h-2 w-48 bg-black/40 blur-xl rounded-full pointer-events-none" />
     </section>
   );
 }

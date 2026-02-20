@@ -31,7 +31,9 @@ body {
     transform: translate3d(0, 0, 0) scale(1);
     opacity: 0;
   }
-  10% { opacity: 1; }
+  10% {
+    opacity: 1;
+  }
   /* The Sway points */
   33% {
     transform: translate3d(var(--drift-x), -25vh, 0) scale(1.1);
@@ -39,7 +41,9 @@ body {
   66% {
     transform: translate3d(calc(var(--drift-x) * -1), -50vh, 0) scale(0.9);
   }
-  90% { opacity: 1; }
+  90% {
+    opacity: 1;
+  }
   100% {
     /* Ensure this matches the starting X/Scale for a seamless loop */
     transform: translate3d(0, -75vh, 0) scale(1);
@@ -47,14 +51,11 @@ body {
   }
 }
 
-
 .motes {
   position: absolute;
   inset: -16%;
   mix-blend-mode: screen;
 }
-
-
 
 /* --- LIGHT BEAMS --- */
 .beam {
@@ -78,15 +79,66 @@ body {
   );
 }
 
-.beam-1 { left: -22vw; transform: rotate(-10deg); opacity: 0.48; animation: beamDriftA 12.5s ease-in-out infinite alternate; }
-.beam-2 { left: 4vw; width: 44vw; transform: rotate(-5deg); opacity: 0.42; animation: beamDriftB 14s ease-in-out infinite alternate; }
-.beam-3 { left: 34vw; width: 46vw; transform: rotate(4deg); opacity: 0.4; animation: beamDriftC 13.5s ease-in-out infinite alternate; }
-.beam-4 { left: 64vw; width: 40vw; transform: rotate(8deg); opacity: 0.36; animation: beamDriftD 15s ease-in-out infinite alternate; }
+.beam-1 {
+  left: -22vw;
+  transform: rotate(-10deg);
+  opacity: 0.48;
+  animation: beamDriftA 12.5s ease-in-out infinite alternate;
+}
+.beam-2 {
+  left: 4vw;
+  width: 44vw;
+  transform: rotate(-5deg);
+  opacity: 0.42;
+  animation: beamDriftB 14s ease-in-out infinite alternate;
+}
+.beam-3 {
+  left: 34vw;
+  width: 46vw;
+  transform: rotate(4deg);
+  opacity: 0.4;
+  animation: beamDriftC 13.5s ease-in-out infinite alternate;
+}
+.beam-4 {
+  left: 64vw;
+  width: 40vw;
+  transform: rotate(8deg);
+  opacity: 0.36;
+  animation: beamDriftD 15s ease-in-out infinite alternate;
+}
 
-@keyframes beamDriftA { from { transform: translate3d(-16%, -2%, 0) rotate(-20deg) scaleX(0.92); } to { transform: translate3d(16%, -2%, 0) rotate(-10deg) scaleX(1.08); } }
-@keyframes beamDriftB { from { transform: translate3d(18%, -1%, 0) rotate(-14deg) scaleX(0.9); } to { transform: translate3d(-18%, -1%, 0) rotate(-2deg) scaleX(1.1); } }
-@keyframes beamDriftC { from { transform: translate3d(-17%, -1%, 0) rotate(4deg) scaleX(0.9); } to { transform: translate3d(17%, -1%, 0) rotate(16deg) scaleX(1.09); } }
-@keyframes beamDriftD { from { transform: translate3d(-15%, -2%, 0) rotate(10deg) scaleX(0.9); } to { transform: translate3d(9%, -2%, 0) rotate(22deg) scaleX(1.08); } }
+@keyframes beamDriftA {
+  from {
+    transform: translate3d(-16%, -2%, 0) rotate(-20deg) scaleX(0.92);
+  }
+  to {
+    transform: translate3d(16%, -2%, 0) rotate(-10deg) scaleX(1.08);
+  }
+}
+@keyframes beamDriftB {
+  from {
+    transform: translate3d(18%, -1%, 0) rotate(-14deg) scaleX(0.9);
+  }
+  to {
+    transform: translate3d(-18%, -1%, 0) rotate(-2deg) scaleX(1.1);
+  }
+}
+@keyframes beamDriftC {
+  from {
+    transform: translate3d(-17%, -1%, 0) rotate(4deg) scaleX(0.9);
+  }
+  to {
+    transform: translate3d(17%, -1%, 0) rotate(16deg) scaleX(1.09);
+  }
+}
+@keyframes beamDriftD {
+  from {
+    transform: translate3d(-15%, -2%, 0) rotate(10deg) scaleX(0.9);
+  }
+  to {
+    transform: translate3d(9%, -2%, 0) rotate(22deg) scaleX(1.08);
+  }
+}
 
 /* --- ATMOSPHERE & WATER --- */
 .surface-ripple {
@@ -96,8 +148,17 @@ body {
   width: 124%;
   height: 26vh;
   background:
-    repeating-linear-gradient(104deg, rgba(186, 230, 253, 0.16) 0 2px, transparent 2px 22px),
-    linear-gradient(to bottom, rgba(125, 211, 252, 0.26) 0%, rgba(125, 211, 252, 0.08) 46%, transparent 100%);
+    repeating-linear-gradient(
+      104deg,
+      rgba(186, 230, 253, 0.16) 0 2px,
+      transparent 2px 22px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(125, 211, 252, 0.26) 0%,
+      rgba(125, 211, 252, 0.08) 46%,
+      transparent 100%
+    );
   mix-blend-mode: screen;
   filter: blur(7px);
   opacity: 0.6;
@@ -105,40 +166,92 @@ body {
 }
 
 @keyframes surfaceShimmer {
-  from { transform: translate3d(-3%, 0, 0) scaleX(1.02); opacity: 0.5; }
-  to { transform: translate3d(3%, 2%, 0) scaleX(0.98); opacity: 0.68; }
+  from {
+    transform: translate3d(-3%, 0, 0) scaleX(1.02);
+    opacity: 0.5;
+  }
+  to {
+    transform: translate3d(3%, 2%, 0) scaleX(0.98);
+    opacity: 0.68;
+  }
 }
 
 .beam-fog {
   position: absolute;
   inset: -20%;
   background:
-    radial-gradient(62% 40% at 50% 8%, rgba(103, 232, 249, 0.24), transparent 74%),
-    radial-gradient(54% 38% at 30% 26%, rgba(56, 189, 248, 0.18), transparent 72%),
-    radial-gradient(50% 34% at 70% 32%, rgba(45, 212, 191, 0.16), transparent 76%);
+    radial-gradient(
+      62% 40% at 50% 8%,
+      rgba(103, 232, 249, 0.24),
+      transparent 74%
+    ),
+    radial-gradient(
+      54% 38% at 30% 26%,
+      rgba(56, 189, 248, 0.18),
+      transparent 72%
+    ),
+    radial-gradient(
+      50% 34% at 70% 32%,
+      rgba(45, 212, 191, 0.16),
+      transparent 76%
+    );
   mix-blend-mode: screen;
   filter: blur(42px);
   opacity: 0.78;
   animation: beamFog 34s ease-in-out infinite alternate;
 }
 
-@keyframes beamFog { from { transform: scale(1); } to { transform: scale(1.05) translate3d(3%, 2%, 0); } }
+@keyframes beamFog {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05) translate3d(3%, 2%, 0);
+  }
+}
 
 .water-tint {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(58% 44% at 50% 12%, rgba(56, 189, 248, 0.1), transparent 72%),
-    linear-gradient(to bottom, rgba(6, 24, 42, 0.34) 0%, rgba(2, 12, 24, 0.62) 100%);
+    radial-gradient(
+      58% 44% at 50% 12%,
+      rgba(56, 189, 248, 0.1),
+      transparent 72%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(6, 24, 42, 0.34) 0%,
+      rgba(2, 12, 24, 0.62) 100%
+    );
   mix-blend-mode: screen;
   opacity: 0.72;
 }
 
 /* --- UI ANIMATIONS --- */
 @keyframes fadein-slideup {
-  from { opacity: 0; transform: translateY(32px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .animate-fadein-slideup {
   animation: fadein-slideup 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* subtle float used for keycaps */
+@keyframes float {
+  0% {
+    transform: translateY(0px) rotateZ(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotateZ(-0.6deg);
+  }
+  100% {
+    transform: translateY(0px) rotateZ(0deg);
+  }
 }

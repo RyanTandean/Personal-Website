@@ -1,5 +1,3 @@
-
-
 import Navbar from "./components/Navbar";
 import Experience from "./components/sections/Experiences";
 import { myExperiences } from "./data/experience";
@@ -8,19 +6,16 @@ import { myProjects } from "./data/project";
 import HeroSection from "./components/HeroSection";
 import BackgroundAbyss from "./components/BackgroundAbyss";
 import GradualBlur from "./components/GradualBlur";
-import KeyboardSection from "./components/sections/KeyboardSection";
 
 export default function App() {
   return (
     <main className="relative min-h-screen bg-[#020617] text-white">
       {/* Add this as the very first thing inside your background div */}
-      
-      
+
       <BackgroundAbyss />
       {/* CONTENT LAYER */}
       <div className="relative z-30 w-full">
         <HeroSection />
-        <KeyboardSection />
         <Experience items={myExperiences} />
         <Projects items={myProjects} />
       </div>
