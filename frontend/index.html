@@ -1,11 +1,34 @@
 <!doctype html>
-<html lang="en" style="background-color: #053c42;">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/src/assets/circlewave.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#000000" />
-    <title>Ryan Tandean</title>
+    <meta name="theme-color" content="#053c42" /> <title>Ryan Tandean</title>
+
+      <style>
+        /* 1. Remove all default spacing to prevent shifting */
+        html, body, #root {
+          margin: 0;
+          padding: 0;
+          width: 100%;
+          height: 100%;
+          background-color: #000000; /* Base fallback */
+          
+        }
+
+        /* 2. This matches your "FULL-HEIGHT GRADIENT OVERLAY" exactly */
+        #root {
+          background: linear-gradient(
+            to bottom, 
+            rgba(2, 50, 50, 1) 0%, 
+            rgba(2, 36, 48, 0.6) 35%, 
+            rgba(2, 24, 36, 0.6) 65%, 
+            #000000 100%
+          );
+          background-attachment: fixed;
+        }
+      </style>
   </head>
   <body>
     <div id="root"></div>

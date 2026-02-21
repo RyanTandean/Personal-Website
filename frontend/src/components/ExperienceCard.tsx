@@ -1,44 +1,89 @@
+import { useRef, useState } from "react";
 import type { Experience } from "../types/experience";
 
-export default function ExperienceCard({
-  experience,
-}: {
-  experience: Experience;
-}) {
-  // Optionally, you can add an image property to Experience type and data for a background image
-  // For now, fallback to a colored background if no image
+export default function ExperienceCard({ experience }: { experience: Experience }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [overlayOpacity, setOverlayOpacity] = useState(0);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    // Set the CSS variables so the background can track the mouse
+    cardRef.current.style.setProperty("--mouse-x", `${x}px`);
+    cardRef.current.style.setProperty("--mouse-y", `${y}px`);
+  };
+
   return (
-    <div className="group relative flex-col rounded-4xl bg-black/40 border border-white/10 transition-all duration-200 hover:border-white/30 hover:shadow-[0_0_16px_4px_rgba(56,189,248,0.22),0_0_32px_8px_rgba(125,211,252,0.12)] rounded-b-4xl">
-      {/* Background overlay (no image available for experience) */}
-      <div className="absolute inset-0 z-0 bg-linear-to-t from-black via-black/80 to-transparent rounded-4xl" />
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setOverlayOpacity(1)}
+      onMouseLeave={() => setOverlayOpacity(0)}
+      className="relative z-30 isolate flex flex-col rounded-3xl bg-white/[0.03] backdrop-blur-xs border border-white/10 overflow-hidden transition-all duration-500 hover:bg-white/[0.06] hover:border-white/20"
+    >
+      {/* THE SPOTLIGHT OVERLAY */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-500"
+        style={{
+          opacity: overlayOpacity,
+          background: `radial-gradient(
+            600px circle at var(--mouse-x) var(--mouse-y), 
+            rgba(6, 212, 179, 0.15), 
+            transparent 40%
+          )`,
+        }}
+      />
 
-      <div className="relative z-10 p-8 flex flex-col h-full">
-        <div className="flex items-center justify-between mt-2 mb-1 gap-2">
-          <h3 className="text-xl font-medium text-white [text-shadow:0_0_15px_rgba(255,255,255,0.2)]">
-            {experience.company}
-          </h3>
-          <span className="text-gray-300/80 font-medium tracking-wide text-base whitespace-nowrap text-right">
-            {experience.title}
-          </span>
-        </div>
-        <div className="flex items-center justify-between mb-1 gap-2">
-          <span className="text-[10px] tracking-[0.3em] text-white/40 font-bold uppercase">
-            {experience.start} — {experience.end}
-          </span>
-          <span className="text-[10px] tracking-[0.2em] text-gray-400/60 font-bold uppercase whitespace-nowrap text-right">
-            {experience.location}
-          </span>
+      {/* BORDER ILLUMINATION (Optional: Makes the border glow near the mouse) */}
+      <div
+        className="pointer-events-none absolute -inset-px z-10 rounded-3xl transition-opacity duration-500"
+        style={{
+          opacity: overlayOpacity,
+          background: `radial-gradient(
+            300px circle at var(--mouse-x) var(--mouse-y), 
+            rgba(6, 212, 179, 0.4), 
+            transparent 80%
+          )`,
+          WebkitMaskImage: `linear-gradient(black, black), linear-gradient(black, black)`,
+          WebkitMaskComposite: "xor",
+          maskComposite: "exclude",
+          padding: "1px",
+        }}
+      />
+
+      <div className="relative z-20 p-8 flex flex-col h-full">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h3 className="text-xl font-semibold text-white tracking-tight">
+              {experience.company}
+            </h3>
+            <p className="text-[#06d4b3] text-sm font-medium">
+              {experience.title}
+            </p>
+          </div>
+          <div className="text-right shrink-0">
+            <span className="block text-[10px] tracking-widest text-white/30 font-bold uppercase">
+              {experience.location}
+            </span>
+            <span className="text-[10px] text-[#06d4b3]/50 font-bold">
+              {experience.start} — {experience.end}
+            </span>
+          </div>
         </div>
 
-        <p className="mt-2 text-gray-400 font-light leading-relaxed text-sm line-clamp-4">
+        <p className="mt-6 z-30 text-gray-400 font-light leading-relaxed text-sm line-clamp-3">
           {experience.description}
         </p>
 
-        <div className="pt-6 flex flex-wrap gap-2">
-          {experience.technologies.slice(0, 4).map((tech) => (
+        <div className="mt-auto pt-8 flex flex-wrap gap-2">
+          {experience.technologies.slice(0, 5).map((tech) => (
             <span
               key={tech}
-              className="px-2 py-1 text-[9px] uppercase tracking-widest bg-white/5 border border-white/10 rounded text-white/50"
+              className="relative px-2.5 py-0.5 text-[10px] font-medium tracking-wider bg-white/[0.05] border border-white/5 rounded-full text-white/40 z-30"
             >
               {tech}
             </span>

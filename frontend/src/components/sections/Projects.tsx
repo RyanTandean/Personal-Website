@@ -4,10 +4,10 @@ import type { Project } from "../../types/project";
 
 interface ProjectsProps {
   items: Project[];
+  onProjectClick: (projectId: string) => void; // Added this
 }
 
-export default function Projects({ items }: ProjectsProps) {
-  // We filter for featured projects here to keep the main App logic simple
+export default function Projects({ items, onProjectClick }: ProjectsProps) {
   const featuredProjects = items.filter(p => p.featured);
 
   return (
@@ -17,11 +17,12 @@ export default function Projects({ items }: ProjectsProps) {
           Projects
         </h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuredProjects.map((project, idx) => (
             <div 
               key={project.id} 
-              className="animate-fadein-slideup" 
+              onClick={() => onProjectClick(project.title)} // Trigger navigation
+              className="animate-fadein-slideup cursor-pointer active:scale-[0.98] transition-transform" 
               style={{ animationDelay: `${0.1 + idx * 0.1}s` }}
             >
               <ProjectCard project={project} />

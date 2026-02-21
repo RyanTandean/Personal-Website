@@ -11,6 +11,19 @@ body {
   background-color: #020617;
   color: #fff;
 }
+.preload * {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}
+
+.animate-gpu {
+  backface-visibility: hidden;
+  perspective: 1000px;
+  transform: translateZ(0); /* Triggers hardware acceleration */
+}
 
 /* --- CORE BACKGROUND --- */
 .beams-bg {

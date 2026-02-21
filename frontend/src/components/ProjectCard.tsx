@@ -1,78 +1,107 @@
+import { useRef } from "react";
 import type { Project } from "../types/project";
-import { useState } from "react";
 
 export default function ProjectCard({ project }: { project: Project }) {
-  const [imgError, setImgError] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const xPct = ((e.clientX - rect.left) / rect.width) * 100;
+    const yPct = ((e.clientY - rect.top) / rect.height) * 100;
+    
+    cardRef.current.style.setProperty("--mouse-x", `${xPct}%`);
+    cardRef.current.style.setProperty("--mouse-y", `${yPct}%`);
+  };
+
   return (
-    <div className="group relative flex-col h-112.5 rounded-3xl bg-black/40 border border-white/10 backdrop-blur-md transition-all duration-200 hover:border-white/30 hover:shadow-[0_0_16px_4px_rgba(56,189,248,0.22),0_0_32px_8px_rgba(125,211,252,0.12)]">
-      {/* Project Image with Underwater Mask */}
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      className="group relative flex flex-col h-[450px] rounded-3xl bg-[#0a101f]/60 border border-white/10 backdrop-blur-xl overflow-hidden transition-all duration-500 hover:border-[#06d4b3]/40 hover:shadow-[0_0_40px_-10px_rgba(6,212,179,0.2)] isolate cursor-pointer active:scale-[0.98]"
+    >
+      {/* 1. IMAGE LAYER */}
       <div className="absolute inset-0 z-0">
-        {!imgError ? (
-          <img
-            src={project.image}
-            alt={project.title}
-            className="w-full h-full object-cover opacity-20 group-hover:opacity-40 transition-opacity duration-700 grayscale group-hover:grayscale-0 rounded-3xl"
-            onError={() => setImgError(true)}
-          />
-        ) : (
-          <div className="flex items-center justify-center w-full h-full bg-black/60">
-            <span className="text-white/60 text-center text-xs px-2">
-              {project.title}
-            </span>
-          </div>
-        )}
-        {/* Gradient Overlay to ensure text readability */}
-        <div className="absolute inset-0 bg-linear-to-t from-black via-black/80 to-transparent rounded-3xl" />
+        <img
+          src={project.image}
+          alt={project.title}
+          className="w-full h-full object-cover opacity-30 grayscale-[50%] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000 ease-out"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/40 to-transparent z-[1]" />
       </div>
 
+      {/* 2. THE "GLINT" */}
+      <div 
+        className="pointer-events-none absolute inset-0 z-[2] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{
+          background: `radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.12) 0%, transparent 50%)`
+        }}
+      />
+
+      {/* CONTENT */}
       <div className="relative z-10 p-8 flex flex-col h-full">
         <div className="flex justify-between items-start">
-          <span className="text-[10px] tracking-[0.3em] text-white/40 font-bold uppercase">
-            {project.year}{" "}
-            {project.isHackathon &&
-              `// ${project.hackathonName || "Hackathon"}`}
-          </span>
+          <div className="flex flex-col gap-1">
+            <span className="text-[10px] tracking-[0.3em] text-[#06d4b3] font-bold uppercase opacity-80">
+              {project.year}
+            </span>
+            {project.isHackathon && (
+              <span className="text-[9px] text-white/30 uppercase tracking-widest italic font-medium">
+                {project.hackathonName || "Hackathon Entry"}
+              </span>
+            )}
+          </div>
           {project.featured && (
-            <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981]" />
+            <span className="px-2 py-0.5 rounded-full border border-emerald-500/50 bg-emerald-500/10 text-[9px] text-emerald-400 font-bold uppercase tracking-tight shadow-[0_0_10px_rgba(16,185,129,0.2)]">
+              Featured
+            </span>
           )}
         </div>
 
-        <h3 className="mt-4 text-xl font-medium text-white [text-shadow:0_0_15px_rgba(255,255,255,0.2)]">
+        <h3 className="mt-6 text-2xl font-bold text-white tracking-tight group-hover:text-[#06d4b3] transition-colors duration-300">
           {project.title}
         </h3>
 
-        <p className="mt-4 text-gray-400 font-light leading-relaxed text-sm line-clamp-4">
+        <p className="mt-3 text-gray-400/90 font-light leading-relaxed text-sm line-clamp-3">
           {project.description}
         </p>
 
-        <div className="mt-auto pt-6 flex flex-wrap gap-2">
-          {project.technologies.slice(0, 4).map((tech) => (
+        {/* REFINED LINKS: We stop propagation so clicking these doesn't trigger the card's page-swap */}
+        <div className="mt-6 flex gap-6">
+          {project.githubUrl && (
+            <a 
+              href={project.githubUrl} 
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="z-20 text-[11px] font-bold text-white/40 hover:text-white transition-colors flex items-center gap-2 uppercase tracking-tighter"
+            >
+              View Code <span className="text-[#06d4b3]">→</span>
+            </a>
+          )}
+          {project.liveUrl && (
+            <a 
+              href={project.liveUrl} 
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="z-20 text-[11px] font-bold text-white/40 hover:text-white transition-colors flex items-center gap-2 uppercase tracking-tighter"
+            >
+              Live Demo <span className="text-[#06d4b3]">↗</span>
+            </a>
+          )}
+        </div>
+
+        {/* TECH STACK */}
+        <div className="mt-auto pt-6 flex flex-wrap gap-1.5">
+          {project.technologies.slice(0, 5).map((tech) => (
             <span
               key={tech}
-              className="px-2 py-1 text-[9px] uppercase tracking-widest bg-white/5 border border-white/10 rounded text-white/50"
+              className="px-2 py-0.5 text-[9px] font-semibold bg-white/[0.03] border border-white/5 rounded text-white/40 group-hover:text-white/60 group-hover:border-white/20 transition-all"
             >
               {tech}
             </span>
           ))}
-        </div>
-
-        <div className="mt-6 flex gap-4">
-          {project.githubUrl && (
-            <a
-              href={project.githubUrl}
-              className="text-xs text-white/30 hover:text-white transition-colors uppercase tracking-widest"
-            >
-              Code
-            </a>
-          )}
-          {project.liveUrl && (
-            <a
-              href={project.liveUrl}
-              className="text-xs text-white/30 hover:text-white transition-colors uppercase tracking-widest"
-            >
-              Demo
-            </a>
-          )}
         </div>
       </div>
     </div>

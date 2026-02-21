@@ -8,7 +8,7 @@ interface ExperiencesProps {
 
 export default function Experiences({ items }: ExperiencesProps) {
   return (
-    <section className="relative w-full flex flex-col items-center py-32">
+    <section className="relative w-full flex flex-col items-center py-32 z-30">
       <div className="w-full max-w-5xl px-6">
         <h2 className="text-2xl md:text-3xl font-semibold mb-12 tracking-wide text-white text-center [text-shadow:0_0_8px_rgba(56,189,248,0.55)]">
           Experience
