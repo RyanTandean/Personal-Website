@@ -14,7 +14,10 @@ interface MotesLayerProps {
   depth?: number; // 0 to 1
 }
 
-const MotesLayer = memo(function MotesLayer({ count, depth = 0 }: MotesLayerProps) {
+const MotesLayer = memo(function MotesLayer({
+  count,
+  depth = 0,
+}: MotesLayerProps) {
   const motes = useMemo(() => {
     const rand = mulberry32(20260216);
     return Array.from({ length: count }).map(() => {
@@ -29,37 +32,39 @@ const MotesLayer = memo(function MotesLayer({ count, depth = 0 }: MotesLayerProp
   }, [count]);
 
   return (
-    <div 
+    <div
       className="motes-container absolute inset-0 overflow-hidden pointer-events-none transition-transform duration-700 ease-out"
-      style={{ 
-        // Parallax: As you scroll down (depth increases), motes move UP 
-        // Adjust the -100px to -200px if you want more aggressive parallax
+      style={{
+        // Parallax: As you scroll down (depth increases), motes move UP
         transform: `translate3d(0, ${depth * -500}px, 0)`,
-        willChange: 'transform'
+        // keep will-change on container only to avoid promoting many layers
+        willChange: "transform",
       }}
     >
       {motes.map((mote, i) => (
         <div
           key={i}
           className="mote-element absolute rounded-full"
-          style={{
-            background: 'radial-gradient(circle, #fff 0%, #7dd3fc 40%, transparent 100%)',
-            width: `${mote.size}px`,
-            height: `${mote.size}px`,
-            left: `${mote.left}%`,
-            top: `${mote.top}%`,
-            opacity: mote.opacity,
-            
-            // Apply speed multiplier based on depth (slower in the deep)
-            animation: `orbitalDrift ${mote.duration * (1 + depth)}s infinite linear`,
-            animationDelay: `${-(i * 1.5)}s`,
-            
-            willChange: 'transform', 
-            transform: 'translate3d(0,0,0)',
-            WebkitFontSmoothing: 'antialiased', 
-            // @ts-ignore
-            "--drift-x": `${((i * 937) % 30) - 15}px`,
-          } as React.CSSProperties}
+          style={
+            {
+              background:
+                "radial-gradient(circle, #fff 0%, #7dd3fc 40%, transparent 100%)",
+              width: `${mote.size}px`,
+              height: `${mote.size}px`,
+              left: `${mote.left}%`,
+              top: `${mote.top}%`,
+              opacity: mote.opacity,
+
+              // Apply speed multiplier based on depth (slower in the deep)
+              animation: `orbitalDrift ${mote.duration * (1 + depth)}s infinite linear`,
+              animationDelay: `${-(i * 1.5)}s`,
+
+              transform: "translate3d(0,0,0)",
+              WebkitFontSmoothing: "antialiased",
+              // @ts-ignore
+              "--drift-x": `${((i * 937) % 30) - 15}px`,
+            } as React.CSSProperties
+          }
         />
       ))}
     </div>

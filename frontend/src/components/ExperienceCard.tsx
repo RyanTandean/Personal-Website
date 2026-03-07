@@ -1,9 +1,17 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useId } from "react";
 import type { Experience } from "../types/experience";
+import Tag from "./Tag";
 
-export default function ExperienceCard({ experience }: { experience: Experience }) {
+export default function ExperienceCard({
+  experience,
+}: {
+  experience: Experience;
+}) {
   const cardRef = useRef<HTMLDivElement>(null);
+
   const [overlayOpacity, setOverlayOpacity] = useState(0);
+  const [open, setOpen] = useState(false);
+  const detailsId = `exp-${useId()}`;
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
@@ -21,9 +29,9 @@ export default function ExperienceCard({ experience }: { experience: Experience 
     <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setOverlayOpacity(1)}
+      onMouseEnter={() => setOverlayOpacity(0.35)}
       onMouseLeave={() => setOverlayOpacity(0)}
-      className="relative z-30 isolate flex flex-col rounded-3xl bg-white/[0.03] backdrop-blur-xs border border-white/10 overflow-hidden transition-all duration-500 hover:bg-white/[0.06] hover:border-white/20"
+      className="glow-breathe antialiased relative z-30 isolate group flex flex-col rounded-3xl min-h-48 sm:min-h-56 md:min-h-64 bg-white/[0.015] backdrop-blur-xs border border-white/10 overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:border-[#06d4b3]/40 hover:shadow-[0_0_40px_-10px_rgba(6,212,179,0.18)]"
     >
       {/* THE SPOTLIGHT OVERLAY */}
       <div
@@ -55,38 +63,62 @@ export default function ExperienceCard({ experience }: { experience: Experience 
         }}
       />
 
-      <div className="relative z-20 p-8 flex flex-col h-full">
+      <div className="relative z-20 p-6 sm:p-8 flex flex-col h-full">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <h3 className="text-xl font-semibold text-white tracking-tight">
+            <h3 className="text-xl md:text-2xl font-semibold text-white tracking-tight transition-colors duration-300 group-hover:text-[#06d4b3]">
               {experience.company}
             </h3>
-            <p className="text-[#06d4b3] text-sm font-medium">
+            <p className="text-[#06d4b3] text-base md:text-lg font-medium">
               {experience.title}
             </p>
           </div>
           <div className="text-right shrink-0">
-            <span className="block text-[10px] tracking-widest text-white/30 font-bold uppercase">
+            <span className="block text-sm tracking-wider text-white/30 font-bold uppercase">
               {experience.location}
             </span>
-            <span className="text-[10px] text-[#06d4b3]/50 font-bold">
+            <span className="text-sm md:text-base text-[#06d4b3]/60 font-bold">
               {experience.start} — {experience.end}
             </span>
           </div>
         </div>
-
-        <p className="mt-6 z-30 text-gray-400 font-light leading-relaxed text-sm line-clamp-3">
+        <p
+          className={`mt-6 z-30 text-gray-300 font-light leading-relaxed text-base md:text-lg ${open ? "" : "line-clamp-3"}`}
+        >
           {experience.description}
         </p>
 
+        <div className="mt-3">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setOpen(!open);
+            }}
+            aria-expanded={open}
+            aria-controls={detailsId}
+            className="text-sm font-semibold text-white/70 hover:text-white transition-colors"
+          >
+            {open ? "Show less" : "Read more"}
+          </button>
+
+          <div
+            id={detailsId}
+            aria-hidden={!open}
+            className={`mt-3 overflow-hidden transition-[max-height,opacity] duration-300 ${open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}
+          >
+            {experience.points?.length ? (
+              <ul className="text-gray-300 text-sm space-y-2">
+                {experience.points.map((p, i) => (
+                  <li key={i}>• {p}</li>
+                ))}
+              </ul>
+            ) : null}
+          </div>
+        </div>
+
         <div className="mt-auto pt-8 flex flex-wrap gap-2">
           {experience.technologies.slice(0, 5).map((tech) => (
-            <span
-              key={tech}
-              className="relative px-2.5 py-0.5 text-[10px] font-medium tracking-wider bg-white/[0.05] border border-white/5 rounded-full text-white/40 z-30"
-            >
-              {tech}
-            </span>
+            <Tag key={tech} name={tech} />
           ))}
         </div>
       </div>
