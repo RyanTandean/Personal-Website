@@ -12,6 +12,8 @@ export default function ExperienceCard({
   const [overlayOpacity, setOverlayOpacity] = useState(0);
   const [open, setOpen] = useState(false);
   const detailsId = `exp-${useId()}`;
+  const titleId = `exp-title-${useId()}`;
+  const descId = `exp-desc-${useId()}`;
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
@@ -31,7 +33,17 @@ export default function ExperienceCard({
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setOverlayOpacity(0.35)}
       onMouseLeave={() => setOverlayOpacity(0)}
-      className="glow-breathe antialiased relative z-30 isolate group flex flex-col rounded-3xl min-h-48 sm:min-h-56 md:min-h-64 bg-white/[0.015] backdrop-blur-xs border border-white/10 overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:border-[#06d4b3]/40 hover:shadow-[0_0_40px_-10px_rgba(6,212,179,0.18)]"
+      role="article"
+      aria-labelledby={titleId}
+      aria-describedby={descId}
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.target !== e.currentTarget) return;
+        if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
+          setOpen((s) => !s);
+        }
+      }}
+      className="glow-breathe antialiased relative z-30 isolate group flex flex-col rounded-3xl min-h-48 sm:min-h-56 md:min-h-64 bg-white/[0.015] backdrop-blur-xs border border-white/10 overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:border-[#06d4b3]/40 hover:shadow-[0_0_40px_-10px_rgba(6,212,179,0.18)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
     >
       {/* THE SPOTLIGHT OVERLAY */}
       <div
@@ -65,13 +77,27 @@ export default function ExperienceCard({
 
       <div className="relative z-20 p-6 sm:p-8 flex flex-col h-full">
         <div className="flex items-start justify-between gap-4">
-          <div>
-            <h3 className="text-xl md:text-2xl font-semibold text-white tracking-tight transition-colors duration-300 group-hover:text-[#06d4b3]">
-              {experience.company}
-            </h3>
-            <p className="text-[#06d4b3] text-base md:text-lg font-medium">
-              {experience.title}
-            </p>
+          <div className="flex items-center gap-4">
+            {experience.logo ? (
+              <img
+                src={experience.logo}
+                alt={experience.logoAlt ?? `${experience.company} logo`}
+                className="w-12 h-12 rounded-md object-contain bg-white/5 p-1"
+                loading="lazy"
+              />
+            ) : null}
+
+            <div>
+              <h3
+                id={titleId}
+                className="text-xl md:text-2xl font-semibold text-white tracking-tight transition-colors duration-300 group-hover:text-[#06d4b3]"
+              >
+                {experience.company}
+              </h3>
+              <p className="text-[#06d4b3] text-base md:text-lg font-medium">
+                {experience.title}
+              </p>
+            </div>
           </div>
           <div className="text-right shrink-0">
             <span className="block text-sm tracking-wider text-white/30 font-bold uppercase">
@@ -83,6 +109,7 @@ export default function ExperienceCard({
           </div>
         </div>
         <p
+          id={descId}
           className={`mt-6 z-30 text-gray-300 font-light leading-relaxed text-base md:text-lg ${open ? "" : "line-clamp-3"}`}
         >
           {experience.description}

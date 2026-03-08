@@ -20,7 +20,8 @@ export function NavItem({ label, icon: Icon, isActive, onClick, setRef }: NavIte
 
       <button
         onClick={onClick}
-        /* ADDED: antialiased, transform-gpu, and backface-hidden to fix blur */
+        aria-label={label}
+        aria-current={isActive ? "page" : undefined}
         className={`relative z-10 p-3.5 rounded-full transition-all duration-300 flex items-center justify-center transform-gpu backface-hidden
           ${isActive 
             ? "text-sky-400 drop-shadow-[0_0_10px_rgba(56,189,248,0.8)]" 

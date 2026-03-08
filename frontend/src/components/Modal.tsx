@@ -9,9 +9,10 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  ariaLabel?: string;
 }
 
-export default function Modal({ isOpen, onClose, children }: ModalProps) {
+export default function Modal({ isOpen, onClose, children, ariaLabel }: ModalProps) {
   const panelRef = useRef<HTMLDivElement | null>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
   const [mounted, setMounted] = useState(isOpen);
@@ -102,6 +103,7 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
             ref={panelRef}
             role="dialog"
             aria-modal="true"
+            aria-label={ariaLabel}
             tabIndex={-1}
             className="relative z-10 w-full max-w-5xl bg-transparent outline-none"
             initial={{ opacity: 0, y: 40, scale: 0.96 }}

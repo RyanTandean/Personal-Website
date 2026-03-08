@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 interface KeycapProps {
   children: ReactNode;
   link: string;
+  ariaLabel?: string;
   rotation?: number;
   yOffset?: number;
   xOffset?: number;
@@ -12,16 +13,21 @@ interface KeycapProps {
 export default function Keycap({
   children,
   link,
+  ariaLabel,
   rotation = 0,
   yOffset = 0,
   xOffset = 0,
 }: KeycapProps) {
+  const isExternal = !/^(mailto:|tel:)/i.test(link);
+
   return (
     <a
       href={link}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group relative block w-16 h-18"
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
+      aria-label={ariaLabel}
+      title={ariaLabel}
+      className="group relative block w-16 h-18 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
       style={{
         transform: `translate(${xOffset}px, ${yOffset}px) rotate(${rotation}deg)`,
       }}

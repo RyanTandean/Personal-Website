@@ -15,7 +15,7 @@ export default function ProjectDetail({
     myProjects.find((p) => p.title === projectId) || myProjects[0];
 
   return (
-    <div className="max-w-6xl mx-auto px-6 pt-32 pb-20">
+    <div className="max-w-6xl mx-auto px-6 pt-8 sm:pt-12 pb-20">
       {/* NAVIGATION / BACK BUTTON */}
       <button
         onClick={onBack}

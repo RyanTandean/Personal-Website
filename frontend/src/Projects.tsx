@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { useSearchParams } from "react-router-dom";
 import BackgroundAbyss from "./components/BackgroundAbyss";
 import Navbar from "./components/Navbar";
@@ -8,23 +9,17 @@ import ProjectDetail from "./components/sections/ProjectDetail";
 import GradualBlur from "./components/GradualBlur";
 import { myProjects } from "./data/project";
 import Tag from "./components/Tag";
-
-// Collect every unique tech tag across all projects
-const ALL_TAGS = Array.from(
-  new Set(myProjects.flatMap((p) => p.technologies)),
-).sort();
-
-export default function ProjectsPage() {
+import Footer from "./components/Footer";
+export default function Projects() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [activeTags, setActiveTags] = useState<string[]>([]);
+  const prevPathRef = useRef<string | null>(null);
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
-  const [isMounted, setIsMounted] = useState(false);
-  const prevPathRef = useRef("/projects");
+  const [activeTags, setActiveTags] = useState<string[]>([]);
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
+  // derive all tags from project data
+  const ALL_TAGS = Array.from(
+    new Set(myProjects.flatMap((p) => p.technologies)),
+  );
   // Deep-link: open modal from /projects?modal=Title
   useEffect(() => {
     const modal = searchParams.get("modal");
@@ -71,8 +66,21 @@ export default function ProjectsPage() {
 
   return (
     <main
-      className={`relative min-h-screen text-white bg-black transition-opacity duration-500 ease-out ${isMounted ? "opacity-100" : "opacity-0"}`}
+      id="main-content"
+      className="relative min-h-screen text-white bg-black"
     >
+      <Helmet>
+        <title>Projects · Ryan Tandean</title>
+        <meta
+          name="description"
+          content="A collection of Ryan Tandean's software and data science projects."
+        />
+        <meta property="og:title" content="Projects · Ryan Tandean" />
+        <meta
+          property="og:description"
+          content="A collection of Ryan Tandean's software and data science projects."
+        />
+      </Helmet>
       {/* Background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <BackgroundAbyss />
@@ -96,6 +104,7 @@ export default function ProjectsPage() {
         <div className="flex flex-wrap gap-2 mb-10">
           <button
             onClick={() => setActiveTags([])}
+            aria-pressed={activeTags.length === 0}
             className={`px-4 py-1.5 rounded-full text-sm font-semibold border transition-all duration-200 ${
               activeTags.length === 0
                 ? "bg-[#06d4b3] text-black border-[#06d4b3]"
@@ -144,8 +153,19 @@ export default function ProjectsPage() {
             {filtered.map((project) => (
               <div
                 key={project.id}
-                className="cursor-pointer"
+                role="button"
+                tabIndex={0}
                 onClick={() => openProject(project.title)}
+                onKeyDown={(e) => {
+                  if (
+                    e.key === "Enter" ||
+                    e.key === " " ||
+                    e.key === "Spacebar"
+                  ) {
+                    openProject(project.title);
+                  }
+                }}
+                className="cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
               >
                 <ProjectCard project={project} />
               </div>
@@ -167,13 +187,14 @@ export default function ProjectsPage() {
       />
 
       {/* Modal */}
-      <Modal isOpen={!!selectedProject} onClose={closeProject}>
+      <Modal isOpen={!!selectedProject} onClose={closeProject} ariaLabel={selectedProject ?? undefined}>
         {selectedProject && (
           <ProjectDetail projectId={selectedProject} onBack={closeProject} />
         )}
       </Modal>
 
       <Navbar />
+      <Footer />
     </main>
   );
 }

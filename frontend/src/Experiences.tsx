@@ -1,22 +1,29 @@
-import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import BackgroundAbyss from "./components/BackgroundAbyss";
 import Navbar from "./components/Navbar";
 import ExperienceCard from "./components/ExperienceCard";
 import GradualBlur from "./components/GradualBlur";
 import { myExperiences } from "./data/experience";
+import Footer from "./components/Footer";
 
 export default function ExperiencesPage() {
-  const [isMounted, setIsMounted] = useState(false);
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
   return (
     <main
-      className={`relative min-h-screen text-white bg-black transition-opacity duration-500 ease-out ${
-        isMounted ? "opacity-100" : "opacity-0"
-      }`}
+      id="main-content"
+      className="relative min-h-screen text-white bg-black"
     >
+      <Helmet>
+        <title>Experience · Ryan Tandean</title>
+        <meta
+          name="description"
+          content="Ryan Tandean's work experience, internships, and career timeline."
+        />
+        <meta property="og:title" content="Experience · Ryan Tandean" />
+        <meta
+          property="og:description"
+          content="Ryan Tandean's work experience, internships, and career timeline."
+        />
+      </Helmet>
       {/* Background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <BackgroundAbyss />
@@ -82,6 +89,7 @@ export default function ExperiencesPage() {
       />
 
       <Navbar />
+      <Footer />
     </main>
   );
 }

@@ -10,4 +10,8 @@ export interface Experience {
   technologies: TagName[];
   location?: string;
   featured?: boolean;
+  // Optional path to a company logo (imported asset or URL)
+  logo?: string;
+  // Optional alt text for the logo for accessibility
+  logoAlt?: string;
 }

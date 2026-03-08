@@ -22,7 +22,7 @@ export default function Tag({ name, className = "", onClick, active }: Props) {
       <button
         onClick={onClick}
         aria-pressed={active}
-        className={`${classes} cursor-pointer transition-all duration-200 ${
+        className={`${classes} cursor-pointer transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-1 focus-visible:ring-offset-black ${
           active
             ? "ring-2 ring-white/60 ring-offset-1 ring-offset-black brightness-125 opacity-100"
             : "opacity-60 hover:opacity-100"
@@ -34,7 +34,7 @@ export default function Tag({ name, className = "", onClick, active }: Props) {
   }
 
   return (
-    <span className={classes} aria-label={`tag-${name}`}>
+    <span className={classes}>
       {name}
     </span>
   );

@@ -6,6 +6,8 @@ const ProjectImage = lazy(() => import("./ProjectImage"));
 
 export default function ProjectCard({ project }: { project: Project }) {
   const cardRef = useRef<HTMLDivElement>(null);
+  const titleId = `project-title-${project.id}`;
+  const descId = `project-desc-${project.id}`;
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
@@ -21,7 +23,10 @@ export default function ProjectCard({ project }: { project: Project }) {
     <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      className="glow-breathe group antialiased relative flex flex-col h-64 sm:h-80 md:h-[420px] lg:h-[500px] rounded-3xl bg-[#0a101f]/60 border border-white/10 backdrop-blur-xl overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:border-[#06d4b3]/40 hover:shadow-[0_0_40px_-10px_rgba(6,212,179,0.2)] isolate"
+      role="article"
+      aria-labelledby={titleId}
+      aria-describedby={descId}
+      className="glow-breathe group antialiased relative flex flex-col h-64 sm:h-80 md:h-[420px] lg:h-[500px] rounded-3xl bg-[#0a101f]/60 border border-white/10 backdrop-blur-xl overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:border-[#06d4b3]/40 hover:shadow-[0_0_40px_-10px_rgba(6,212,179,0.2)] isolate focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
     >
       {/* 1. IMAGE LAYER */}
       <div className="absolute inset-0 z-0">
@@ -61,11 +66,17 @@ export default function ProjectCard({ project }: { project: Project }) {
           )}
         </div>
 
-        <h3 className="mt-6 text-2xl md:text-3xl font-bold text-white tracking-tight group-hover:text-[#06d4b3] transition-colors duration-300">
+        <h3
+          id={titleId}
+          className="mt-6 text-2xl md:text-3xl font-bold text-white tracking-tight group-hover:text-[#06d4b3] transition-colors duration-300"
+        >
           {project.title}
         </h3>
 
-        <p className="mt-3 text-gray-300/90 font-light leading-relaxed text-base md:text-lg line-clamp-3">
+        <p
+          id={descId}
+          className="mt-3 text-gray-300/90 font-light leading-relaxed text-base md:text-lg line-clamp-3"
+        >
           {project.description}
         </p>
 
@@ -79,7 +90,7 @@ export default function ProjectCard({ project }: { project: Project }) {
               onClick={(e) => e.stopPropagation()}
               className="z-20 text-sm font-bold text-white/40 hover:text-white transition-colors flex items-center gap-2 uppercase tracking-tighter"
             >
-              View Code <span className="text-[#06d4b3]">→</span>
+              View Code <span className="text-[#06d4b3]" aria-hidden="true">→</span>
             </a>
           )}
           {project.liveUrl && (
@@ -90,7 +101,7 @@ export default function ProjectCard({ project }: { project: Project }) {
               onClick={(e) => e.stopPropagation()}
               className="z-20 text-sm font-bold text-white/40 hover:text-white transition-colors flex items-center gap-2 uppercase tracking-tighter"
             >
-              Live Demo <span className="text-[#06d4b3]">↗</span>
+              Live Demo <span className="text-[#06d4b3]" aria-hidden="true">↗</span>
             </a>
           )}
         </div>
