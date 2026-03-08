@@ -76,8 +76,8 @@ export default function ExperienceCard({
       />
 
       <div className="relative z-20 p-6 sm:p-8 flex flex-col h-full">
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div className="flex items-center gap-4 min-w-0 flex-1">
             {experience.logo ? (
               <img
                 src={experience.logo}
@@ -99,7 +99,7 @@ export default function ExperienceCard({
               </p>
             </div>
           </div>
-          <div className="text-right shrink-0">
+          <div className="text-right shrink-0 max-w-[45%] sm:max-w-none">
             <span className="block text-sm tracking-wider text-white/30 font-bold uppercase">
               {experience.location}
             </span>

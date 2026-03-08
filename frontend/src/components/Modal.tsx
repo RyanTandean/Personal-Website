@@ -12,7 +12,12 @@ interface ModalProps {
   ariaLabel?: string;
 }
 
-export default function Modal({ isOpen, onClose, children, ariaLabel }: ModalProps) {
+export default function Modal({
+  isOpen,
+  onClose,
+  children,
+  ariaLabel,
+}: ModalProps) {
   const panelRef = useRef<HTMLDivElement | null>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
   const [mounted, setMounted] = useState(isOpen);

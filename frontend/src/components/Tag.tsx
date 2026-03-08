@@ -33,9 +33,5 @@ export default function Tag({ name, className = "", onClick, active }: Props) {
     );
   }
 
-  return (
-    <span className={classes}>
-      {name}
-    </span>
-  );
+  return <span className={classes}>{name}</span>;
 }

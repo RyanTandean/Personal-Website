@@ -22,6 +22,13 @@ export default function AnimatedRoutes() {
       >
         Skip to content
       </a>
+      {/* Skip-to-nav link — lets keyboard users jump to the navbar quickly */}
+      <a
+        href="#site-nav"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-40 focus:z-[9999] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-white/10 focus:text-white focus:font-bold focus:outline-none focus:border focus:border-white/20"
+      >
+        Skip to navigation
+      </a>
 
       <ErrorBoundary>
         <Suspense fallback={<div className="min-h-screen bg-black" />}>

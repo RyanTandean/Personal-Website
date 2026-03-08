@@ -22,9 +22,12 @@ export default function Experiences({ items }: ExperiencesProps) {
     btnRef.current.style.setProperty("--mouse-y", `${y}px`);
   };
   return (
-    <section className="relative w-full flex flex-col items-center py-32 z-30">
+    <section
+      aria-label="Work experience"
+      className="relative w-full flex flex-col items-center py-32 z-30"
+    >
       <div className="w-full max-w-5xl px-6">
-        <div className="flex items-center justify-between mb-10">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-10">
           <h2 className="text-3xl md:text-4xl font-semibold tracking-wide text-white [text-shadow:0_0_8px_rgba(56,189,248,0.55)]">
             Experience
           </h2>
@@ -34,10 +37,12 @@ export default function Experiences({ items }: ExperiencesProps) {
             onMouseMove={handleBtnMove}
             onMouseEnter={() => setBtnOverlay(1)}
             onMouseLeave={() => setBtnOverlay(0)}
-            className="ml-4 relative inline-flex items-center h-12 md:h-14 px-5 bg-white/[0.03] border border-white/10 rounded-full text-sm font-semibold text-white/80 hover:bg-white/[0.05] transition transform duration-300 hover:scale-105"
+            className="self-start sm:self-auto relative inline-flex items-center h-12 md:h-14 px-5 bg-white/[0.03] border border-white/10 rounded-full text-sm font-semibold text-white/80 hover:bg-white/[0.05] transition transform duration-300 motion-safe:hover:scale-105"
             aria-label="View all experiences"
           >
-            <span className="relative z-20">View all experiences →</span>
+            <span className="relative z-20">
+              View all experiences <span aria-hidden="true">→</span>
+            </span>
             <div
               className="pointer-events-none absolute inset-0 z-10 rounded-full transition-opacity duration-300"
               style={{
@@ -48,7 +53,7 @@ export default function Experiences({ items }: ExperiencesProps) {
           </Link>
         </div>
 
-        <div className="flex flex-col gap-24">
+        <div className="flex flex-col gap-8 sm:gap-12">
           {items.map((exp) => (
             <ExperienceCard key={exp.id} experience={exp} />
           ))}

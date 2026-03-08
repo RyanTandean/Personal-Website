@@ -11,9 +11,10 @@ export default function ScrollDownArrow() {
 
   return (
     <div
+      aria-hidden="true"
       className={`transition-all duration-500 ease-in-out
       ${isVisible ? "opacity-80 translate-y-0" : "opacity-0 translate-y-4"}
-      animate-bounce`} 
+      motion-safe:animate-bounce`}
     >
       <svg
         width="36"
@@ -21,7 +22,7 @@ export default function ScrollDownArrow() {
         viewBox="0 0 24 24"
         fill="none"
         className="drop-shadow-[0_0_8px_rgba(94,234,212,0.6)]"
-        stroke="currentColor" // Uses parent text-white
+        stroke="currentColor"
         strokeWidth="2.5"
         strokeLinecap="round"
         strokeLinejoin="round"

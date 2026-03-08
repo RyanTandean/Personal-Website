@@ -51,7 +51,10 @@ export default function Navbar() {
   }, [activeIndex]);
 
   return (
-    <nav className="fixed bottom-10 left-1/2 -translate-x-1/2 z-1001 antialiased">
+    <nav
+      id="site-nav"
+      className="fixed bottom-10 left-1/2 -translate-x-1/2 z-1001 antialiased"
+    >
       {/* Container: We keep px-1.5 constant to avoid math shifts */}
       <div className="relative flex items-center gap-1 bg-white/5 border border-white/10 backdrop-blur-2xl p-1.5 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.4)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] motion-safe:hover:scale-110 will-change-transform">
         <div

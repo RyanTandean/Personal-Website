@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import BackgroundAbyss from "../components/BackgroundAbyss";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export default function NotFound() {
   return (
@@ -36,6 +37,7 @@ export default function NotFound() {
       </div>
 
       <Navbar />
+      <Footer />
     </main>
   );
 }

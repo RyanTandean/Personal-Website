@@ -90,7 +90,10 @@ export default function ProjectCard({ project }: { project: Project }) {
               onClick={(e) => e.stopPropagation()}
               className="z-20 text-sm font-bold text-white/40 hover:text-white transition-colors flex items-center gap-2 uppercase tracking-tighter"
             >
-              View Code <span className="text-[#06d4b3]" aria-hidden="true">→</span>
+              View Code{" "}
+              <span className="text-[#06d4b3]" aria-hidden="true">
+                →
+              </span>
             </a>
           )}
           {project.liveUrl && (
@@ -101,7 +104,10 @@ export default function ProjectCard({ project }: { project: Project }) {
               onClick={(e) => e.stopPropagation()}
               className="z-20 text-sm font-bold text-white/40 hover:text-white transition-colors flex items-center gap-2 uppercase tracking-tighter"
             >
-              Live Demo <span className="text-[#06d4b3]" aria-hidden="true">↗</span>
+              Live Demo{" "}
+              <span className="text-[#06d4b3]" aria-hidden="true">
+                ↗
+              </span>
             </a>
           )}
         </div>

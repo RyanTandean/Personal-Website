@@ -187,7 +187,11 @@ export default function Projects() {
       />
 
       {/* Modal */}
-      <Modal isOpen={!!selectedProject} onClose={closeProject} ariaLabel={selectedProject ?? undefined}>
+      <Modal
+        isOpen={!!selectedProject}
+        onClose={closeProject}
+        ariaLabel={selectedProject ?? undefined}
+      >
         {selectedProject && (
           <ProjectDetail projectId={selectedProject} onBack={closeProject} />
         )}

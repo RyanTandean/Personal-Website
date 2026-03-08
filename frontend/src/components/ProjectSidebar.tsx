@@ -24,6 +24,7 @@ export default function ProjectSidebar({
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`Launch live demo for ${project.title} (opens in new tab)`}
               className="flex items-center justify-center py-3 rounded-xl bg-[#06d4b3] text-black font-bold text-xs uppercase tracking-widest hover:brightness-110 transition-all"
             >
               Launch Live Demo
@@ -34,6 +35,7 @@ export default function ProjectSidebar({
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`View source code for ${project.title} on GitHub (opens in new tab)`}
               className="flex items-center justify-center py-3 rounded-xl bg-white/5 border border-white/10 text-white font-bold text-xs uppercase tracking-widest hover:bg-white/10 transition-all"
             >
               View Source Code
