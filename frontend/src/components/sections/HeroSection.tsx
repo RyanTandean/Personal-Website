@@ -1,5 +1,7 @@
+import { Terminal } from "lucide-react";
 import ScrollDownArrow from "../ScrollDownArrow";
 import KeyboardSection from "./KeyboardSection";
+import TerminalBadge from "../TerminalBadge";
 
 export default function HeroSection() {
   return (
@@ -8,6 +10,7 @@ export default function HeroSection() {
       className="relative w-full h-screen flex flex-col justify-center animate-fadein-slideup"
     >
       <div className="w-full max-w-5xl px-6 flex flex-col items-start mx-auto">
+        <TerminalBadge />
         <h1 className="text-3xl md:text-5xl font-medium tracking-[0.12em] text-white [text-shadow:0_0_24px_rgba(56,189,248,0.7),0_0_6px_rgba(255,255,255,0.9)]">
           <span>Hi, I’m Ryan.</span>
           <span className="block mt-2">Data scientist-in-training.</span>
