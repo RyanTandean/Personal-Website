@@ -13,7 +13,7 @@ interface ProjectsProps {
 
 export default function Projects({ items }: ProjectsProps) {
   const featuredProjects = items.filter((p) => p.featured);
-  const [selectedProject, setSelectedProject] = useState<string | null>(null);
+  const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const btnRef = useRef<HTMLAnchorElement | null>(null);
   const [btnOverlay, setBtnOverlay] = useState(0);
 
@@ -66,11 +66,11 @@ export default function Projects({ items }: ProjectsProps) {
               tabIndex={0}
               aria-label={`Open ${project.title} project details`}
               className="w-full cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-3xl"
-              onClick={() => setSelectedProject(project.title)}
+              onClick={() => setSelectedProject(project.id)}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
-                  setSelectedProject(project.title);
+                  setSelectedProject(project.id);
                 }
               }}
             >

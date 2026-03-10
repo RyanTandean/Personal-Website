@@ -1,4 +1,3 @@
-import { Terminal } from "lucide-react";
 import ScrollDownArrow from "../ScrollDownArrow";
 import KeyboardSection from "./KeyboardSection";
 import TerminalBadge from "../TerminalBadge";

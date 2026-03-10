@@ -23,11 +23,14 @@ export default function Contact() {
     const form = e.currentTarget;
     const data = new FormData(form);
     try {
-      const res = await fetch("https://formspree.io/f/your-form-id", {
-        method: "POST",
-        body: data,
-        headers: { Accept: "application/json" },
-      });
+      const res = await fetch(
+        `https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_ID}`,
+        {
+          method: "POST",
+          body: data,
+          headers: { Accept: "application/json" },
+        },
+      );
       if (res.ok) {
         setStatus("success");
         form.reset();

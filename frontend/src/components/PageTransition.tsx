@@ -3,9 +3,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useLocation, Routes, Route } from "react-router-dom";
 import ErrorBoundary from "./ErrorBoundary";
 
-const App = lazy(() => import("../App"));
-const Projects = lazy(() => import("../Projects"));
-const Experiences = lazy(() => import("../Experiences"));
+const Home = lazy(() => import("../pages/Home"));
+const Projects = lazy(() => import("../pages/Projects"));
+const Experiences = lazy(() => import("../pages/Experiences"));
 const Contact = lazy(() => import("../pages/Contact"));
 const About = lazy(() => import("../pages/About"));
 const NotFound = lazy(() => import("../pages/NotFound"));
@@ -41,7 +41,7 @@ export default function AnimatedRoutes() {
               transition={{ duration: 0.18, ease: "easeInOut" }}
             >
               <Routes location={location}>
-                <Route path="/" element={<App />} />
+                <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/experience" element={<Experiences />} />

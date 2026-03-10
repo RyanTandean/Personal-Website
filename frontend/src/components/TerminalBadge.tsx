@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState } from "react";
 
 const FULL_TEXT = "available_for_work!";
@@ -39,11 +37,7 @@ export default function TerminalBadge() {
         className={`inline-block w-1.75 h-3.5 rounded-sm bg-sky-400 ${
           done ? "animate-[blink_1.1s_step-end_infinite]" : "opacity-100"
         }`}
-        style={
-          done
-            ? {}
-            : undefined
-        }
+        style={done ? {} : undefined}
       />
     </div>
   );

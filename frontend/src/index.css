@@ -288,19 +288,41 @@ body {
 
 /* Using Tailwind utilities for hover-scale; custom card-hover-grow removed. */
 
-/* --- CARD HOVER: breathing glow --- */
-@keyframes glowBreathe {
-  0%,
-  100% {
-    box-shadow: 0 0 40px -10px rgba(6, 212, 179, 0.18);
-  }
-  50% {
-    box-shadow: 0 0 70px -4px rgba(6, 212, 179, 0.4);
-  }
+/* --- CARD HOVER: transition-only glow (avoids lingering afterglow in Firefox) --- */
+.glow-breathe {
+  transition: box-shadow 360ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .glow-breathe:hover {
-  animation: glowBreathe 4.5s ease-in-out infinite;
+  animation: none;
+}
+
+/* Shared card lift motion to avoid transform snapping across browsers. */
+.card-lift-smooth {
+  position: relative;
+  top: 0;
+  transition:
+    top 760ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 320ms ease,
+    box-shadow 320ms ease;
+  will-change: top, box-shadow;
+}
+
+.card-lift-smooth:hover {
+  top: -8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-lift-smooth {
+    transition:
+      top 240ms ease,
+      border-color 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .card-lift-smooth:hover {
+    top: -5px;
+  }
 }
 
 /* Waving hand animation for hero emoji */
@@ -382,6 +404,11 @@ body {
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }

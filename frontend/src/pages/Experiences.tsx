@@ -1,10 +1,10 @@
 import { Helmet } from "react-helmet-async";
-import BackgroundAbyss from "./components/BackgroundAbyss";
-import Navbar from "./components/Navbar";
-import ExperienceCard from "./components/ExperienceCard";
-import GradualBlur from "./components/GradualBlur";
-import { myExperiences } from "./data/experience";
-import Footer from "./components/Footer";
+import BackgroundAbyss from "../components/BackgroundAbyss";
+import Navbar from "../components/Navbar";
+import ExperienceCard from "../components/ExperienceCard";
+import GradualBlur from "../components/GradualBlur";
+import { myExperiences } from "../data/experience";
+import Footer from "../components/Footer";
 
 export default function ExperiencesPage() {
   return (

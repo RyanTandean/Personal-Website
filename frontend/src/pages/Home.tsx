@@ -1,13 +1,13 @@
 import { Helmet } from "react-helmet-async";
-import Navbar from "./components/Navbar";
-import Experience from "./components/sections/Experiences";
-import { myExperiences } from "./data/experience";
-import Projects from "./components/sections/Projects";
-import { myProjects } from "./data/project";
-import HeroSection from "./components/sections/HeroSection";
-import BackgroundAbyss from "./components/BackgroundAbyss";
-import GradualBlur from "./components/GradualBlur";
-import Footer from "./components/Footer";
+import Navbar from "../components/Navbar";
+import Experience from "../components/sections/Experiences";
+import { myExperiences } from "../data/experience";
+import Projects from "../components/sections/Projects";
+import { myProjects } from "../data/project";
+import HeroSection from "../components/sections/HeroSection";
+import BackgroundAbyss from "../components/BackgroundAbyss";
+import GradualBlur from "../components/GradualBlur";
+import Footer from "../components/Footer";
 
 export default function App() {
   return (

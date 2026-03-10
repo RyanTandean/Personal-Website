@@ -1,9 +1,8 @@
-import type { Project } from "../../types/project";
 import { myProjects } from "../../data/project";
 import ProjectSidebar from "../ProjectSidebar";
 
 interface ProjectDetailProps {
-  projectId: string;
+  projectId: number;
   onBack: () => void;
 }
 
@@ -11,8 +10,7 @@ export default function ProjectDetail({
   projectId,
   onBack,
 }: ProjectDetailProps) {
-  const project =
-    myProjects.find((p) => p.title === projectId) || myProjects[0];
+  const project = myProjects.find((p) => p.id === projectId) || myProjects[0];
 
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 sm:pt-12 pb-20">

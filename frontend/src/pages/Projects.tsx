@@ -1,37 +1,38 @@
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useSearchParams } from "react-router-dom";
-import BackgroundAbyss from "./components/BackgroundAbyss";
-import Navbar from "./components/Navbar";
-import ProjectCard from "./components/ProjectCard";
-import Modal from "./components/Modal";
-import ProjectDetail from "./components/sections/ProjectDetail";
-import GradualBlur from "./components/GradualBlur";
-import { myProjects } from "./data/project";
-import Tag from "./components/Tag";
-import Footer from "./components/Footer";
+import BackgroundAbyss from "../components/BackgroundAbyss";
+import Navbar from "../components/Navbar";
+import ProjectCard from "../components/ProjectCard";
+import Modal from "../components/Modal";
+import ProjectDetail from "../components/sections/ProjectDetail";
+import GradualBlur from "../components/GradualBlur";
+import { myProjects } from "../data/project";
+import Tag from "../components/Tag";
+import Footer from "../components/Footer";
 export default function Projects() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [selectedProject, setSelectedProject] = useState<string | null>(null);
+  const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const [activeTags, setActiveTags] = useState<string[]>([]);
 
   // derive all tags from project data
   const ALL_TAGS = Array.from(
     new Set(myProjects.flatMap((p) => p.technologies)),
   );
-  // Deep-link: open modal from /projects?modal=Title
+  // Deep-link: open modal from /projects?modal=id
   useEffect(() => {
-    const modal = searchParams.get("modal");
-    if (modal) {
-      const found = myProjects.find((p) => p.title === modal);
-      if (found) setSelectedProject(found.title);
+    const modalId = searchParams.get("modal");
+    if (modalId) {
+      const id = parseInt(modalId, 10);
+      const found = myProjects.find((p) => p.id === id);
+      if (found) setSelectedProject(found.id);
     }
   }, [searchParams]);
 
   // Sync browser history for modal deep-linking
-  function openProject(title: string) {
-    setSearchParams({ modal: title }, { replace: false });
-    setSelectedProject(title);
+  function openProject(id: number) {
+    setSearchParams({ modal: id.toString() }, { replace: false });
+    setSelectedProject(id);
   }
 
   function closeProject() {
@@ -143,14 +144,14 @@ export default function Projects() {
                 key={project.id}
                 role="button"
                 tabIndex={0}
-                onClick={() => openProject(project.title)}
+                onClick={() => openProject(project.id)}
                 onKeyDown={(e) => {
                   if (
                     e.key === "Enter" ||
                     e.key === " " ||
                     e.key === "Spacebar"
                   ) {
-                    openProject(project.title);
+                    openProject(project.id);
                   }
                 }}
                 className="cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
@@ -178,7 +179,11 @@ export default function Projects() {
       <Modal
         isOpen={!!selectedProject}
         onClose={closeProject}
-        ariaLabel={selectedProject ?? undefined}
+        ariaLabel={
+          selectedProject
+            ? myProjects.find((p) => p.id === selectedProject)?.title
+            : undefined
+        }
       >
         {selectedProject && (
           <ProjectDetail projectId={selectedProject} onBack={closeProject} />

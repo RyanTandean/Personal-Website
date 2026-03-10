@@ -27,12 +27,17 @@ export default function ExperienceCard({
     cardRef.current.style.setProperty("--mouse-y", `${y}px`);
   };
 
+  const handleMouseLeave = () => {
+    // Keep the last pointer position so the glow fades out in place.
+    setOverlayOpacity(0);
+  };
+
   return (
     <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setOverlayOpacity(0.35)}
-      onMouseLeave={() => setOverlayOpacity(0)}
+      onMouseLeave={handleMouseLeave}
       role="article"
       aria-labelledby={titleId}
       aria-describedby={descId}
@@ -43,11 +48,11 @@ export default function ExperienceCard({
           setOpen((s) => !s);
         }
       }}
-      className="glow-breathe antialiased relative z-30 isolate group flex flex-col rounded-3xl min-h-48 sm:min-h-56 md:min-h-64 bg-white/[0.015] backdrop-blur-xs border border-white/10 overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:border-[#06d4b3]/40 hover:shadow-[0_0_40px_-10px_rgba(6,212,179,0.18)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+      className="glow-breathe card-lift-smooth antialiased relative z-30 isolate group flex flex-col rounded-3xl min-h-48 sm:min-h-56 md:min-h-64 bg-white/[0.015] backdrop-blur-xs border border-white/10 overflow-hidden hover:border-[#06d4b3]/40 hover:shadow-[0_0_40px_-10px_rgba(6,212,179,0.18)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
     >
       {/* THE SPOTLIGHT OVERLAY */}
       <div
-        className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-500"
+        className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-300 ease-out will-change-opacity"
         style={{
           opacity: overlayOpacity,
           background: `radial-gradient(
@@ -58,9 +63,9 @@ export default function ExperienceCard({
         }}
       />
 
-      {/* BORDER ILLUMINATION (Optional: Makes the border glow near the mouse) */}
+      {/* Border-adjacent glow without mask-composite to avoid Firefox artifacts */}
       <div
-        className="pointer-events-none absolute -inset-px z-10 rounded-3xl transition-opacity duration-500"
+        className="pointer-events-none absolute -inset-px z-10 rounded-3xl mix-blend-screen transition-opacity duration-300 ease-out will-change-opacity"
         style={{
           opacity: overlayOpacity,
           background: `radial-gradient(
@@ -68,10 +73,6 @@ export default function ExperienceCard({
             rgba(6, 212, 179, 0.4), 
             transparent 80%
           )`,
-          WebkitMaskImage: `linear-gradient(black, black), linear-gradient(black, black)`,
-          WebkitMaskComposite: "xor",
-          maskComposite: "exclude",
-          padding: "1px",
         }}
       />
 
