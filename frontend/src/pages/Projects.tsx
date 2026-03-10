@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useSearchParams } from "react-router-dom";
 import BackgroundAbyss from "../components/BackgroundAbyss";
@@ -10,23 +10,27 @@ import GradualBlur from "../components/GradualBlur";
 import { myProjects } from "../data/project";
 import Tag from "../components/Tag";
 import Footer from "../components/Footer";
+import type { TagName } from "../data/tagColors";
+
+const SITE_URL = "https://ryantandean.dev";
+const OG_IMAGE_URL = `${SITE_URL}/og-image.png`;
 export default function Projects() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
-  const [activeTags, setActiveTags] = useState<string[]>([]);
+  const [activeTags, setActiveTags] = useState<TagName[]>([]);
 
-  // derive all tags from project data
-  const ALL_TAGS = Array.from(
-    new Set(myProjects.flatMap((p) => p.technologies)),
+  const allTags = useMemo(
+    () => Array.from(new Set(myProjects.flatMap((p) => p.technologies))),
+    [],
   );
   // Deep-link: open modal from /projects?modal=id
   useEffect(() => {
     const modalId = searchParams.get("modal");
-    if (modalId) {
-      const id = parseInt(modalId, 10);
-      const found = myProjects.find((p) => p.id === id);
-      if (found) setSelectedProject(found.id);
-    }
+    if (!modalId) return;
+    const id = Number(modalId);
+    if (!Number.isFinite(id)) return;
+    const found = myProjects.find((p) => p.id === id);
+    if (found) setSelectedProject(found.id);
   }, [searchParams]);
 
   // Sync browser history for modal deep-linking
@@ -40,7 +44,7 @@ export default function Projects() {
     setSelectedProject(null);
   }
 
-  function toggleTag(tag: string) {
+  function toggleTag(tag: TagName) {
     setActiveTags((prev) =>
       prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
     );
@@ -69,6 +73,17 @@ export default function Projects() {
           property="og:description"
           content="A collection of Ryan Tandean's software and data science projects."
         />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`${SITE_URL}/projects`} />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Projects · Ryan Tandean" />
+        <meta
+          name="twitter:description"
+          content="A collection of Ryan Tandean's software and data science projects."
+        />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
+        <link rel="canonical" href={`${SITE_URL}/projects`} />
       </Helmet>
       {/* Background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
@@ -102,7 +117,7 @@ export default function Projects() {
           >
             All
           </button>
-          {ALL_TAGS.map((tag) => (
+          {allTags.map((tag) => (
             <Tag
               key={tag}
               name={tag}
@@ -143,14 +158,12 @@ export default function Projects() {
               <div
                 key={project.id}
                 role="button"
+                aria-haspopup="dialog"
                 tabIndex={0}
                 onClick={() => openProject(project.id)}
                 onKeyDown={(e) => {
-                  if (
-                    e.key === "Enter" ||
-                    e.key === " " ||
-                    e.key === "Spacebar"
-                  ) {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
                     openProject(project.id);
                   }
                 }}

@@ -19,12 +19,13 @@ export function NavItem({
 }: NavItemProps) {
   return (
     <div ref={setRef} className="group relative">
-      <div className="absolute -top-14 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-white/10 border border-white/20 backdrop-blur-xl rounded-xl text-xs font-semibold text-white opacity-0 -translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 pointer-events-none shadow-xl">
+      <div className="absolute -top-14 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-white/10 border border-white/20 backdrop-blur-xl rounded-xl text-xs font-semibold text-white opacity-0 -translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:translate-y-0 pointer-events-none shadow-xl">
         {label}
         <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#0a192f] border-r border-b border-white/20 rotate-45" />
       </div>
 
       <button
+        type="button"
         onClick={onClick}
         aria-label={label}
         aria-current={isActive ? "page" : undefined}

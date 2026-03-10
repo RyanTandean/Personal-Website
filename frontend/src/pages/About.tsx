@@ -5,6 +5,9 @@ import Navbar from "../components/Navbar";
 import GradualBlur from "../components/GradualBlur";
 import Footer from "../components/Footer";
 
+const SITE_URL = "https://ryantandean.dev";
+const OG_IMAGE_URL = `${SITE_URL}/og-image.png`;
+
 const skills = [
   "Python",
   "TypeScript",
@@ -37,6 +40,17 @@ export default function About() {
           property="og:description"
           content="Learn more about Ryan Tandean — data science student, software developer, and builder."
         />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`${SITE_URL}/about`} />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About · Ryan Tandean" />
+        <meta
+          name="twitter:description"
+          content="Learn more about Ryan Tandean — data science student, software developer, and builder."
+        />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
+        <link rel="canonical" href={`${SITE_URL}/about`} />
       </Helmet>
 
       <div className="fixed inset-0 z-0 pointer-events-none">
@@ -55,10 +69,10 @@ export default function About() {
         </div>
 
         {/* Bio card */}
-        <div className="rounded-3xl bg-white/[0.015] border border-white/10 p-8 sm:p-10 mb-10">
+        <div className="rounded-3xl bg-white/1.5 border border-white/10 p-8 sm:p-10 mb-10">
           {/* Replace the img src with your actual photo path, e.g. /src/assets/headshot.jpg */}
           <div className="flex flex-col sm:flex-row gap-8 items-start">
-            <div className="w-24 h-24 rounded-2xl bg-white/5 border border-white/10 flex-shrink-0 flex items-center justify-center text-white/20 text-sm">
+            <div className="w-24 h-24 rounded-2xl bg-white/5 border border-white/10 shrink-0 flex items-center justify-center text-white/20 text-sm">
               Photo
             </div>
             <div>
@@ -83,7 +97,7 @@ export default function About() {
         </div>
 
         {/* Skills */}
-        <div className="rounded-3xl bg-white/[0.015] border border-white/10 p-8 sm:p-10 mb-10">
+        <div className="rounded-3xl bg-white/1.5 border border-white/10 p-8 sm:p-10 mb-10">
           <h2 className="text-xl font-semibold text-white tracking-tight mb-6">
             Skills &amp; Tools
           </h2>
@@ -91,7 +105,7 @@ export default function About() {
             {skills.map((s) => (
               <span
                 key={s}
-                className="px-3 py-1 rounded-full text-sm font-medium border border-white/10 bg-white/[0.04] text-white/70"
+                className="px-3 py-1 rounded-full text-sm font-medium border border-white/10 bg-white/4 text-white/70"
               >
                 {s}
               </span>
@@ -100,7 +114,7 @@ export default function About() {
         </div>
 
         {/* Links */}
-        <div className="rounded-3xl bg-white/[0.015] border border-white/10 p-8 sm:p-10">
+        <div className="rounded-3xl bg-white/1.5 border border-white/10 p-8 sm:p-10">
           <h2 className="text-xl font-semibold text-white tracking-tight mb-6">
             Find me
           </h2>

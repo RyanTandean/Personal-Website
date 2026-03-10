@@ -31,7 +31,7 @@ export default function ProjectCard({ project }: { project: Project }) {
       role="article"
       aria-labelledby={titleId}
       aria-describedby={descId}
-      className="glow-breathe card-lift-smooth group antialiased relative flex flex-col h-64 sm:h-80 md:h-[420px] lg:h-[500px] rounded-3xl bg-[#0a101f]/60 border border-white/10 backdrop-blur-xl overflow-hidden hover:border-[#06d4b3]/40 hover:shadow-[0_0_40px_-10px_rgba(6,212,179,0.2)] isolate focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+      className="glow-breathe card-lift-smooth group antialiased relative flex flex-col h-64 sm:h-80 md:h-105 lg:h-125 rounded-3xl bg-[#0a101f]/60 border border-white/10 backdrop-blur-xl overflow-hidden hover:border-[#06d4b3]/40 hover:shadow-[0_0_40px_-10px_rgba(6,212,179,0.2)] isolate focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
     >
       {/* 1. IMAGE LAYER */}
       <div className="absolute inset-0 z-0">
@@ -40,12 +40,12 @@ export default function ProjectCard({ project }: { project: Project }) {
         >
           <ProjectImage src={project.image} alt={project.title} />
         </Suspense>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/40 to-transparent z-[1]" />
+        <div className="absolute inset-0 bg-linear-to-t from-[#020617] via-[#020617]/40 to-transparent z-1" />
       </div>
 
       {/* 2. THE "GLINT" */}
       <div
-        className="pointer-events-none absolute inset-0 z-[2] opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out will-change-opacity"
+        className="pointer-events-none absolute inset-0 z-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out will-change-opacity"
         style={{
           background: `radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.12) 0%, transparent 50%)`,
         }}

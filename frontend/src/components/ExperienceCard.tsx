@@ -41,14 +41,7 @@ export default function ExperienceCard({
       role="article"
       aria-labelledby={titleId}
       aria-describedby={descId}
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.target !== e.currentTarget) return;
-        if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
-          setOpen((s) => !s);
-        }
-      }}
-      className="glow-breathe card-lift-smooth antialiased relative z-30 isolate group flex flex-col rounded-3xl min-h-48 sm:min-h-56 md:min-h-64 bg-white/[0.015] backdrop-blur-xs border border-white/10 overflow-hidden hover:border-[#06d4b3]/40 hover:shadow-[0_0_40px_-10px_rgba(6,212,179,0.18)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+      className="glow-breathe card-lift-smooth antialiased relative z-30 isolate group flex flex-col rounded-3xl min-h-48 sm:min-h-56 md:min-h-64 bg-white/1.5 backdrop-blur-xs border border-white/10 overflow-hidden hover:border-[#06d4b3]/40 hover:shadow-[0_0_40px_-10px_rgba(6,212,179,0.18)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
     >
       {/* THE SPOTLIGHT OVERLAY */}
       <div

@@ -2,7 +2,6 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import ExperienceCard from "../ExperienceCard";
-// Reveal removed: simple hover grow on cards instead
 import type { Experience } from "../../types/experience";
 
 interface ExperiencesProps {
@@ -37,7 +36,7 @@ export default function Experiences({ items }: ExperiencesProps) {
             onMouseMove={handleBtnMove}
             onMouseEnter={() => setBtnOverlay(1)}
             onMouseLeave={() => setBtnOverlay(0)}
-            className="self-start sm:self-auto relative inline-flex items-center h-12 md:h-14 px-5 bg-white/[0.03] border border-white/10 rounded-full text-sm font-semibold text-white/80 hover:bg-white/[0.05] transition transform duration-300 motion-safe:hover:scale-105"
+            className="self-start sm:self-auto relative inline-flex items-center h-12 md:h-14 px-5 bg-white/3 border border-white/10 rounded-full text-sm font-semibold text-white/80 hover:bg-white/5 transition-[transform,background-color,border-color,box-shadow] duration-300 ease-out motion-safe:hover:-translate-y-0.5"
             aria-label="View all experiences"
           >
             <span className="relative z-20">
@@ -48,6 +47,13 @@ export default function Experiences({ items }: ExperiencesProps) {
               style={{
                 opacity: btnOverlay,
                 background: `radial-gradient(300px circle at var(--mouse-x) var(--mouse-y), rgba(6,212,179,0.12), transparent 40%)`,
+              }}
+            />
+            <div
+              className="pointer-events-none absolute -inset-px z-10 rounded-full mix-blend-screen transition-opacity duration-300 ease-out"
+              style={{
+                opacity: btnOverlay,
+                background: `radial-gradient(180px circle at var(--mouse-x) var(--mouse-y), rgba(6,212,179,0.45), transparent 78%)`,
               }}
             />
           </Link>

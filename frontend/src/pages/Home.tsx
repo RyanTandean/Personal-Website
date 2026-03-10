@@ -9,6 +9,9 @@ import BackgroundAbyss from "../components/BackgroundAbyss";
 import GradualBlur from "../components/GradualBlur";
 import Footer from "../components/Footer";
 
+const SITE_URL = "https://ryantandean.dev";
+const OG_IMAGE_URL = `${SITE_URL}/og-image.png`;
+
 export default function App() {
   return (
     <main
@@ -26,6 +29,17 @@ export default function App() {
           property="og:description"
           content="Data science student and software developer. Projects, experience, and more."
         />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`${SITE_URL}/`} />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Ryan Tandean" />
+        <meta
+          name="twitter:description"
+          content="Data science student and software developer. Projects, experience, and more."
+        />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
+        <link rel="canonical" href={`${SITE_URL}/`} />
       </Helmet>
       {/* 1. PERSISTENT BACKGROUND LAYER */}
       <div className="fixed inset-0 z-0 pointer-events-none">

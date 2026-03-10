@@ -29,8 +29,8 @@ export default function ProjectDetail({
         {/* LEFT COLUMN: Main Content */}
         <div className="lg:col-span-2 space-y-12">
           {/* HERO IMAGE STAGE */}
-          <div className="relative aspect-video rounded-3xl overflow-hidden border border-white/10 bg-white/[0.02] group">
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
+          <div className="relative aspect-video rounded-3xl overflow-hidden border border-white/10 bg-white/2 group">
+            <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent z-10" />
             <img
               src={project.image}
               alt={project.title}

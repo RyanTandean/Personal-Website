@@ -14,4 +14,6 @@ export interface Experience {
   logo?: string;
   // Optional alt text for the logo for accessibility
   logoAlt?: string;
+  // Optional bullet points shown in expanded view on the card.
+  points?: string[];
 }

@@ -15,7 +15,7 @@ export default function ProjectSidebar({
   const hasLinks = hasLiveUrl || hasGithubUrl;
 
   return (
-    <div className="p-8 rounded-3xl bg-white/[0.05] border border-white/10 space-y-8">
+    <div className="p-8 rounded-3xl bg-white/5 border border-white/10 space-y-8">
       {/* LINKS — only rendered when at least one is available */}
       {hasLinks && (
         <div className="flex flex-col gap-4">

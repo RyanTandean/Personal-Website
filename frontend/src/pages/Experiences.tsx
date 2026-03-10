@@ -6,6 +6,9 @@ import GradualBlur from "../components/GradualBlur";
 import { myExperiences } from "../data/experience";
 import Footer from "../components/Footer";
 
+const SITE_URL = "https://ryantandean.dev";
+const OG_IMAGE_URL = `${SITE_URL}/og-image.png`;
+
 export default function ExperiencesPage() {
   return (
     <main
@@ -23,6 +26,17 @@ export default function ExperiencesPage() {
           property="og:description"
           content="Ryan Tandean's work experience, internships, and career timeline."
         />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`${SITE_URL}/experience`} />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Experience · Ryan Tandean" />
+        <meta
+          name="twitter:description"
+          content="Ryan Tandean's work experience, internships, and career timeline."
+        />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
+        <link rel="canonical" href={`${SITE_URL}/experience`} />
       </Helmet>
       {/* Background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
@@ -49,11 +63,11 @@ export default function ExperiencesPage() {
           {myExperiences.map((exp) => (
             <div key={exp.id} className="relative flex items-start gap-8">
               {/* Dot column — holds dot + the line segment below it */}
-              <div className="relative flex-shrink-0 flex flex-col items-center self-stretch w-3.5">
+              <div className="relative shrink-0 flex flex-col items-center self-stretch w-3.5">
                 {/* Spacer to push dot down to align with card header */}
                 <div className="mt-7" />
                 {/* Glow + dot */}
-                <div className="relative z-10 flex-shrink-0">
+                <div className="relative z-10 shrink-0">
                   <div className="absolute inset-0 rounded-full bg-[#06d4b3]/30 blur-[5px] scale-150" />
                   <div className="relative w-3.5 h-3.5 rounded-full bg-[#06d4b3] ring-2 ring-black shadow-[0_0_10px_rgba(6,212,179,0.8)]" />
                 </div>

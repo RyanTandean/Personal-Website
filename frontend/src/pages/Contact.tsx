@@ -5,6 +5,10 @@ import Navbar from "../components/Navbar";
 import GradualBlur from "../components/GradualBlur";
 import Footer from "../components/Footer";
 
+const SITE_URL = "https://ryantandean.dev";
+const OG_IMAGE_URL = `${SITE_URL}/og-image.png`;
+const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID;
+
 const inputClass =
   "mt-1 w-full rounded-xl bg-white/[0.04] border border-white/10 px-4 py-2.5 text-white placeholder-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06d4b3] transition-colors duration-200 hover:border-white/20";
 
@@ -19,18 +23,19 @@ export default function Contact() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (!FORMSPREE_ID) {
+      setStatus("error");
+      return;
+    }
     setStatus("submitting");
     const form = e.currentTarget;
     const data = new FormData(form);
     try {
-      const res = await fetch(
-        `https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_ID}`,
-        {
-          method: "POST",
-          body: data,
-          headers: { Accept: "application/json" },
-        },
-      );
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
       if (res.ok) {
         setStatus("success");
         form.reset();
@@ -59,6 +64,17 @@ export default function Contact() {
           property="og:description"
           content="Get in touch with Ryan Tandean."
         />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`${SITE_URL}/contact`} />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Contact · Ryan Tandean" />
+        <meta
+          name="twitter:description"
+          content="Get in touch with Ryan Tandean — open to opportunities, collaborations, and coffee chats."
+        />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
+        <link rel="canonical" href={`${SITE_URL}/contact`} />
       </Helmet>
       {/* Background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
@@ -86,7 +102,7 @@ export default function Contact() {
         </div>
 
         {/* Form card — matched to ExperienceCard glass style */}
-        <div className="antialiased relative isolate rounded-3xl bg-white/[0.015] backdrop-blur-xs border border-[#06d4b3]/30 overflow-hidden shadow-[0_0_40px_-10px_rgba(6,212,179,0.18)]">
+        <div className="antialiased relative isolate rounded-3xl bg-white/1.5 backdrop-blur-xs border border-[#06d4b3]/30 overflow-hidden shadow-[0_0_40px_-10px_rgba(6,212,179,0.18)]">
           <div className="relative z-10 p-8 sm:p-10">
             <h2 className="text-2xl font-semibold text-white tracking-tight mb-8">
               Send a message
@@ -186,7 +202,9 @@ export default function Contact() {
                     tabIndex={-1}
                     className="text-sm text-red-400 bg-red-400/10 border border-red-400/20 rounded-xl px-4 py-3"
                   >
-                    Something went wrong. Please try emailing me directly at{" "}
+                    {!FORMSPREE_ID
+                      ? "Contact form not configured. Please email me directly at "
+                      : "Something went wrong. Please try emailing me directly at "}
                     <a
                       href="mailto:ryan.tandean194@gmail.com"
                       className="underline text-red-300"
@@ -200,10 +218,19 @@ export default function Contact() {
                 <div className="flex flex-wrap items-center gap-4 pt-2">
                   <button
                     type="submit"
-                    disabled={status === "submitting"}
+                    disabled={status === "submitting" || !FORMSPREE_ID}
+                    title={
+                      !FORMSPREE_ID
+                        ? "Contact form not configured (missing VITE_FORMSPREE_ID)"
+                        : ""
+                    }
                     className="px-6 py-2.5 rounded-xl bg-[#06d4b3] text-black font-bold tracking-tight transition-all duration-200 hover:bg-[#06d4b3]/80 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                   >
-                    {status === "submitting" ? "Sending…" : "Send message"}
+                    {status === "submitting"
+                      ? "Sending…"
+                      : !FORMSPREE_ID
+                        ? "Form not configured"
+                        : "Send message"}
                   </button>
                   <a
                     href="mailto:ryan.tandean194@gmail.com"

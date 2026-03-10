@@ -4,6 +4,9 @@ import BackgroundAbyss from "../components/BackgroundAbyss";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
+const SITE_URL = "https://ryantandean.dev";
+const OG_IMAGE_URL = `${SITE_URL}/og-image.png`;
+
 export default function NotFound() {
   return (
     <main
@@ -13,6 +16,16 @@ export default function NotFound() {
       <Helmet>
         <title>404 · Ryan Tandean</title>
         <meta name="description" content="Page not found." />
+        <meta name="robots" content="noindex, nofollow" />
+        <meta property="og:title" content="404 · Ryan Tandean" />
+        <meta property="og:description" content="Page not found." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`${SITE_URL}/404`} />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="404 · Ryan Tandean" />
+        <meta name="twitter:description" content="Page not found." />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
       </Helmet>
       <div className="fixed inset-0 z-0 pointer-events-none">
         <BackgroundAbyss />

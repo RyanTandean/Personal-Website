@@ -53,6 +53,7 @@ export default function Navbar() {
   return (
     <nav
       id="site-nav"
+      aria-label="Primary navigation"
       className="fixed bottom-10 left-1/2 -translate-x-1/2 z-1001 antialiased"
     >
       {/* Container: We keep px-1.5 constant to avoid math shifts */}

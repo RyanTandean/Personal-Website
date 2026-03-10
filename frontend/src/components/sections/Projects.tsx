@@ -1,10 +1,9 @@
 // src/components/sections/Projects.tsx
-import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import ProjectCard from "../ProjectCard";
 import Modal from "../Modal";
 import ProjectDetail from "./ProjectDetail";
-// Reveal removed: use hover grow on project cards
 import type { Project } from "../../types/project";
 
 interface ProjectsProps {
@@ -12,7 +11,11 @@ interface ProjectsProps {
 }
 
 export default function Projects({ items }: ProjectsProps) {
-  const featuredProjects = items.filter((p) => p.featured);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const featuredProjects = useMemo(
+    () => items.filter((p) => p.featured),
+    [items],
+  );
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const btnRef = useRef<HTMLAnchorElement | null>(null);
   const [btnOverlay, setBtnOverlay] = useState(0);
@@ -25,6 +28,26 @@ export default function Projects({ items }: ProjectsProps) {
     btnRef.current.style.setProperty("--mouse-x", `${x}px`);
     btnRef.current.style.setProperty("--mouse-y", `${y}px`);
   };
+
+  // Deep-link: open modal from /?modal=<projectId>
+  useEffect(() => {
+    const modalId = searchParams.get("modal");
+    if (!modalId) return;
+    const id = Number(modalId);
+    if (!Number.isFinite(id)) return;
+    const found = featuredProjects.find((p) => p.id === id);
+    if (found) setSelectedProject(found.id);
+  }, [featuredProjects, searchParams]);
+
+  function openProject(projectId: number) {
+    setSearchParams({ modal: String(projectId) }, { replace: false });
+    setSelectedProject(projectId);
+  }
+
+  function closeProject() {
+    setSearchParams({}, { replace: false });
+    setSelectedProject(null);
+  }
 
   return (
     <section
@@ -42,7 +65,7 @@ export default function Projects({ items }: ProjectsProps) {
             onMouseMove={handleBtnMove}
             onMouseEnter={() => setBtnOverlay(1)}
             onMouseLeave={() => setBtnOverlay(0)}
-            className="self-start sm:self-auto relative inline-flex items-center h-12 md:h-14 px-5 bg-white/[0.03] border border-white/10 rounded-full text-sm font-semibold text-white/80 hover:bg-white/[0.05] transition transform duration-300 motion-safe:hover:scale-105"
+            className="self-start sm:self-auto relative inline-flex items-center h-12 md:h-14 px-5 bg-white/3 border border-white/10 rounded-full text-sm font-semibold text-white/80 hover:bg-white/5 transition-[transform,background-color,border-color,box-shadow] duration-300 ease-out motion-safe:hover:-translate-y-0.5"
             aria-label="View all projects"
           >
             <span className="relative z-20">
@@ -55,6 +78,13 @@ export default function Projects({ items }: ProjectsProps) {
                 background: `radial-gradient(300px circle at var(--mouse-x) var(--mouse-y), rgba(6,212,179,0.12), transparent 40%)`,
               }}
             />
+            <div
+              className="pointer-events-none absolute -inset-px z-10 rounded-full mix-blend-screen transition-opacity duration-300 ease-out"
+              style={{
+                opacity: btnOverlay,
+                background: `radial-gradient(180px circle at var(--mouse-x) var(--mouse-y), rgba(6,212,179,0.45), transparent 78%)`,
+              }}
+            />
           </Link>
         </div>
 
@@ -64,13 +94,14 @@ export default function Projects({ items }: ProjectsProps) {
               key={project.id}
               role="button"
               tabIndex={0}
+              aria-haspopup="dialog"
               aria-label={`Open ${project.title} project details`}
               className="w-full cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-3xl"
-              onClick={() => setSelectedProject(project.id)}
+              onClick={() => openProject(project.id)}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
-                  setSelectedProject(project.id);
+                  openProject(project.id);
                 }
               }}
             >
@@ -78,15 +109,9 @@ export default function Projects({ items }: ProjectsProps) {
             </div>
           ))}
         </div>
-        <Modal
-          isOpen={!!selectedProject}
-          onClose={() => setSelectedProject(null)}
-        >
+        <Modal isOpen={!!selectedProject} onClose={closeProject}>
           {selectedProject ? (
-            <ProjectDetail
-              projectId={selectedProject}
-              onBack={() => setSelectedProject(null)}
-            />
+            <ProjectDetail projectId={selectedProject} onBack={closeProject} />
           ) : null}
         </Modal>
       </div>
