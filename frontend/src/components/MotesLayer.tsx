@@ -61,7 +61,6 @@ const MotesLayer = memo(function MotesLayer({
 
               transform: "translate3d(0,0,0)",
               WebkitFontSmoothing: "antialiased",
-              // @ts-ignore
               "--drift-x": `${((i * 937) % 30) - 15}px`,
             } as React.CSSProperties
           }

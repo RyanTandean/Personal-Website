@@ -6,7 +6,7 @@ import React, {
   useMemo,
   type PropsWithChildren,
 } from "react";
-import * as math from "mathjs";
+// Use native Math instead of mathjs for simple numeric ops
 
 type GradualBlurProps = PropsWithChildren<{
   position?: "top" | "bottom" | "left" | "right";
@@ -124,7 +124,7 @@ const getGradientDirection = (position: string): string => {
   return directions[position] || "to bottom";
 };
 
-const debounce = <T extends (...a: any[]) => void>(fn: T, wait: number) => {
+const debounce = <T extends (...a: unknown[]) => void>(fn: T, wait: number) => {
   let t: ReturnType<typeof setTimeout>;
   return (...a: Parameters<T>) => {
     clearTimeout(t);
@@ -135,21 +135,26 @@ const useResponsiveDimension = (
   responsive: boolean | undefined,
   config: Partial<GradualBlurProps>,
   key: keyof GradualBlurProps,
-) => {
-  const [val, setVal] = useState<any>(config[key]);
+): string | undefined => {
+  const [val, setVal] = useState<string | undefined>(
+    config[key] as string | undefined,
+  );
   useEffect(() => {
     if (!responsive) return;
     const calc = () => {
       const w = window.innerWidth;
-      let v: any = config[key];
+      let v: string | undefined = config[key] as string | undefined;
       const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
       const k = cap(key as string);
-      if (w <= 480 && (config as any)["mobile" + k])
-        v = (config as any)["mobile" + k];
-      else if (w <= 768 && (config as any)["tablet" + k])
-        v = (config as any)["tablet" + k];
-      else if (w <= 1024 && (config as any)["desktop" + k])
-        v = (config as any)["desktop" + k];
+      const mobileKey = `mobile${k}` as keyof GradualBlurProps;
+      const tabletKey = `tablet${k}` as keyof GradualBlurProps;
+      const desktopKey = `desktop${k}` as keyof GradualBlurProps;
+      if (w <= 480 && (config[mobileKey] as string | undefined))
+        v = config[mobileKey] as string | undefined;
+      else if (w <= 768 && (config[tabletKey] as string | undefined))
+        v = config[tabletKey] as string | undefined;
+      else if (w <= 1024 && (config[desktopKey] as string | undefined))
+        v = config[desktopKey] as string | undefined;
       setVal(v);
     };
     const deb = debounce(calc, 100);
@@ -157,7 +162,7 @@ const useResponsiveDimension = (
     window.addEventListener("resize", deb);
     return () => window.removeEventListener("resize", deb);
   }, [responsive, config, key]);
-  return responsive ? val : (config as any)[key];
+  return responsive ? val : (config[key] as string | undefined);
 };
 
 const useIntersectionObserver = (
@@ -215,10 +220,15 @@ const GradualBlur: React.FC<GradualBlurProps> = (props) => {
 
   const blurDivs = useMemo(() => {
     const divs: React.ReactNode[] = [];
-    const deviceMemory =
-      typeof navigator !== "undefined" && (navigator as any).deviceMemory
-        ? (navigator as any).deviceMemory
-        : 4;
+    interface NavigatorWithDeviceMemory extends Navigator {
+      deviceMemory?: number;
+    }
+
+    const nav =
+      typeof navigator !== "undefined"
+        ? (navigator as NavigatorWithDeviceMemory)
+        : (undefined as unknown as NavigatorWithDeviceMemory | undefined);
+    const deviceMemory = nav?.deviceMemory ?? 4;
     const effectiveDivCount =
       deviceMemory <= 2 ? Math.min(3, config.divCount) : config.divCount;
     const increment = 100 / effectiveDivCount;
@@ -235,18 +245,17 @@ const GradualBlur: React.FC<GradualBlurProps> = (props) => {
 
       let blurValue: number;
       if (config.exponential) {
-        blurValue =
-          Number(math.pow(2, progress * 4)) * 0.0625 * currentStrength;
+        blurValue = Math.pow(2, progress * 4) * 0.0625 * currentStrength;
       } else {
         blurValue = 0.0625 * (progress * config.divCount + 1) * currentStrength;
       }
       // Reduce blur on very low-memory devices to avoid heavy backdrop-filter cost
       if (deviceMemory <= 2) blurValue *= 0.6;
 
-      const p1 = math.round((increment * i - increment) * 10) / 10;
-      const p2 = math.round(increment * i * 10) / 10;
-      const p3 = math.round((increment * i + increment) * 10) / 10;
-      const p4 = math.round((increment * i + increment * 2) * 10) / 10;
+      const p1 = Math.round((increment * i - increment) * 10) / 10;
+      const p2 = Math.round(increment * i * 10) / 10;
+      const p3 = Math.round((increment * i + increment) * 10) / 10;
+      const p4 = Math.round((increment * i + increment * 2) * 10) / 10;
 
       let gradient = `transparent ${p1}%, black ${p2}%`;
       if (p3 <= 100) gradient += `, black ${p3}%`;
@@ -304,8 +313,7 @@ const GradualBlur: React.FC<GradualBlurProps> = (props) => {
     return baseStyle;
   }, [config, responsiveHeight, responsiveWidth, isVisible]);
 
-  const { hoverIntensity, animated, onAnimationComplete, duration } =
-    config as any;
+  const { hoverIntensity, animated, onAnimationComplete, duration } = config;
   useEffect(() => {
     if (isVisible && animated === "scroll" && onAnimationComplete) {
       const t = setTimeout(
@@ -332,8 +340,7 @@ const GradualBlur: React.FC<GradualBlurProps> = (props) => {
 
 const GradualBlurMemo = React.memo(GradualBlur);
 GradualBlurMemo.displayName = "GradualBlur";
-(GradualBlurMemo as any).PRESETS = PRESETS;
-(GradualBlurMemo as any).CURVE_FUNCTIONS = CURVE_FUNCTIONS;
+export { PRESETS, CURVE_FUNCTIONS };
 export default GradualBlurMemo;
 
 const injectStyles = () => {

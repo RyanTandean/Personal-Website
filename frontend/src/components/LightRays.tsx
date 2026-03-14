@@ -2,10 +2,14 @@ import { useRef, useEffect, useState, memo } from "react";
 import { Renderer, Program, Triangle, Mesh } from "ogl";
 // Device heuristics: limit DPR based on available device memory
 const getMaxDPR = () => {
-  const mem =
-    typeof navigator !== "undefined" && (navigator as any).deviceMemory
-      ? (navigator as any).deviceMemory
-      : 4;
+  interface NavigatorWithDeviceMemory extends Navigator {
+    deviceMemory?: number;
+  }
+  const nav =
+    typeof navigator !== "undefined"
+      ? (navigator as NavigatorWithDeviceMemory)
+      : (undefined as unknown as NavigatorWithDeviceMemory | undefined);
+  const mem = nav?.deviceMemory ?? 4;
   if (mem <= 2) return 1;
   if (mem <= 4) return 1.5;
   return 2;
@@ -411,7 +415,9 @@ void main() {
       };
     };
 
-    initializeWebGL();
+    // initializeWebGL returns a promise; intentionally run it in background
+    // and explicitly mark it as intentionally not-awaited to satisfy lint.
+    void initializeWebGL();
 
     return () => {
       if (cleanupFunctionRef.current) {

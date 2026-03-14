@@ -80,7 +80,7 @@ export default function Navbar() {
             <NavItem
               {...item}
               isActive={activeIndex === idx}
-              onClick={() => navigate(item.path)}
+              onClick={() => void navigate(item.path)}
               setRef={(el) => {
                 containerRefs.current[idx] = el;
               }}

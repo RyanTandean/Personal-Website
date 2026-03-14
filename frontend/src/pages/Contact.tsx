@@ -7,7 +7,7 @@ import Footer from "../components/Footer";
 
 const SITE_URL = "https://ryantandean.dev";
 const OG_IMAGE_URL = `${SITE_URL}/og-image.png`;
-const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID;
+const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID as string | undefined;
 
 const inputClass =
   "mt-1 w-full rounded-xl bg-white/[0.04] border border-white/10 px-4 py-2.5 text-white placeholder-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06d4b3] transition-colors duration-200 hover:border-white/20";
@@ -130,7 +130,11 @@ export default function Contact() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+              <form
+                onSubmit={(e) => void handleSubmit(e)}
+                className="space-y-6"
+                noValidate
+              >
                 {/* Honeypot */}
                 <input
                   type="text"
