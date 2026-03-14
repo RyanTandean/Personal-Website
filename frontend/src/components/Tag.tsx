@@ -1,4 +1,4 @@
-import React from "react";
+// Removed unused React default import (JSX runtime handles JSX)
 import { tagMeta } from "../data/tagColors";
 
 type Props = {

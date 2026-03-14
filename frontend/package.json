@@ -7,6 +7,11 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc -b --pretty false",
+    "check": "npm run typecheck && npm run lint && npm run build",
+    "ci": "npm run check",
+    "audit:deps": "npm audit --audit-level=high",
     "preview": "vite preview"
   },
   "dependencies": {
