@@ -53,7 +53,7 @@ export default function About() {
         <link rel="canonical" href={`${SITE_URL}/about`} />
       </Helmet>
 
-      <div className="fixed inset-0 z-0 pointer-events-none">
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <BackgroundAbyss />
       </div>
 

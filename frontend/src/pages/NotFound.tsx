@@ -27,7 +27,7 @@ export default function NotFound() {
         <meta name="twitter:description" content="Page not found." />
         <meta name="twitter:image" content={OG_IMAGE_URL} />
       </Helmet>
-      <div className="fixed inset-0 z-0 pointer-events-none">
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <BackgroundAbyss />
       </div>
 

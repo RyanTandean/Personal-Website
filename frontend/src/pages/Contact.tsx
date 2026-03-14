@@ -77,7 +77,7 @@ export default function Contact() {
         <link rel="canonical" href={`${SITE_URL}/contact`} />
       </Helmet>
       {/* Background */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <BackgroundAbyss />
       </div>
 

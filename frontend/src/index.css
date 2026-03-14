@@ -4,6 +4,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #020617;
+  --scroll: 0;
+  --grad: 0.15;
 }
 
 /* Increase base font-size to scale UI up across the site. */
@@ -25,7 +27,12 @@ html {
 
 html,
 body {
-  background-color: #020617;
+  background: linear-gradient(
+    to bottom,
+    rgba(6, 212, 179, 0.03) 0%,
+    rgba(2, 16, 24, 0.45) 20%,
+    #020617 60%
+  );
   color: #fff;
 }
 .preload * {
@@ -59,31 +66,32 @@ body {
 @keyframes orbitalDrift {
   0% {
     transform: translate3d(0, 0, 0) scale(1);
-    opacity: 0;
+    opacity: 0.15;
   }
   10% {
-    opacity: 1;
+    opacity: 0.9;
   }
   /* The Sway points */
   33% {
-    transform: translate3d(var(--drift-x), -25vh, 0) scale(1.1);
+    transform: translate3d(var(--drift-x), -12vh, 0) scale(1.06);
   }
   66% {
-    transform: translate3d(calc(var(--drift-x) * -1), -50vh, 0) scale(0.9);
+    transform: translate3d(calc(var(--drift-x) * -1), -28vh, 0) scale(0.95);
   }
   90% {
     opacity: 1;
   }
   100% {
-    /* Ensure this matches the starting X/Scale for a seamless loop */
-    transform: translate3d(0, -75vh, 0) scale(1);
-    opacity: 0;
+    /* Reduce final travel and keep a low opacity so motes don't vanish abruptly when combined with scroll */
+    transform: translate3d(0, -40vh, 0) scale(1);
+    opacity: 0.15;
   }
 }
 
 .motes {
   position: absolute;
-  inset: -16%;
+  /* keep a small overflow region but not too large to avoid surprising scroll */
+  inset: -8%;
   mix-blend-mode: screen;
 }
 

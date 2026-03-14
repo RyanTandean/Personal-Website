@@ -84,8 +84,8 @@ export default function Projects() {
         <meta name="twitter:image" content={OG_IMAGE_URL} />
         <link rel="canonical" href={`${SITE_URL}/projects`} />
       </Helmet>
-      {/* Background */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
+      {/* Background (now participates in scroll) */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <BackgroundAbyss />
       </div>
 

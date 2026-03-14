@@ -39,7 +39,7 @@ export default function ExperiencesPage() {
         <link rel="canonical" href={`${SITE_URL}/experience`} />
       </Helmet>
       {/* Background */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <BackgroundAbyss />
       </div>
 

@@ -1,33 +1,35 @@
-import LightRays from './LightRays'; 
+import LightRays from "./LightRays";
 import MotesLayer from "./MotesLayer";
-import { memo } from 'react';
+import { memo } from "react";
+import useScrollParallax from "../hooks/useScrollParallax";
 
 const BackgroundAbyss = memo(function BackgroundAbyss() {
+  const scroll = useScrollParallax();
+
   return (
     <div
-      className="fixed inset-0 z-0 pointer-events-none will-change-transform bg-black"
+      className="absolute inset-0 z-0 pointer-events-none will-change-transform bg-black"
       style={{ transform: "translateZ(0)" }}
       aria-hidden="true"
     >
-      {/* ATMOSPHERIC WRAPPER: This handles the smoothing */}
+      {/* ATMOSPHERIC WRAPPER: This handles the smoothing and now participates in scroll */}
       <div
         className="absolute inset-0 transition-all duration-700 ease-out"
         style={{
-          // Fixed background: keep constant appearance to avoid scroll-driven repaints
           filter: `brightness(1) blur(0px)`,
           opacity: 1,
         }}
       >
-        {/* 1. BASE GRADIENT OVERLAY */}
+        {/* 1. BASE GRADIENT OVERLAY — uses CSS var --grad (0..1) updated by the hook */}
         <div
           className="absolute inset-0 z-0"
           style={{
             background:
               "linear-gradient(to bottom, \
-                rgba(6, 212, 179, 0.25) 0%,   /* Bright Mint/Teal tint at the top */ \
-                rgba(2, 50, 50, 1) 15%,       /* Stronger deep teal */ \
-                rgba(2, 60, 80, 0.8) 50%,     /* Brighter Blue-Teal midsection */ \
-                rgba(0, 0, 0, 1) 100%)", /* Still fades to black at the floor */
+                rgba(6, 212, 179, var(--grad, 0.25)) 0%, \
+                rgba(2, 50, 50, 1) 15%, \
+                rgba(2, 60, 80, 0.8) 50%, \
+                rgba(0, 0, 0, 1) 100%)",
           }}
         />
 
@@ -49,9 +51,8 @@ const BackgroundAbyss = memo(function BackgroundAbyss() {
           />
         </div>
 
-        {/* 3. MOTES (Dimmed by the parent wrapper) */}
-        <MotesLayer count={20} />
-
+        {/* 3. MOTES — moderate motes count (36) to balance density and performance */}
+        <MotesLayer count={36} depth={Math.min(1, scroll)} />
       </div>
     </div>
   );

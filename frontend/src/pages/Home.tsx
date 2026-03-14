@@ -41,8 +41,8 @@ export default function App() {
         <meta name="twitter:image" content={OG_IMAGE_URL} />
         <link rel="canonical" href={`${SITE_URL}/`} />
       </Helmet>
-      {/* 1. PERSISTENT BACKGROUND LAYER */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
+      {/* 1. PERSISTENT BACKGROUND LAYER (now participates in scroll) */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <BackgroundAbyss />
       </div>
 

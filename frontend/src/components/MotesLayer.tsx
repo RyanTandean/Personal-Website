@@ -21,9 +21,13 @@ const MotesLayer = memo(function MotesLayer({
   const motes = useMemo(() => {
     const rand = mulberry32(20260216);
     return Array.from({ length: count }).map(() => {
+      // Bias top distribution away from extremes to avoid clustering at the bottom.
+      // Use a slightly narrowed range (10%..90%) and a mild centralizing effect.
+      const left = rand() * 120 - 10; // allow slight overflow horizontally
+      const top = ((rand() + rand() + rand()) / 3) * 80 + 10; // ~10%..90%, more centered
       return {
-        left: rand() * 100,
-        top: rand() * 100,
+        left,
+        top,
         size: 2 + rand() * 4,
         opacity: 0.3 + rand() * 0.4,
         duration: 40 + rand() * 40,
@@ -33,10 +37,11 @@ const MotesLayer = memo(function MotesLayer({
 
   return (
     <div
-      className="motes-container absolute inset-0 overflow-hidden pointer-events-none transition-transform duration-700 ease-out"
+      className="motes-container absolute inset-0 overflow-hidden pointer-events-none transition-transform duration-700 ease-out motes"
       style={{
-        // Parallax: As you scroll down (depth increases), motes move UP
-        transform: `translate3d(0, ${depth * -500}px, 0)`,
+        // Parallax: As you scroll down (depth increases), motes should rise.
+        // Increase multiplier slightly so motes move more noticeably on full scroll.
+        transform: `translate3d(0, ${-depth * 420}px, 0)`,
         // keep will-change on container only to avoid promoting many layers
         willChange: "transform",
       }}
@@ -55,8 +60,9 @@ const MotesLayer = memo(function MotesLayer({
               top: `${mote.top}%`,
               opacity: mote.opacity,
 
-              // Apply speed multiplier based on depth (slower in the deep)
-              animation: `orbitalDrift ${mote.duration * (1 + depth)}s infinite linear`,
+              // Keep animation duration independent of scroll depth so updates
+              // to `depth` don't restart CSS animations (which causes abrupt flicker).
+              animation: `orbitalDrift ${mote.duration}s infinite linear`,
               animationDelay: `${-(i * 1.5)}s`,
 
               transform: "translate3d(0,0,0)",
