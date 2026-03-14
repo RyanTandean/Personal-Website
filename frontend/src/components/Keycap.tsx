@@ -32,7 +32,7 @@ export default function Keycap({
         transform: `translate(${xOffset}px, ${yOffset}px) rotate(${rotation}deg)`,
       }}
     >
-      <div className="absolute inset-0 transition-all duration-100 ease-out group-hover:translate-y-[4px] group-active:translate-y-[11px]">
+      <div className="absolute inset-0 transition-all duration-100 ease-out group-hover:translate-y-1 group-active:translate-y-2.75">
         {/* FRONT WALL: Restored Original Deep Tones */}
         <div
           className="absolute inset-0"

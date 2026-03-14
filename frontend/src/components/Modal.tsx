@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 // Focusable element selectors for focus trap
@@ -20,14 +20,12 @@ export default function Modal({
 }: ModalProps) {
   const panelRef = useRef<HTMLDivElement | null>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
-  const [mounted, setMounted] = useState(isOpen);
 
   // Track previous focus and body scroll lock
   useEffect(() => {
     if (isOpen) {
       previouslyFocused.current = document.activeElement as HTMLElement | null;
       document.body.style.overflow = "hidden";
-      setMounted(true);
     } else {
       document.body.style.overflow = "";
     }
@@ -84,10 +82,8 @@ export default function Modal({
     };
   }, [isOpen, onClose]);
 
-  if (!mounted) return null;
-
   return (
-    <AnimatePresence onExitComplete={() => setMounted(false)}>
+    <AnimatePresence>
       {isOpen && (
         <motion.div
           key="modal-overlay"

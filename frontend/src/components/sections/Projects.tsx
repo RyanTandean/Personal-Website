@@ -1,5 +1,5 @@
 // src/components/sections/Projects.tsx
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import ProjectCard from "../ProjectCard";
 import Modal from "../Modal";
@@ -16,7 +16,14 @@ export default function Projects({ items }: ProjectsProps) {
     () => items.filter((p) => p.featured),
     [items],
   );
-  const [selectedProject, setSelectedProject] = useState<number | null>(null);
+  // Derive selected project from URL `?modal=` param (URL is source-of-truth)
+  const selectedProject = useMemo(() => {
+    const modalId = searchParams.get("modal");
+    if (!modalId) return null;
+    const id = Number(modalId);
+    if (!Number.isFinite(id)) return null;
+    return featuredProjects.find((p) => p.id === id)?.id ?? null;
+  }, [searchParams, featuredProjects]);
   const btnRef = useRef<HTMLAnchorElement | null>(null);
   const [btnOverlay, setBtnOverlay] = useState(0);
 
@@ -29,24 +36,14 @@ export default function Projects({ items }: ProjectsProps) {
     btnRef.current.style.setProperty("--mouse-y", `${y}px`);
   };
 
-  // Deep-link: open modal from /?modal=<projectId>
-  useEffect(() => {
-    const modalId = searchParams.get("modal");
-    if (!modalId) return;
-    const id = Number(modalId);
-    if (!Number.isFinite(id)) return;
-    const found = featuredProjects.find((p) => p.id === id);
-    if (found) setSelectedProject(found.id);
-  }, [featuredProjects, searchParams]);
+  // URL-derived modal — no effect needed because `selectedProject` is computed
 
   function openProject(projectId: number) {
     setSearchParams({ modal: String(projectId) }, { replace: false });
-    setSelectedProject(projectId);
   }
 
   function closeProject() {
     setSearchParams({}, { replace: false });
-    setSelectedProject(null);
   }
 
   return (

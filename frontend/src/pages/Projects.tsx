@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useSearchParams } from "react-router-dom";
 import BackgroundAbyss from "../components/BackgroundAbyss";
@@ -16,7 +16,15 @@ const SITE_URL = "https://ryantandean.dev";
 const OG_IMAGE_URL = `${SITE_URL}/og-image.png`;
 export default function Projects() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [selectedProject, setSelectedProject] = useState<number | null>(null);
+
+  // Derive selected project from URL `?modal=` param (URL is source-of-truth)
+  const selectedProjectId = useMemo(() => {
+    const modalId = searchParams.get("modal");
+    if (!modalId) return null;
+    const id = Number(modalId);
+    if (!Number.isFinite(id)) return null;
+    return myProjects.find((p) => p.id === id)?.id ?? null;
+  }, [searchParams]);
   const [activeTags, setActiveTags] = useState<TagName[]>([]);
 
   const allTags = useMemo(
@@ -24,24 +32,15 @@ export default function Projects() {
     [],
   );
   // Deep-link: open modal from /projects?modal=id
-  useEffect(() => {
-    const modalId = searchParams.get("modal");
-    if (!modalId) return;
-    const id = Number(modalId);
-    if (!Number.isFinite(id)) return;
-    const found = myProjects.find((p) => p.id === id);
-    if (found) setSelectedProject(found.id);
-  }, [searchParams]);
+  // URL-derived modal — no effect needed because `selectedProjectId` is computed
 
   // Sync browser history for modal deep-linking
   function openProject(id: number) {
     setSearchParams({ modal: id.toString() }, { replace: false });
-    setSelectedProject(id);
   }
 
   function closeProject() {
     setSearchParams({}, { replace: false });
-    setSelectedProject(null);
   }
 
   function toggleTag(tag: TagName) {
@@ -190,16 +189,16 @@ export default function Projects() {
 
       {/* Modal */}
       <Modal
-        isOpen={!!selectedProject}
+        isOpen={!!selectedProjectId}
         onClose={closeProject}
         ariaLabel={
-          selectedProject
-            ? myProjects.find((p) => p.id === selectedProject)?.title
+          selectedProjectId
+            ? myProjects.find((p) => p.id === selectedProjectId)?.title
             : undefined
         }
       >
-        {selectedProject && (
-          <ProjectDetail projectId={selectedProject} onBack={closeProject} />
+        {selectedProjectId && (
+          <ProjectDetail projectId={selectedProjectId} onBack={closeProject} />
         )}
       </Modal>
 
