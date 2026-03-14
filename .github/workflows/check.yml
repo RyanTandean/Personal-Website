@@ -16,7 +16,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: "22.12"
           cache: "npm"
 
       - name: Debug info
@@ -37,3 +37,7 @@ jobs:
       - name: Run checks
         working-directory: frontend
         run: npm run check
+      - name: Clean node_modules and package-lock.json
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install --legacy-peer-deps
