@@ -41,13 +41,13 @@ const BackgroundAbyss = memo(function BackgroundAbyss() {
             raysSpeed={0.2}
             lightSpread={1.0}
             rayLength={3.0}
-            noiseAmount={0.04}
+            noiseAmount={0.10}
             distortion={0.05}
             pulsating={true}
             fadeDistance={5}
             mouseInfluence={0}
             followMouse={false}
-            saturation={3}
+            saturation={5}
           />
         </div>
 

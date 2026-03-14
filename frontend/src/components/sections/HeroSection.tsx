@@ -12,13 +12,13 @@ export default function HeroSection() {
         <TerminalBadge />
         <h1 className="text-3xl md:text-5xl font-medium tracking-[0.12em] text-white [text-shadow:0_0_24px_rgba(56,189,248,0.7),0_0_6px_rgba(255,255,255,0.9)]">
           <span>Hi, I’m Ryan.</span>
-          <span className="block mt-2">Data scientist-in-training.</span>
+          <span className="block mt-2">Aspiring Data Scientist</span>
         </h1>
 
         <p className="mt-4 text-lg md:text-2xl text-gray-300 font-light max-w-2xl">
           <span className="block">Data Science @ University of Waterloo.</span>
           <span className="block">
-            I use data to build solutions and aid decision-making.
+            I use data to build solutions and inform decision-making.
           </span>
         </p>
       </div>

@@ -7,6 +7,8 @@ const navLinks = [
   { label: "Experience", path: "/experience" },
   { label: "About", path: "/about" },
   { label: "Contact", path: "/contact" },
+  // Resume (static PDF served from public/resume.pdf)
+  { label: "Resume", path: "/resume.pdf", external: true },
 ];
 
 export default function Footer() {
@@ -28,12 +30,23 @@ export default function Footer() {
           <ul className="flex gap-5">
             {navLinks.map((link) => (
               <li key={link.path}>
-                <Link
-                  to={link.path}
-                  className="text-sm text-white/40 hover:text-white transition-colors duration-200"
-                >
-                  {link.label}
-                </Link>
+                {link.external ? (
+                  <a
+                    href={link.path}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-white/40 hover:text-white transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded"
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link
+                    to={link.path}
+                    className="text-sm text-white/40 hover:text-white transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded"
+                  >
+                    {link.label}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>

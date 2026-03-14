@@ -13,7 +13,7 @@ export function useScrollParallax() {
     if (prefersReduced) {
       document.documentElement.style.setProperty("--scroll", "0");
       document.documentElement.style.setProperty("--grad", "0");
-      setProgress(0);
+      // progress already defaults to 0; avoid synchronous setState inside effect
       return;
     }
 
