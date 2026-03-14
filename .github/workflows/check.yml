@@ -17,6 +17,17 @@ jobs:
           node-version: "18"
           cache: "npm"
 
+      - name: Debug info
+        run: |
+          echo "--- runner info ---"
+          uname -a || true
+          node --version || true
+          npm --version || true
+          echo "--- frontend files ---"
+          ls -la frontend || true
+          echo "--- package.json ---"
+          cat frontend/package.json || true
+
       - name: Install dependencies
         working-directory: frontend
         run: npm ci
