@@ -96,7 +96,11 @@ export default function Projects({ items }: ProjectsProps) {
               className="w-full cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-3xl"
               onClick={() => openProject(project.id)}
               onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
+                if (
+                  e.key === "Enter" ||
+                  e.key === " " ||
+                  e.key === "Spacebar"
+                ) {
                   e.preventDefault();
                   openProject(project.id);
                 }
@@ -106,7 +110,15 @@ export default function Projects({ items }: ProjectsProps) {
             </div>
           ))}
         </div>
-        <Modal isOpen={!!selectedProject} onClose={closeProject}>
+        <Modal
+          isOpen={!!selectedProject}
+          onClose={closeProject}
+          ariaLabel={
+            selectedProject
+              ? featuredProjects.find((p) => p.id === selectedProject)?.title
+              : undefined
+          }
+        >
           {selectedProject ? (
             <ProjectDetail projectId={selectedProject} onBack={closeProject} />
           ) : null}

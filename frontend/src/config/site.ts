@@ -1,5 +1,5 @@
 const configuredSiteUrl =
-  import.meta.env.VITE_SITE_URL ?? "https://ryantandean.com";
+  String(import.meta.env.VITE_SITE_URL ?? "https://ryantandean.com");
 
 // Keep canonical URLs stable (no trailing slash duplication).
 export const SITE_URL = configuredSiteUrl.replace(/\/+$/, "");

@@ -159,7 +159,11 @@ export default function Projects() {
                 tabIndex={0}
                 onClick={() => openProject(project.id)}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
+                  if (
+                    e.key === "Enter" ||
+                    e.key === " " ||
+                    e.key === "Spacebar"
+                  ) {
                     e.preventDefault();
                     openProject(project.id);
                   }

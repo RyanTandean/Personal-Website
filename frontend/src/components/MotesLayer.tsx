@@ -18,6 +18,16 @@ function randomNormal01(rand: () => number, mean = 0.5, stdDev = 0.2): number {
   return Math.min(1, Math.max(0, n));
 }
 
+function hashU32(input: string): number {
+  // FNV-1a 32-bit hash for a deterministic PRNG seed.
+  let hash = 0x811c9dc5;
+  for (let i = 0; i < input.length; i += 1) {
+    hash ^= input.charCodeAt(i);
+    hash = Math.imul(hash, 0x01000193);
+  }
+  return hash >>> 0;
+}
+
 interface MotesLayerProps {
   count: number;
   depth?: number; // 0 to 1
@@ -28,7 +38,7 @@ const MotesLayer = memo(function MotesLayer({
   depth = 0,
 }: MotesLayerProps) {
   const motes = useMemo(() => {
-    const seed = (Date.now() ^ Math.floor(Math.random() * 0xffffffff)) >>> 0;
+    const seed = hashU32(`motes:${count}`);
     const rand = mulberry32(seed);
     return Array.from({ length: count }).map(() => {
       // Normal-distributed spawn: cluster around center with fewer edge outliers.
