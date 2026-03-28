@@ -8,9 +8,7 @@ import HeroSection from "../components/sections/HeroSection";
 import BackgroundAbyss from "../components/BackgroundAbyss";
 import GradualBlur from "../components/GradualBlur";
 import Footer from "../components/Footer";
-
-const SITE_URL = "https://ryantandean.dev";
-const OG_IMAGE_URL = `${SITE_URL}/og-image.png`;
+import { OG_IMAGE_URL, SITE_URL } from "../config/site";
 
 export default function App() {
   return (

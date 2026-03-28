@@ -11,9 +11,7 @@ import { myProjects } from "../data/project";
 import Tag from "../components/Tag";
 import Footer from "../components/Footer";
 import type { TagName } from "../data/tagColors";
-
-const SITE_URL = "https://ryantandean.dev";
-const OG_IMAGE_URL = `${SITE_URL}/og-image.png`;
+import { OG_IMAGE_URL, SITE_URL } from "../config/site";
 export default function Projects() {
   const [searchParams, setSearchParams] = useSearchParams();
 

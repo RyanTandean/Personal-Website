@@ -27,7 +27,7 @@ export default function Footer() {
 
         {/* Centre: quick nav */}
         <nav aria-label="Footer navigation">
-          <ul className="flex gap-5">
+          <ul className="flex flex-wrap justify-center gap-x-5 gap-y-3">
             {navLinks.map((link) => (
               <li key={link.path}>
                 {link.external ? (

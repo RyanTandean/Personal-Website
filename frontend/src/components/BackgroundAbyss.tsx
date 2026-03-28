@@ -8,7 +8,7 @@ const BackgroundAbyss = memo(function BackgroundAbyss() {
 
   return (
     <div
-      className="absolute inset-0 z-0 pointer-events-none will-change-transform bg-black"
+      className="absolute inset-0 z-0 pointer-events-none will-change-transform bg-black overflow-hidden"
       style={{ transform: "translateZ(0)" }}
       aria-hidden="true"
     >
@@ -41,12 +41,12 @@ const BackgroundAbyss = memo(function BackgroundAbyss() {
             raysSpeed={0.2}
             lightSpread={1.0}
             rayLength={3.0}
-            noiseAmount={0.10}
-            distortion={0.05}
+            noiseAmount={0}
+            distortion={0.1}
             pulsating={true}
             fadeDistance={5}
-            mouseInfluence={0}
-            followMouse={false}
+            mouseInfluence={0.1}
+            followMouse={true}
             saturation={5}
           />
         </div>

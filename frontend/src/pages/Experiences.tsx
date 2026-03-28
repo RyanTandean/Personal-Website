@@ -5,9 +5,7 @@ import ExperienceCard from "../components/ExperienceCard";
 import GradualBlur from "../components/GradualBlur";
 import { myExperiences } from "../data/experience";
 import Footer from "../components/Footer";
-
-const SITE_URL = "https://ryantandean.dev";
-const OG_IMAGE_URL = `${SITE_URL}/og-image.png`;
+import { OG_IMAGE_URL, SITE_URL } from "../config/site";
 
 export default function ExperiencesPage() {
   return (

@@ -41,7 +41,7 @@ export default function ExperienceCard({
       role="article"
       aria-labelledby={titleId}
       aria-describedby={descId}
-      className="glow-breathe card-lift-smooth antialiased relative z-30 isolate group flex flex-col rounded-3xl min-h-48 sm:min-h-56 md:min-h-64 bg-white/1.5 backdrop-blur-xs border border-white/10 overflow-hidden hover:border-[#06d4b3]/40 hover:shadow-[0_0_40px_-10px_rgba(6,212,179,0.18)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+      className="glow-breathe card-lift-smooth antialiased relative z-30 isolate group flex flex-col rounded-3xl min-h-48 sm:min-h-56 md:min-h-64 bg-white/2 backdrop-blur-xs border border-white/10 overflow-hidden hover:border-[#06d4b3]/40 hover:shadow-[0_0_40px_-10px_rgba(6,212,179,0.18)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
     >
       {/* THE SPOTLIGHT OVERLAY */}
       <div
@@ -58,12 +58,12 @@ export default function ExperienceCard({
 
       {/* Border-adjacent glow without mask-composite to avoid Firefox artifacts */}
       <div
-        className="pointer-events-none absolute -inset-px z-10 rounded-3xl mix-blend-screen transition-opacity duration-300 ease-out will-change-opacity"
+        className="pointer-events-none absolute inset-0 z-10 rounded-3xl transition-opacity duration-300 ease-out will-change-opacity"
         style={{
           opacity: overlayOpacity,
           background: `radial-gradient(
             300px circle at var(--mouse-x) var(--mouse-y), 
-            rgba(6, 212, 179, 0.4), 
+            rgba(6, 212, 179, 0.22), 
             transparent 80%
           )`,
         }}

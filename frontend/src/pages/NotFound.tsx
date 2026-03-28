@@ -3,9 +3,7 @@ import { Helmet } from "react-helmet-async";
 import BackgroundAbyss from "../components/BackgroundAbyss";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-
-const SITE_URL = "https://ryantandean.dev";
-const OG_IMAGE_URL = `${SITE_URL}/og-image.png`;
+import { OG_IMAGE_URL, SITE_URL } from "../config/site";
 
 export default function NotFound() {
   return (

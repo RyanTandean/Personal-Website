@@ -4,6 +4,9 @@ import Tag from "./Tag";
 
 const ProjectImage = lazy(() => import("./ProjectImage"));
 
+// Keep featured metadata for sorting/filtering, but hide the badge for now.
+const SHOW_FEATURED_BADGE = false;
+
 export default function ProjectCard({ project }: { project: Project }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const titleId = `project-title-${project.id}`;
@@ -64,7 +67,7 @@ export default function ProjectCard({ project }: { project: Project }) {
               </span>
             )}
           </div>
-          {project.featured && (
+          {SHOW_FEATURED_BADGE && project.featured && (
             <span className="px-3 py-0.5 rounded-full border border-emerald-500/50 bg-emerald-500/10 text-sm text-emerald-400 font-bold uppercase tracking-tight shadow-[0_0_10px_rgba(16,185,129,0.2)]">
               Featured
             </span>

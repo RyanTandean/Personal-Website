@@ -59,32 +59,55 @@ body {
 }
 
 .mote-element {
-  /* This curve (Ease-in-out) makes the sway feel weighted */
-  animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+  /* Default to linear to keep drift continuous across keyframes. */
+  animation-timing-function: linear;
 }
 
 @keyframes orbitalDrift {
   0% {
     transform: translate3d(0, 0, 0) scale(1);
-    opacity: 0.15;
+    opacity: 0;
   }
-  10% {
+  8% {
+    opacity: 0.45;
+  }
+  16% {
     opacity: 0.9;
   }
-  /* The Sway points */
-  33% {
-    transform: translate3d(var(--drift-x), -12vh, 0) scale(1.06);
+  /* Multiple sway arcs make lateral drift more legible during ascent. */
+  25% {
+    transform: translate3d(
+        calc(var(--drift-x) * 0.9),
+        calc(var(--rise-end, -240vh) * 0.2),
+        0
+      )
+      scale(1.05);
   }
-  66% {
-    transform: translate3d(calc(var(--drift-x) * -1), -28vh, 0) scale(0.95);
+  50% {
+    transform: translate3d(
+        calc(var(--drift-x) * -1.15),
+        calc(var(--rise-end, -240vh) * 0.48),
+        0
+      )
+      scale(0.95);
   }
-  90% {
-    opacity: 1;
+  75% {
+    transform: translate3d(
+        calc(var(--drift-x) * 0.75),
+        calc(var(--rise-end, -240vh) * 0.76),
+        0
+      )
+      scale(1.02);
+  }
+  84% {
+    opacity: 0.9;
+  }
+  94% {
+    opacity: 0.4;
   }
   100% {
-    /* Reduce final travel and keep a low opacity so motes don't vanish abruptly when combined with scroll */
-    transform: translate3d(0, -40vh, 0) scale(1);
-    opacity: 0.15;
+    transform: translate3d(0, var(--rise-end, -240vh), 0) scale(1);
+    opacity: 0;
   }
 }
 
@@ -308,28 +331,28 @@ body {
 /* Shared card lift motion to avoid transform snapping across browsers. */
 .card-lift-smooth {
   position: relative;
-  top: 0;
+  transform: translate3d(0, 0, 0);
   transition:
-    top 760ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 620ms cubic-bezier(0.16, 1, 0.3, 1),
     border-color 320ms ease,
     box-shadow 320ms ease;
-  will-change: top, box-shadow;
+  will-change: transform, box-shadow;
 }
 
 .card-lift-smooth:hover {
-  top: -8px;
+  transform: translate3d(0, -8px, 0);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .card-lift-smooth {
     transition:
-      top 240ms ease,
+      transform 220ms ease,
       border-color 180ms ease,
       box-shadow 180ms ease;
   }
 
   .card-lift-smooth:hover {
-    top: -5px;
+    transform: translate3d(0, -5px, 0);
   }
 }
 

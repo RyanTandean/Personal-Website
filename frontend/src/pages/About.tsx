@@ -4,9 +4,7 @@ import BackgroundAbyss from "../components/BackgroundAbyss";
 import Navbar from "../components/Navbar";
 import GradualBlur from "../components/GradualBlur";
 import Footer from "../components/Footer";
-
-const SITE_URL = "https://ryantandean.dev";
-const OG_IMAGE_URL = `${SITE_URL}/og-image.png`;
+import { OG_IMAGE_URL, SITE_URL } from "../config/site";
 
 const skills = [
   "Python",
