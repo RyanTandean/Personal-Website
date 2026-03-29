@@ -8,7 +8,7 @@ const BackgroundAbyss = memo(function BackgroundAbyss() {
 
   return (
     <div
-      className="absolute inset-0 z-0 pointer-events-none will-change-transform bg-black overflow-hidden"
+      className="absolute inset-0 z-0 pointer-events-none bg-black overflow-hidden"
       style={{ transform: "translateZ(0)" }}
       aria-hidden="true"
     >

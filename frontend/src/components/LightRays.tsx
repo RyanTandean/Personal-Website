@@ -15,6 +15,21 @@ const getMaxDPR = () => {
   return 2;
 };
 
+const MIN_RENDER_WIDTH = 280;
+const MIN_RENDER_HEIGHT = 280;
+const INIT_RETRY_DELAY_MS = 120;
+const MAX_INIT_RETRIES = 12;
+
+const isRenderableViewport = (w: number, h: number) =>
+  w >= MIN_RENDER_WIDTH && h >= MIN_RENDER_HEIGHT;
+
+const getAdaptiveDPR = (heightCssPx: number) => {
+  const base = getMaxDPR();
+  if (heightCssPx < 520) return Math.min(base, 1);
+  if (heightCssPx < 700) return Math.min(base, 1.25);
+  return base;
+};
+
 export type RaysOrigin =
   | "top-center"
   | "top-left"
@@ -124,6 +139,7 @@ const LightRays: React.FC<LightRaysProps> = ({
   const animationIdRef = useRef<number | null>(null);
   const meshRef = useRef<Mesh | null>(null);
   const cleanupFunctionRef = useRef<(() => void) | null>(null);
+  const initRetryTimeoutRef = useRef<number | null>(null);
   const pausedRef = useRef(false);
   const [isVisible, setIsVisible] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -152,20 +168,37 @@ const LightRays: React.FC<LightRaysProps> = ({
   useEffect(() => {
     if (!isVisible || !containerRef.current) return;
 
+    if (initRetryTimeoutRef.current) {
+      clearTimeout(initRetryTimeoutRef.current);
+      initRetryTimeoutRef.current = null;
+    }
+
     if (cleanupFunctionRef.current) {
       cleanupFunctionRef.current();
       cleanupFunctionRef.current = null;
     }
 
-    const initializeWebGL = async () => {
+    const initializeWebGL = async (attempt = 0) => {
       if (!containerRef.current) return;
 
       await new Promise((resolve) => setTimeout(resolve, 10));
 
       if (!containerRef.current) return;
 
+      const { clientWidth: initW, clientHeight: initH } = containerRef.current;
+
+      // If layout is not ready yet (or viewport is too small), retry briefly.
+      if (!isRenderableViewport(initW, initH)) {
+        if (attempt < MAX_INIT_RETRIES) {
+          initRetryTimeoutRef.current = window.setTimeout(() => {
+            void initializeWebGL(attempt + 1);
+          }, INIT_RETRY_DELAY_MS);
+        }
+        return;
+      }
+
       const renderer = new Renderer({
-        dpr: Math.min(window.devicePixelRatio, getMaxDPR()),
+        dpr: Math.min(window.devicePixelRatio, getAdaptiveDPR(initH)),
         alpha: true,
       });
       rendererRef.current = renderer;
@@ -314,10 +347,18 @@ void main() {
       const updatePlacement = () => {
         if (!containerRef.current || !renderer) return;
 
-        // Cap DPR based on device heuristics to lower GPU load on low-memory devices
-        renderer.dpr = Math.min(window.devicePixelRatio, getMaxDPR());
-
         const { clientWidth: wCSS, clientHeight: hCSS } = containerRef.current;
+
+        // Avoid pushing WebGL when the viewport is too small (common source of context loss).
+        if (!isRenderableViewport(wCSS, hCSS)) {
+          renderer.setSize(1, 1);
+          uniforms.iResolution.value = [1, 1];
+          return;
+        }
+
+        // Cap DPR based on memory and viewport height to lower GPU load on constrained screens.
+        renderer.dpr = Math.min(window.devicePixelRatio, getAdaptiveDPR(hCSS));
+
         renderer.setSize(wCSS, hCSS);
 
         const dpr = renderer.dpr;
@@ -334,6 +375,15 @@ void main() {
       const loop = (t: number) => {
         if (!rendererRef.current || !uniformsRef.current || !meshRef.current) {
           return;
+        }
+
+        const host = containerRef.current;
+        if (host) {
+          const { clientWidth, clientHeight } = host;
+          if (!isRenderableViewport(clientWidth, clientHeight)) {
+            animationIdRef.current = requestAnimationFrame(loop);
+            return;
+          }
         }
 
         uniforms.iTime.value = t * 0.001;
@@ -420,6 +470,11 @@ void main() {
     void initializeWebGL();
 
     return () => {
+      if (initRetryTimeoutRef.current) {
+        clearTimeout(initRetryTimeoutRef.current);
+        initRetryTimeoutRef.current = null;
+      }
+
       if (cleanupFunctionRef.current) {
         cleanupFunctionRef.current();
         cleanupFunctionRef.current = null;
@@ -482,6 +537,7 @@ void main() {
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current || !rendererRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
+      if (rect.width <= 0 || rect.height <= 0) return;
       const x = (e.clientX - rect.left) / rect.width;
       const y = (e.clientY - rect.top) / rect.height;
       mouseRef.current = { x, y };

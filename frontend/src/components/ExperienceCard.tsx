@@ -45,7 +45,7 @@ export default function ExperienceCard({
     >
       {/* THE SPOTLIGHT OVERLAY */}
       <div
-        className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-300 ease-out will-change-opacity"
+        className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-300 ease-out"
         style={{
           opacity: overlayOpacity,
           background: `radial-gradient(
@@ -58,7 +58,7 @@ export default function ExperienceCard({
 
       {/* Border-adjacent glow without mask-composite to avoid Firefox artifacts */}
       <div
-        className="pointer-events-none absolute inset-0 z-10 rounded-3xl transition-opacity duration-300 ease-out will-change-opacity"
+        className="pointer-events-none absolute inset-0 z-10 rounded-3xl transition-opacity duration-300 ease-out"
         style={{
           opacity: overlayOpacity,
           background: `radial-gradient(

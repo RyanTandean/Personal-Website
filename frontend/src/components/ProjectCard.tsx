@@ -48,7 +48,7 @@ export default function ProjectCard({ project }: { project: Project }) {
 
       {/* 2. THE "GLINT" */}
       <div
-        className="pointer-events-none absolute inset-0 z-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out will-change-opacity"
+        className="pointer-events-none absolute inset-0 z-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"
         style={{
           background: `radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.12) 0%, transparent 50%)`,
         }}

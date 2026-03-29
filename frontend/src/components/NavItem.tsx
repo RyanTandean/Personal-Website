@@ -33,16 +33,11 @@ export function NavItem({
           ${
             isActive
               ? "text-sky-400 drop-shadow-[0_0_10px_rgba(56,189,248,0.8)]"
-              : "text-white/40 hover:text-white hover:scale-110 active:scale-95"
+              : "text-white/40 hover:text-white motion-safe:hover:-translate-y-1 active:translate-y-0"
           }
         `}
       >
-        <Icon
-          size={20}
-          strokeWidth={isActive ? 2.5 : 2}
-          /* Hint to the browser to keep this sharp */
-          className="will-change-transform"
-        />
+        <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />
       </button>
     </div>
   );
