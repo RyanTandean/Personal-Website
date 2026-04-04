@@ -44,10 +44,10 @@ export default function ExperiencesPage() {
       <div className="relative z-30 w-full max-w-4xl mx-auto px-6 pt-28 pb-40">
         {/* Page header */}
         <div className="mb-16">
-          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#06d4b3]/70 mb-3">
+          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#60a5fa]/70 mb-3">
             Career
           </p>
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-white [text-shadow:0_0_20px_rgba(6,212,179,0.35),0_0_55px_rgba(6,212,179,0.12)]">
+          <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-white [text-shadow:0_0_20px_rgba(96,165,250,0.35),0_0_55px_rgba(96,165,250,0.12)]">
             Experience
           </h1>
           <p className="mt-3 text-white/40 text-lg font-light">
@@ -65,15 +65,15 @@ export default function ExperiencesPage() {
                 <div className="mt-7" />
                 {/* Glow + dot */}
                 <div className="relative z-10 shrink-0">
-                  <div className="absolute inset-0 rounded-full bg-[#06d4b3]/30 blur-[5px] scale-150" />
-                  <div className="relative w-3.5 h-3.5 rounded-full bg-[#06d4b3] ring-2 ring-black shadow-[0_0_10px_rgba(6,212,179,0.8)]" />
+                  <div className="absolute inset-0 rounded-full bg-[#60a5fa]/30 blur-[5px] scale-150" />
+                  <div className="relative w-3.5 h-3.5 rounded-full bg-[#60a5fa] shadow-[0_0_10px_rgba(96,165,250,0.8)]" />
                 </div>
                 {/* Line segment — grows to fill space below dot */}
                 <div
                   className="flex-1 w-px mt-3"
                   style={{
                     background:
-                      "linear-gradient(to bottom, rgba(6,212,179,0.4) 0%, rgba(255,255,255,0.06) 70%, transparent 100%)",
+                      "linear-gradient(to bottom, rgba(96,165,250,0.4) 0%, rgba(255,255,255,0.06) 70%, transparent 100%)",
                   }}
                 />
               </div>

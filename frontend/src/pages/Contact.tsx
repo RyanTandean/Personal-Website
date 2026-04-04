@@ -7,7 +7,7 @@ import { OG_IMAGE_URL, SITE_URL } from "../config/site";
 const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID as string | undefined;
 
 const inputClass =
-  "mt-1 w-full rounded-xl bg-white/[0.04] border border-white/10 px-4 py-2.5 text-white placeholder-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06d4b3] transition-colors duration-200 hover:border-white/20";
+  "mt-1 w-full rounded-xl bg-white/[0.04] border border-white/10 px-4 py-2.5 text-white placeholder-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#60a5fa] transition-colors duration-200 hover:border-white/20";
 
 const labelClass =
   "block text-sm font-semibold tracking-wide text-white/60 uppercase mb-1";
@@ -81,17 +81,17 @@ export default function Contact() {
       <div className="relative z-10 w-full max-w-3xl mx-auto px-6 pt-24 pb-40">
         {/* Page header */}
         <div className="mb-12">
-          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#06d4b3]/70 mb-3">
+          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#60a5fa]/70 mb-3">
             Reach out
           </p>
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-white [text-shadow:0_0_20px_rgba(6,212,179,0.35),0_0_55px_rgba(6,212,179,0.12)]">
+          <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-white [text-shadow:0_0_20px_rgba(96,165,250,0.35),0_0_55px_rgba(96,165,250,0.12)]">
             Contact
           </h1>
           <p className="mt-3 text-white/40 text-lg font-light">
             Get in touch with me here at{" "}
             <a
               href="mailto:ryan.tandean194@gmail.com"
-              className="text-[#06d4b3] hover:text-[#06d4b3]/80 transition-colors underline underline-offset-4"
+              className="text-[#60a5fa] hover:text-[#60a5fa]/80 transition-colors underline underline-offset-4"
             >
               ryan.tandean194@gmail.com
             </a>
@@ -99,7 +99,7 @@ export default function Contact() {
         </div>
 
         {/* Form card — matched to ExperienceCard glass style */}
-        <div className="antialiased relative isolate rounded-3xl bg-white/1.5 backdrop-blur-xs border border-[#06d4b3]/30 overflow-hidden shadow-[0_0_40px_-10px_rgba(6,212,179,0.18)]">
+        <div className="antialiased relative isolate rounded-3xl bg-white/1.5 backdrop-blur-xs border border-[#60a5fa]/30 overflow-hidden shadow-[0_0_40px_-10px_rgba(96,165,250,0.18)]">
           <div className="relative z-10 p-8 sm:p-10">
             <h2 className="text-2xl font-semibold text-white tracking-tight mb-8">
               Send a message
@@ -113,7 +113,7 @@ export default function Contact() {
                 aria-live="polite"
                 className="py-12 text-center"
               >
-                <p className="text-3xl font-bold text-[#06d4b3] mb-2">
+                <p className="text-3xl font-bold text-[#60a5fa] mb-2">
                   Message sent!
                 </p>
                 <p className="text-white/50">
@@ -225,7 +225,7 @@ export default function Contact() {
                         ? "Contact form not configured (missing VITE_FORMSPREE_ID)"
                         : ""
                     }
-                    className="px-6 py-2.5 rounded-xl bg-[#06d4b3] text-black font-bold tracking-tight transition-all duration-200 hover:bg-[#06d4b3]/80 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                    className="px-6 py-2.5 rounded-xl bg-[#60a5fa] text-black font-bold tracking-tight transition-all duration-200 hover:bg-[#60a5fa]/80 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-[#60a5fa] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                   >
                     {status === "submitting"
                       ? "Sending…"

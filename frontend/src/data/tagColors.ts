@@ -59,6 +59,38 @@ export const tagMeta = {
     classes: "bg-[#11557c]/10 border-[#11557c]/20 text-[#4dd0e1]",
     icon: "📈",
   },
+  C: {
+    classes: "bg-[#1f2937]/10 border-[#1f2937]/20 text-[#93c5fd]",
+    icon: "🔧",
+  },
+  Git: {
+    classes: "bg-[#f05033]/10 border-[#f05033]/20 text-[#f05033]",
+    icon: "🌿",
+  },
+  Azure: {
+    classes: "bg-[#0078d4]/10 border-[#0078d4]/20 text-[#60a5fa]",
+    icon: "☁️",
+  },
+  AI: {
+    classes: "bg-[#16a34a]/10 border-[#16a34a]/20 text-[#4ade80]",
+    icon: "🤖",
+  },
+  "ESP-IDF": {
+    classes: "bg-[#a16207]/10 border-[#a16207]/20 text-[#facc15]",
+    icon: "🧩",
+  },
+  "Embedded Systems": {
+    classes: "bg-[#0f766e]/10 border-[#0f766e]/20 text-[#2dd4bf]",
+    icon: "🛠️",
+  },
+  "Statistical Modeling": {
+    classes: "bg-[#4338ca]/10 border-[#4338ca]/20 text-[#818cf8]",
+    icon: "📐",
+  },
+  Simulation: {
+    classes: "bg-[#7c3aed]/10 border-[#7c3aed]/20 text-[#c4b5fd]",
+    icon: "⏱️",
+  },
 };
 
 export type TagName = keyof typeof tagMeta;

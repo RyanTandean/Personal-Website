@@ -17,7 +17,7 @@ export default function ProjectDetail({
       {/* NAVIGATION / BACK BUTTON */}
       <button
         onClick={onBack}
-        className="group mb-8 flex items-center gap-2 text-white/40 hover:text-[#06d4b3] transition-colors uppercase text-[10px] tracking-[0.2em] font-bold"
+        className="group mb-8 flex items-center gap-2 text-white/40 hover:text-[#38bdf8] transition-colors uppercase text-[10px] tracking-[0.2em] font-bold"
       >
         <span className="transition-transform group-hover:-translate-x-1">
           ←
@@ -43,7 +43,7 @@ export default function ProjectDetail({
             <h1 className="text-4xl md:text-6xl font-bold tracking-tighter text-white">
               {project.title}
             </h1>
-            <div className="h-1 w-20 bg-[#06d4b3]" />
+            <div className="h-1 w-20 bg-[#60a5fa]" />
             <p className="text-lg text-gray-400 font-light leading-relaxed">
               {project.description}
             </p>

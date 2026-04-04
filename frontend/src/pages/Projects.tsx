@@ -89,10 +89,10 @@ export default function Projects() {
       <div className="relative z-10 w-full max-w-6xl mx-auto px-6 pt-24 pb-40">
         {/* Header */}
         <div className="mb-12">
-          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#06d4b3]/70 mb-3">
+          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#60a5fa]/70 mb-3">
             Work
           </p>
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-white [text-shadow:0_0_20px_rgba(6,212,179,0.35),0_0_55px_rgba(6,212,179,0.12)]">
+          <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-white [text-shadow:0_0_20px_rgba(96,165,250,0.35),0_0_55px_rgba(96,165,250,0.12)]">
             Projects
           </h1>
           <p className="mt-3 text-white/40 text-lg font-light">
@@ -107,8 +107,8 @@ export default function Projects() {
             aria-pressed={activeTags.length === 0}
             className={`px-4 py-1.5 rounded-full text-sm font-semibold border transition-all duration-200 ${
               activeTags.length === 0
-                ? "bg-[#06d4b3] text-black border-[#06d4b3]"
-                : "bg-white/5 border-white/10 text-white/60 hover:border-[#06d4b3]/50 hover:text-white"
+                ? "bg-[#60a5fa] text-black border-[#60a5fa]"
+                : "bg-white/5 border-white/10 text-white/60 hover:border-[#60a5fa]/50 hover:text-white"
             }`}
           >
             All
@@ -130,7 +130,7 @@ export default function Projects() {
             {activeTags.map((t, i) => (
               <span key={t}>
                 {i > 0 && <span className="mx-1 text-white/20">+</span>}
-                <span className="text-[#06d4b3]">{t}</span>
+                <span className="text-[#60a5fa]">{t}</span>
               </span>
             ))}
             <button
@@ -167,7 +167,7 @@ export default function Projects() {
                     openProject(project.id);
                   }
                 }}
-                className="cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                className="cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#60a5fa] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
               >
                 <ProjectCard project={project} />
               </div>

@@ -27,7 +27,7 @@ export default function Keycap({
       rel={isExternal ? "noopener noreferrer" : undefined}
       aria-label={ariaLabel}
       title={ariaLabel}
-      className="group relative block w-16 h-18 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+      className="group relative block w-16 h-18 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#60a5fa] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
       style={{
         transform: `translate(${xOffset}px, ${yOffset}px) rotate(${rotation}deg)`,
       }}
@@ -38,7 +38,7 @@ export default function Keycap({
           className="absolute inset-0"
           style={{
             clipPath: "polygon(14% 15%, 86% 15%, 100% 100%, 0% 100%)",
-            background: "linear-gradient(to bottom, #202b36 0%, #0e1820 100%)",
+            background: "linear-gradient(to bottom, #151f29 0%, #0a1118 100%)",
           }}
         />
 
@@ -47,14 +47,14 @@ export default function Keycap({
           className="absolute inset-0"
           style={{
             clipPath: "polygon(0% 25%, 14% 15%, 14% 100%, 0% 100%)",
-            background: "linear-gradient(to bottom, #151e26, #0e1820)",
+            background: "linear-gradient(to bottom, #101821, #0a1118)",
           }}
         />
         <div
           className="absolute inset-0"
           style={{
             clipPath: "polygon(86% 15%, 100% 25%, 100% 100%, 86% 100%)",
-            background: "linear-gradient(to bottom, #151e26, #0e1820)",
+            background: "linear-gradient(to bottom, #101821, #0a1118)",
           }}
         />
 
@@ -63,7 +63,7 @@ export default function Keycap({
           className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-500 blur-lg pointer-events-none"
           style={{
             background:
-              "radial-gradient(circle at 50% 40%, #38bdf8 0%, transparent 60%)",
+              "radial-gradient(circle at 50% 40%, rgba(96,165,250,0.55) 0%, transparent 62%)",
           }}
         />
 
@@ -73,7 +73,7 @@ export default function Keycap({
           style={{
             clipPath: "polygon(24% 15%, 76% 15%, 76% 78%, 24% 78%)",
             background:
-              "radial-gradient(ellipse at 45% 35%, #34495a 0%, #22333f 50%, #18262f 100%)",
+              "radial-gradient(ellipse at 45% 35%, #243547 0%, #162330 52%, #0f1821 100%)",
           }}
         >
           {/* Subtle Rim Highlight */}
@@ -81,7 +81,7 @@ export default function Keycap({
             className="absolute inset-0 pointer-events-none opacity-20 group-hover:opacity-40 transition-opacity"
             style={{
               background:
-                "linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 50%)",
+                "linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%)",
             }}
           />
 
@@ -103,7 +103,7 @@ export default function Keycap({
         </div>
 
         {/* AMBIENT SHADOW */}
-        <div className="absolute -bottom-1 left-0 right-0 h-4 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.6)_0%,transparent_80%)] blur-md pointer-events-none transition-all group-active:h-2 group-active:opacity-40" />
+        <div className="absolute -bottom-1 left-0 right-0 h-4 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.82)_0%,transparent_80%)] blur-md pointer-events-none transition-all group-active:h-2 group-active:opacity-40" />
       </div>
     </a>
   );

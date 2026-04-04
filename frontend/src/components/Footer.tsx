@@ -35,14 +35,14 @@ export default function Footer() {
                     href={link.path}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-white/40 hover:text-white transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded"
+                    className="text-sm text-white/40 hover:text-white transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#60a5fa] focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded"
                   >
                     {link.label}
                   </a>
                 ) : (
                   <Link
                     to={link.path}
-                    className="text-sm text-white/40 hover:text-white transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded"
+                    className="text-sm text-white/40 hover:text-white transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#60a5fa] focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded"
                   >
                     {link.label}
                   </Link>

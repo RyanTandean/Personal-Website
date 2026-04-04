@@ -34,7 +34,7 @@ export default function ProjectCard({ project }: { project: Project }) {
       role="article"
       aria-labelledby={titleId}
       aria-describedby={descId}
-      className="glow-breathe card-lift-smooth group antialiased relative flex flex-col h-64 sm:h-80 md:h-105 lg:h-125 rounded-3xl bg-[#0a101f]/60 border border-white/10 backdrop-blur-xl overflow-hidden hover:border-[#06d4b3]/40 hover:shadow-[0_0_40px_-10px_rgba(6,212,179,0.2)] isolate focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+      className="glow-breathe card-lift-smooth group antialiased relative flex flex-col h-64 sm:h-80 md:h-105 lg:h-125 rounded-3xl bg-[#0a101f]/60 border border-white/10 backdrop-blur-xl overflow-hidden hover:border-[#60a5fa]/35 hover:shadow-[0_0_40px_-10px_rgba(96,165,250,0.2)] isolate focus:outline-none focus-visible:ring-2 focus-visible:ring-[#60a5fa] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
     >
       {/* 1. IMAGE LAYER */}
       <div className="absolute inset-0 z-0">
@@ -50,7 +50,11 @@ export default function ProjectCard({ project }: { project: Project }) {
       <div
         className="pointer-events-none absolute inset-0 z-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"
         style={{
-          background: `radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.12) 0%, transparent 50%)`,
+          background: `
+            radial-gradient(320px 220px at 0% 0%, rgba(96,165,250,0.08), transparent 74%),
+            radial-gradient(320px 220px at 100% 100%, rgba(96,165,250,0.08), transparent 74%),
+            radial-gradient(560px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.11) 0%, transparent 58%)
+          `,
         }}
       />
 
@@ -58,7 +62,7 @@ export default function ProjectCard({ project }: { project: Project }) {
       <div className="relative z-10 p-6 sm:p-8 flex flex-col h-full">
         <div className="flex justify-between items-start">
           <div className="flex flex-col gap-1">
-            <span className="text-sm tracking-[0.3em] text-[#06d4b3] font-bold uppercase opacity-90">
+            <span className="text-sm tracking-[0.3em] text-[#60a5fa] font-bold uppercase opacity-90">
               {project.year}
             </span>
             {project.isHackathon && (
@@ -68,7 +72,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             )}
           </div>
           {SHOW_FEATURED_BADGE && project.featured && (
-            <span className="px-3 py-0.5 rounded-full border border-emerald-500/50 bg-emerald-500/10 text-sm text-emerald-400 font-bold uppercase tracking-tight shadow-[0_0_10px_rgba(16,185,129,0.2)]">
+            <span className="px-3 py-0.5 rounded-full border border-blue-400/50 bg-blue-400/10 text-sm text-blue-300 font-bold uppercase tracking-tight shadow-[0_0_10px_rgba(96,165,250,0.2)]">
               Featured
             </span>
           )}
@@ -76,7 +80,7 @@ export default function ProjectCard({ project }: { project: Project }) {
 
         <h3
           id={titleId}
-          className="mt-6 text-2xl md:text-3xl font-bold text-white tracking-tight group-hover:text-[#06d4b3] transition-colors duration-300"
+          className="mt-6 text-2xl md:text-3xl font-bold text-white tracking-tight group-hover:text-[#60a5fa] transition-colors duration-300"
         >
           {project.title}
         </h3>
@@ -99,7 +103,7 @@ export default function ProjectCard({ project }: { project: Project }) {
               className="z-20 text-sm font-bold text-white/40 hover:text-white transition-colors flex items-center gap-2 uppercase tracking-tighter"
             >
               View Code{" "}
-              <span className="text-[#06d4b3]" aria-hidden="true">
+              <span className="text-[#60a5fa]" aria-hidden="true">
                 →
               </span>
             </a>
@@ -113,7 +117,7 @@ export default function ProjectCard({ project }: { project: Project }) {
               className="z-20 text-sm font-bold text-white/40 hover:text-white transition-colors flex items-center gap-2 uppercase tracking-tighter"
             >
               Live Demo{" "}
-              <span className="text-[#06d4b3]" aria-hidden="true">
+              <span className="text-[#60a5fa]" aria-hidden="true">
                 ↗
               </span>
             </a>

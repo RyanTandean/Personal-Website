@@ -46,14 +46,14 @@ export default function Experiences({ items }: ExperiencesProps) {
               className="pointer-events-none absolute inset-0 z-10 rounded-full transition-opacity duration-300"
               style={{
                 opacity: btnOverlay,
-                background: `radial-gradient(300px circle at var(--mouse-x) var(--mouse-y), rgba(6,212,179,0.12), transparent 40%)`,
+                background: `radial-gradient(300px circle at var(--mouse-x) var(--mouse-y), rgba(56,189,248,0.12), transparent 40%)`,
               }}
             />
             <div
               className="pointer-events-none absolute -inset-px z-10 rounded-full mix-blend-screen transition-opacity duration-300 ease-out"
               style={{
                 opacity: btnOverlay,
-                background: `radial-gradient(180px circle at var(--mouse-x) var(--mouse-y), rgba(6,212,179,0.45), transparent 78%)`,
+                background: `radial-gradient(180px circle at var(--mouse-x) var(--mouse-y), rgba(56,189,248,0.45), transparent 78%)`,
               }}
             />
           </Link>

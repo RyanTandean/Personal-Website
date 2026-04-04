@@ -3,9 +3,26 @@
 :root {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #020617;
+  background-color: #05112b;
   --scroll: 0;
   --grad: 0.15;
+  --scene-exposure: 1.14;
+  --scene-base-0: #05112b;
+  --scene-base-1: #040d22;
+  --scene-base-2: #020819;
+  --scene-base-3: #010511;
+  --scene-base-4: #00030a;
+  --scene-base-5: #000102;
+  --beam-core-rgb: 118, 168, 242;
+  --beam-core-alpha: 0.135;
+  --beam-mid-rgb: 88, 136, 224;
+  --beam-mid-alpha: 0.082;
+  --beam-tail-rgb: 70, 114, 204;
+  --beam-tail-alpha: 0.046;
+  --vignette-top-left-alpha: 0.48;
+  --vignette-top-right-alpha: 0.46;
+  --vignette-bottom-left-alpha: 0.54;
+  --vignette-bottom-right-alpha: 0.52;
 }
 
 /* Increase base font-size to scale UI up across the site. */
@@ -27,12 +44,7 @@ html {
 
 html,
 body {
-  background: linear-gradient(
-    to bottom,
-    rgba(6, 212, 179, 0.03) 0%,
-    rgba(2, 16, 24, 0.45) 20%,
-    #020617 60%
-  );
+  background: var(--scene-base-5);
   color: #fff;
 }
 .preload * {
@@ -63,6 +75,70 @@ body {
   animation-timing-function: linear;
 }
 
+.biolum-blob {
+  animation-duration: 7s !important;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes blobDriftA {
+  from {
+    transform: translate3d(-10%, -7%, 0) scale(0.9);
+  }
+  to {
+    transform: translate3d(11%, 8%, 0) scale(1.16);
+  }
+}
+
+@keyframes blobDriftB {
+  from {
+    transform: translate3d(10%, -8%, 0) scale(0.9);
+  }
+  to {
+    transform: translate3d(-12%, 9%, 0) scale(1.16);
+  }
+}
+
+@keyframes blobDriftC {
+  from {
+    transform: translate3d(-9%, 9%, 0) scale(0.91);
+  }
+  to {
+    transform: translate3d(10%, -10%, 0) scale(1.18);
+  }
+}
+
+@keyframes blobDriftD {
+  from {
+    transform: translate3d(8%, -10%, 0) scale(0.89);
+  }
+  to {
+    transform: translate3d(-11%, 11%, 0) scale(1.16);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .biolum-blob {
+    animation-duration: 20s !important;
+  }
+}
+
+@media (max-width: 900px), (prefers-reduced-motion: reduce) {
+  .beam {
+    filter: blur(6px) brightness(1.05) saturate(1.05);
+    opacity: 0.14;
+  }
+
+  .surface-ripple {
+    filter: blur(2px);
+    opacity: 0.42;
+  }
+
+  .motes {
+    inset: -4%;
+    mix-blend-mode: normal;
+  }
+}
+
 @keyframes orbitalDrift {
   0% {
     transform: translate3d(0, 0, 0) scale(1);
@@ -70,23 +146,6 @@ body {
   }
   8% {
     opacity: 0.45;
-  }
-
-  @media (max-width: 900px), (prefers-reduced-motion: reduce) {
-    .beam {
-      filter: blur(6px) brightness(1.05) saturate(1.05);
-      opacity: 0.14;
-    }
-
-    .surface-ripple {
-      filter: blur(2px);
-      opacity: 0.42;
-    }
-
-    .motes {
-      inset: -4%;
-      mix-blend-mode: normal;
-    }
   }
   16% {
     opacity: 0.9;

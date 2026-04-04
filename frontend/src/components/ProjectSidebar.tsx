@@ -25,7 +25,7 @@ export default function ProjectSidebar({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Launch live demo for ${project.title} (opens in new tab)`}
-              className="flex items-center justify-center py-3 rounded-xl bg-[#06d4b3] text-black font-bold text-xs uppercase tracking-widest hover:brightness-110 transition-all"
+              className="flex items-center justify-center py-3 rounded-xl bg-[#60a5fa] text-black font-bold text-xs uppercase tracking-widest hover:brightness-110 transition-all"
             >
               Launch Live Demo
             </a>

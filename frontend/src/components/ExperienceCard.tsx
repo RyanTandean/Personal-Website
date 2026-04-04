@@ -36,23 +36,23 @@ export default function ExperienceCard({
     <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setOverlayOpacity(0.35)}
+      onMouseEnter={() => setOverlayOpacity(0.3)}
       onMouseLeave={handleMouseLeave}
       role="article"
       aria-labelledby={titleId}
       aria-describedby={descId}
-      className="glow-breathe card-lift-smooth antialiased relative z-30 isolate group flex flex-col rounded-3xl min-h-48 sm:min-h-56 md:min-h-64 bg-white/2 backdrop-blur-xs border border-white/10 overflow-hidden hover:border-[#06d4b3]/40 hover:shadow-[0_0_40px_-10px_rgba(6,212,179,0.18)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06d4b3] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+      className="glow-breathe card-lift-smooth antialiased relative z-30 isolate group flex flex-col rounded-3xl min-h-48 sm:min-h-56 md:min-h-64 bg-white/2 backdrop-blur-xs border border-white/10 overflow-hidden hover:border-[#60a5fa]/35 hover:shadow-[0_0_40px_-10px_rgba(96,165,250,0.2)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#60a5fa] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
     >
       {/* THE SPOTLIGHT OVERLAY */}
       <div
         className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-300 ease-out"
         style={{
           opacity: overlayOpacity,
-          background: `radial-gradient(
-            600px circle at var(--mouse-x) var(--mouse-y), 
-            rgba(6, 212, 179, 0.15), 
-            transparent 40%
-          )`,
+          background: `
+            radial-gradient(360px 250px at 0% 0%, rgba(96, 165, 250, 0.12), transparent 74%),
+            radial-gradient(360px 250px at 100% 100%, rgba(96, 165, 250, 0.08), transparent 76%),
+            radial-gradient(640px circle at var(--mouse-x) var(--mouse-y), rgba(96, 165, 250, 0.14), transparent 58%)
+          `,
         }}
       />
 
@@ -61,11 +61,11 @@ export default function ExperienceCard({
         className="pointer-events-none absolute inset-0 z-10 rounded-3xl transition-opacity duration-300 ease-out"
         style={{
           opacity: overlayOpacity,
-          background: `radial-gradient(
-            300px circle at var(--mouse-x) var(--mouse-y), 
-            rgba(6, 212, 179, 0.22), 
-            transparent 80%
-          )`,
+          background: `
+            radial-gradient(420px circle at var(--mouse-x) var(--mouse-y), rgba(96, 165, 250, 0.22), transparent 78%),
+            radial-gradient(240px 170px at 100% 0%, rgba(96, 165, 250, 0.12), transparent 82%),
+            radial-gradient(240px 170px at 0% 100%, rgba(96, 165, 250, 0.11), transparent 84%)
+          `,
         }}
       />
 
@@ -84,11 +84,11 @@ export default function ExperienceCard({
             <div>
               <h3
                 id={titleId}
-                className="text-xl md:text-2xl font-semibold text-white tracking-tight transition-colors duration-300 group-hover:text-[#06d4b3]"
+                className="text-xl md:text-2xl font-semibold text-white tracking-tight transition-colors duration-300 group-hover:text-[#60a5fa]"
               >
                 {experience.company}
               </h3>
-              <p className="text-[#06d4b3] text-base md:text-lg font-medium">
+              <p className="text-[#60a5fa] text-base md:text-lg font-medium">
                 {experience.title}
               </p>
             </div>
@@ -97,7 +97,7 @@ export default function ExperienceCard({
             <span className="block text-sm tracking-wider text-white/30 font-bold uppercase">
               {experience.location}
             </span>
-            <span className="text-sm md:text-base text-[#06d4b3]/60 font-bold">
+            <span className="text-sm md:text-base text-[#60a5fa]/60 font-bold">
               {experience.start} — {experience.end}
             </span>
           </div>

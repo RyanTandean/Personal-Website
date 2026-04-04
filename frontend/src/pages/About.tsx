@@ -57,10 +57,10 @@ export default function About() {
       <div className="relative z-10 w-full max-w-3xl mx-auto px-6 pt-24 pb-40">
         {/* Header */}
         <div className="mb-14">
-          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#06d4b3]/70 mb-3">
+          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#60a5fa]/70 mb-3">
             Me
           </p>
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-white [text-shadow:0_0_20px_rgba(6,212,179,0.35),0_0_55px_rgba(6,212,179,0.12)]">
+          <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-white [text-shadow:0_0_20px_rgba(96,165,250,0.35),0_0_55px_rgba(96,165,250,0.12)]">
             About
           </h1>
         </div>
@@ -76,8 +76,8 @@ export default function About() {
               <h2 className="text-2xl font-semibold text-white tracking-tight mb-1">
                 Ryan Tandean
               </h2>
-              <p className="text-[#06d4b3] font-medium mb-4">
-                Data Science &amp; Software Engineering
+              <p className="text-[#60a5fa] font-medium mb-4">
+                Data Science @ University of Waterloo
               </p>
               <p className="text-white/60 leading-relaxed">
                 {/* Replace this with your real bio */}
@@ -124,7 +124,7 @@ export default function About() {
             >
               <Github
                 size={20}
-                className="text-white/30 group-hover:text-[#06d4b3] transition-colors"
+                className="text-white/30 group-hover:text-[#60a5fa] transition-colors"
               />
               <span>github.com/RyanTandean</span>
             </a>
@@ -136,7 +136,7 @@ export default function About() {
             >
               <Linkedin
                 size={20}
-                className="text-white/30 group-hover:text-[#06d4b3] transition-colors"
+                className="text-white/30 group-hover:text-[#60a5fa] transition-colors"
               />
               <span>linkedin.com/in/194-ryan-tandean</span>
             </a>
@@ -146,7 +146,7 @@ export default function About() {
             >
               <Mail
                 size={20}
-                className="text-white/30 group-hover:text-[#06d4b3] transition-colors"
+                className="text-white/30 group-hover:text-[#60a5fa] transition-colors"
               />
               <span>ryan.tandean194@gmail.com</span>
             </a>

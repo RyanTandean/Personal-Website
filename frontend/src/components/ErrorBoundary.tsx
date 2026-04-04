@@ -23,7 +23,7 @@ export default class ErrorBoundary extends Component<Props, State> {
     if (this.state.hasError) {
       return (
         <div className="min-h-screen bg-black flex flex-col items-center justify-center gap-4 text-white px-6 text-center">
-          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#06d4b3]/70">
+          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#60a5fa]/70">
             Something went wrong
           </p>
           <h1 className="text-3xl font-bold">Failed to load page</h1>
