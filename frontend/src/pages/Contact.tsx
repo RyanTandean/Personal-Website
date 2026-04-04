@@ -2,7 +2,6 @@ import { useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import BackgroundAbyss from "../components/BackgroundAbyss";
 import Navbar from "../components/Navbar";
-import GradualBlur from "../components/GradualBlur";
 import Footer from "../components/Footer";
 import { OG_IMAGE_URL, SITE_URL } from "../config/site";
 const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID as string | undefined;
@@ -251,18 +250,6 @@ export default function Contact() {
           shared with third parties.
         </p>
       </div>
-
-      <GradualBlur
-        target="page"
-        position="bottom"
-        height="7rem"
-        curve="bezier"
-        exponential
-        opacity={1}
-        strength={2}
-        divCount={5}
-        zIndex={40}
-      />
 
       <Navbar />
       <Footer />

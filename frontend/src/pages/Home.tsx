@@ -6,7 +6,6 @@ import Projects from "../components/sections/Projects";
 import { myProjects } from "../data/project";
 import HeroSection from "../components/sections/HeroSection";
 import BackgroundAbyss from "../components/BackgroundAbyss";
-import GradualBlur from "../components/GradualBlur";
 import Footer from "../components/Footer";
 import { OG_IMAGE_URL, SITE_URL } from "../config/site";
 
@@ -50,18 +49,6 @@ export default function App() {
         <Experience items={myExperiences} />
         <Projects items={myProjects} />
       </div>
-
-      <GradualBlur
-        target="page"
-        position="bottom"
-        height="7rem"
-        curve="bezier"
-        exponential
-        opacity={1}
-        strength={2}
-        divCount={5}
-        zIndex={40}
-      />
 
       <Navbar />
       <Footer />

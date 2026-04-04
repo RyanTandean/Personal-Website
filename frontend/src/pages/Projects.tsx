@@ -6,7 +6,6 @@ import Navbar from "../components/Navbar";
 import ProjectCard from "../components/ProjectCard";
 import Modal from "../components/Modal";
 import ProjectDetail from "../components/sections/ProjectDetail";
-import GradualBlur from "../components/GradualBlur";
 import { myProjects } from "../data/project";
 import Tag from "../components/Tag";
 import Footer from "../components/Footer";
@@ -176,18 +175,6 @@ export default function Projects() {
           </div>
         )}
       </div>
-
-      <GradualBlur
-        target="page"
-        position="bottom"
-        height="7rem"
-        curve="bezier"
-        exponential
-        opacity={1}
-        strength={2}
-        divCount={5}
-        zIndex={40}
-      />
 
       {/* Modal */}
       <Modal

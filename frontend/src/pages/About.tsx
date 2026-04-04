@@ -2,7 +2,6 @@ import { Helmet } from "react-helmet-async";
 import { Github, Linkedin, Mail } from "lucide-react";
 import BackgroundAbyss from "../components/BackgroundAbyss";
 import Navbar from "../components/Navbar";
-import GradualBlur from "../components/GradualBlur";
 import Footer from "../components/Footer";
 import { OG_IMAGE_URL, SITE_URL } from "../config/site";
 
@@ -154,18 +153,6 @@ export default function About() {
           </div>
         </div>
       </div>
-
-      <GradualBlur
-        target="page"
-        position="bottom"
-        height="7rem"
-        curve="bezier"
-        exponential
-        opacity={1}
-        strength={2}
-        divCount={5}
-        zIndex={40}
-      />
 
       <Navbar />
       <Footer />

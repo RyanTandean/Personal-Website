@@ -2,7 +2,6 @@ import { Helmet } from "react-helmet-async";
 import BackgroundAbyss from "../components/BackgroundAbyss";
 import Navbar from "../components/Navbar";
 import ExperienceCard from "../components/ExperienceCard";
-import GradualBlur from "../components/GradualBlur";
 import { myExperiences } from "../data/experience";
 import Footer from "../components/Footer";
 import { OG_IMAGE_URL, SITE_URL } from "../config/site";
@@ -87,18 +86,6 @@ export default function ExperiencesPage() {
           ))}
         </div>
       </div>
-
-      <GradualBlur
-        target="page"
-        position="bottom"
-        height="7rem"
-        curve="bezier"
-        exponential
-        opacity={1}
-        strength={2}
-        divCount={5}
-        zIndex={40}
-      />
 
       <Navbar />
       <Footer />
