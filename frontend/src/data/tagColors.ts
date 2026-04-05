@@ -31,6 +31,26 @@ export const tagMeta = {
     classes: "bg-[#264de4]/10 border-[#264de4]/20 text-[#264de4]",
     icon: "🎨",
   },
+  "Tailwind CSS": {
+    classes: "bg-[#38bdf8]/10 border-[#38bdf8]/20 text-[#38bdf8]",
+    icon: "💨",
+  },
+  Vite: {
+    classes: "bg-[#646cff]/10 border-[#646cff]/20 text-[#646cff]",
+    icon: "⚡",
+  },
+  "React Router": {
+    classes: "bg-[#f44250]/10 border-[#f44250]/20 text-[#f44250]",
+    icon: "🧭",
+  },
+  "Framer Motion": {
+    classes: "bg-[#0055ff]/10 border-[#0055ff]/20 text-[#6ea8ff]",
+    icon: "🎞️",
+  },
+  "React Helmet Async": {
+    classes: "bg-[#8b5cf6]/10 border-[#8b5cf6]/20 text-[#c4b5fd]",
+    icon: "🪖",
+  },
   Vue: {
     classes: "bg-[#41b883]/10 border-[#41b883]/20 text-[#41b883]",
     icon: "🟩",

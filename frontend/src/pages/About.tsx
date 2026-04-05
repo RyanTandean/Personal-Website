@@ -4,6 +4,7 @@ import BackgroundAbyss from "../components/BackgroundAbyss";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { OG_IMAGE_URL, SITE_URL } from "../config/site";
+import profilePhoto from "../assets/pfp.jpg";
 
 const skills = [
   "Python",
@@ -67,11 +68,14 @@ export default function About() {
 
         {/* Bio card */}
         <div className="rounded-3xl bg-white/1.5 border border-white/10 p-8 sm:p-10 mb-10">
-          {/* Replace the img src with your actual photo path, e.g. /src/assets/headshot.jpg */}
           <div className="flex flex-col sm:flex-row gap-8 items-start">
-            <div className="w-24 h-24 rounded-2xl bg-white/5 border border-white/10 shrink-0 flex items-center justify-center text-white/20 text-sm">
-              Photo
-            </div>
+            <img
+              src={profilePhoto}
+              alt="Ryan Tandean"
+              className="w-24 h-24 rounded-2xl border border-white/10 object-cover shrink-0"
+              loading="lazy"
+              decoding="async"
+            />
             <div>
               <h2 className="text-2xl font-semibold text-white tracking-tight mb-1">
                 Ryan Tandean
@@ -129,7 +133,7 @@ export default function About() {
               <span>github.com/RyanTandean</span>
             </a>
             <a
-              href="https://www.linkedin.com/in/194-ryan-tandean"
+              href="https://www.linkedin.com/in/ryantandean/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-4 text-white/50 hover:text-white transition-colors group"
@@ -138,7 +142,7 @@ export default function About() {
                 size={20}
                 className="text-white/30 group-hover:text-[#60a5fa] transition-colors"
               />
-              <span>linkedin.com/in/194-ryan-tandean</span>
+              <span>linkedin.com/in/ryantandean</span>
             </a>
             <a
               href="mailto:ryan.tandean194@gmail.com"

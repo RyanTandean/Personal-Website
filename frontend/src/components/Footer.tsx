@@ -64,7 +64,7 @@ export default function Footer() {
             <Github size={18} />
           </a>
           <a
-            href="https://www.linkedin.com/in/194-ryan-tandean"
+            href="https://www.linkedin.com/in/ryantandean/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"

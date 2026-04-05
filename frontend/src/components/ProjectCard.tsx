@@ -11,6 +11,8 @@ export default function ProjectCard({ project }: { project: Project }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const titleId = `project-title-${project.id}`;
   const descId = `project-desc-${project.id}`;
+  const visibleTechnologies = project.technologies.slice(0, 5);
+  const remainingTechnologies = project.technologies.length - visibleTechnologies.length;
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
@@ -126,9 +128,14 @@ export default function ProjectCard({ project }: { project: Project }) {
 
         {/* TECH STACK */}
         <div className="mt-auto pt-6 flex flex-wrap gap-1.5">
-          {project.technologies.slice(0, 5).map((tech) => (
+          {visibleTechnologies.map((tech) => (
             <Tag key={tech} name={tech} />
           ))}
+          {remainingTechnologies > 0 && (
+            <span className="relative inline-flex items-center px-3 py-0.5 text-sm sm:text-base font-medium tracking-wider rounded-full z-30 bg-white/5 border border-white/5 text-white/50">
+              +{remainingTechnologies} more
+            </span>
+          )}
         </div>
       </div>
     </div>

@@ -40,7 +40,7 @@ export default function KeyboardSection() {
           >
             <Keycap
               ariaLabel="Open LinkedIn (opens in new tab)"
-              link="https://www.linkedin.com/in/194-ryan-tandean"
+              link="https://www.linkedin.com/in/ryantandean/"
               rotation={6}
               yOffset={23}
               xOffset={0}

@@ -8,7 +8,14 @@ export const myProjects: Project[] = [
     year: "2026",
     description:
       "An AI-powered home environment demo that listens to your voice, detects emotion, and adapts lighting, color, and music in real time.",
-    technologies: ["React", "JavaScript", "Node.js", "Python", "AI"],
+    technologies: [
+      "React",
+      "Tailwind CSS",
+      "JavaScript",
+      "Node.js",
+      "Python",
+      "AI",
+    ],
     githubUrl: "https://github.com/RyanTandeanUW/MoodNest.git",
     isHackathon: true,
     hackathonName: "CXC 2026 - AI Hackathon",
@@ -22,7 +29,15 @@ export const myProjects: Project[] = [
     year: "2026",
     description:
       "My personal portfolio website for showcasing projects, experience, and contact information.",
-    technologies: ["React", "TypeScript", "CSS"],
+    technologies: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Vite",
+      "React Router",
+      "Framer Motion",
+      "React Helmet Async",
+    ],
     isHackathon: false,
     image: quickPng,
     category: "Software",

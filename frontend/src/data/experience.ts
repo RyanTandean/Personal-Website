@@ -1,4 +1,7 @@
 import type { Experience } from "../types/experience";
+import kumonLogo from "../assets/kumon_canada_logo.jpg";
+import uwaterlooLogo from "../assets/uwaterloo_logo.jpg";
+import electriumLogo from "../assets/electrium_mobility_logo.jpg";
 
 export const myExperiences: Experience[] = [
   {
@@ -18,6 +21,8 @@ export const myExperiences: Experience[] = [
     technologies: ["Python", "Pandas", "Statistical Modeling", "Simulation"],
     location: "Waterloo, ON",
     featured: true,
+    logo: uwaterlooLogo,
+    logoAlt: "University of Waterloo logo",
   },
   {
     id: 2,
@@ -35,6 +40,8 @@ export const myExperiences: Experience[] = [
     technologies: ["Azure", "AI", "Data Analysis"],
     location: "Remote",
     featured: true,
+    logo: uwaterlooLogo,
+    logoAlt: "University of Waterloo logo",
   },
   {
     id: 3,
@@ -52,6 +59,8 @@ export const myExperiences: Experience[] = [
     technologies: ["C", "ESP-IDF", "Embedded Systems", "Git"],
     location: "Waterloo, ON",
     featured: true,
+    logo: electriumLogo,
+    logoAlt: "Electrium Mobility logo",
   },
   {
     id: 4,
@@ -68,5 +77,7 @@ export const myExperiences: Experience[] = [
     technologies: ["Data Analysis"],
     location: "Markham, ON",
     featured: false,
+    logo: kumonLogo,
+    logoAlt: "Kumon Canada logo",
   },
 ];

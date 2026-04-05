@@ -4,7 +4,7 @@ import BackgroundAbyss from "../components/BackgroundAbyss";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { OG_IMAGE_URL, SITE_URL } from "../config/site";
-const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID as string | undefined;
+const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID;
 
 const inputClass =
   "mt-1 w-full rounded-xl bg-white/[0.04] border border-white/10 px-4 py-2.5 text-white placeholder-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#60a5fa] transition-colors duration-200 hover:border-white/20";
