@@ -32,7 +32,7 @@ export default function ProjectDetail({
           <div className="relative aspect-video rounded-3xl overflow-hidden border border-white/10 bg-white/2 group">
             <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent z-10" />
             <img
-              src={project.image}
+              src={project.modalImage ?? project.image}
               alt={project.title}
               className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-1000"
             />

@@ -11,6 +11,9 @@ export interface Project {
   isHackathon: boolean;
   hackathonName?: string; // e.g., "Waterloo Datafest" or "HackTheNorth"
   image: string; // Path to local asset or URL
+  cardImage?: string; // Optional thumbnail image for project cards
+  modalImage?: string; // Optional image for the project detail modal
+  cardOverlayDarkness?: number; // Optional 0-1 black overlay opacity for card readability
   category: "Data Science" | "Software" | "AI/ML"; // Helps with filtering later
   featured: boolean; // For highlighting projects on the home page
 }

@@ -11,8 +11,13 @@ export default function ProjectCard({ project }: { project: Project }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const titleId = `project-title-${project.id}`;
   const descId = `project-desc-${project.id}`;
+  const overlayDarkness = Math.min(
+    0.9,
+    Math.max(0, project.cardOverlayDarkness ?? 0.3),
+  );
   const visibleTechnologies = project.technologies.slice(0, 5);
-  const remainingTechnologies = project.technologies.length - visibleTechnologies.length;
+  const remainingTechnologies =
+    project.technologies.length - visibleTechnologies.length;
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
@@ -36,15 +41,22 @@ export default function ProjectCard({ project }: { project: Project }) {
       role="article"
       aria-labelledby={titleId}
       aria-describedby={descId}
-      className="glow-breathe card-lift-smooth group antialiased relative flex flex-col h-64 sm:h-80 md:h-105 lg:h-125 rounded-3xl bg-[#0a101f]/60 border border-white/10 backdrop-blur-xl overflow-hidden hover:border-[#60a5fa]/35 hover:shadow-[0_0_40px_-10px_rgba(96,165,250,0.2)] isolate focus:outline-none focus-visible:ring-2 focus-visible:ring-[#60a5fa] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+      className="glow-breathe card-lift-smooth group antialiased relative flex flex-col min-h-64 sm:min-h-80 md:min-h-105 lg:min-h-125 rounded-3xl bg-[#0a101f]/60 border border-white/10 backdrop-blur-xl overflow-hidden hover:border-[#60a5fa]/35 hover:shadow-[0_0_40px_-10px_rgba(96,165,250,0.2)] isolate focus:outline-none focus-visible:ring-2 focus-visible:ring-[#60a5fa] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
     >
       {/* 1. IMAGE LAYER */}
       <div className="absolute inset-0 z-0">
         <Suspense
           fallback={<div className="absolute inset-0 bg-[#020617] z-0" />}
         >
-          <ProjectImage src={project.image} alt={project.title} />
+          <ProjectImage
+            src={project.cardImage ?? project.image}
+            alt={project.title}
+          />
         </Suspense>
+        <div
+          className="absolute inset-0 z-1 bg-black"
+          style={{ opacity: overlayDarkness }}
+        />
         <div className="absolute inset-0 bg-linear-to-t from-[#020617] via-[#020617]/40 to-transparent z-1" />
       </div>
 
@@ -89,7 +101,7 @@ export default function ProjectCard({ project }: { project: Project }) {
 
         <p
           id={descId}
-          className="mt-3 text-gray-300/90 font-light leading-relaxed text-base md:text-lg line-clamp-3"
+          className="mt-3 text-gray-300/90 font-light leading-relaxed text-base md:text-lg"
         >
           {project.description}
         </p>

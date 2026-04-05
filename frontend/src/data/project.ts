@@ -1,4 +1,6 @@
-import quickPng from "../assets/quick.png";
+import moodnestModalPng from "../assets/moodnest_modal.png";
+import heroCardPng from "../assets/hero_card.png";
+import heroModalPng from "../assets/hero_modal.png";
 import type { Project } from "../types/project";
 
 export const myProjects: Project[] = [
@@ -19,7 +21,7 @@ export const myProjects: Project[] = [
     githubUrl: "https://github.com/RyanTandeanUW/MoodNest.git",
     isHackathon: true,
     hackathonName: "CXC 2026 - AI Hackathon",
-    image: quickPng,
+    image: moodnestModalPng,
     category: "Software",
     featured: true,
   },
@@ -34,12 +36,16 @@ export const myProjects: Project[] = [
       "TypeScript",
       "Tailwind CSS",
       "Vite",
-      "React Router",
       "Framer Motion",
-      "React Helmet Async",
+      "SEO",
+      "HTML",
+      "CSS",
     ],
     isHackathon: false,
-    image: quickPng,
+    image: heroModalPng,
+    cardImage: heroCardPng,
+    modalImage: heroModalPng,
+    cardOverlayDarkness: 0.58,
     category: "Software",
     featured: true,
   },
