@@ -34,7 +34,7 @@ export const myExperiences: Experience[] = [
     ],
     technologies: ["Azure", "AI", "Data Analysis"],
     location: "Remote",
-    featured: false,
+    featured: true,
   },
   {
     id: 3,
@@ -51,7 +51,7 @@ export const myExperiences: Experience[] = [
     ],
     technologies: ["C", "ESP-IDF", "Embedded Systems", "Git"],
     location: "Waterloo, ON",
-    featured: false,
+    featured: true,
   },
   {
     id: 4,

@@ -1,5 +1,5 @@
 // src/components/sections/Experiences.tsx
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import ExperienceCard from "../ExperienceCard";
 import type { Experience } from "../../types/experience";
@@ -9,6 +9,11 @@ interface ExperiencesProps {
 }
 
 export default function Experiences({ items }: ExperiencesProps) {
+  const featuredExperiences = useMemo(
+    () => items.filter((experience) => experience.featured),
+    [items],
+  );
+
   const btnRef = useRef<HTMLAnchorElement | null>(null);
   const [btnOverlay, setBtnOverlay] = useState(0);
 
@@ -60,7 +65,7 @@ export default function Experiences({ items }: ExperiencesProps) {
         </div>
 
         <div className="flex flex-col gap-8 sm:gap-12">
-          {items.map((exp) => (
+          {featuredExperiences.map((exp) => (
             <ExperienceCard key={exp.id} experience={exp} />
           ))}
         </div>

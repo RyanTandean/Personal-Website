@@ -1,4 +1,4 @@
-import { useRef, useState, useId } from "react";
+import { useId, useRef, useState } from "react";
 import type { Experience } from "../types/experience";
 import Tag from "./Tag";
 
@@ -122,19 +122,17 @@ export default function ExperienceCard({
             {open ? "Show less" : "Read more"}
           </button>
 
-          <div
-            id={detailsId}
-            aria-hidden={!open}
-            className={`mt-3 overflow-hidden transition-[max-height,opacity] duration-300 ${open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}
-          >
-            {experience.points?.length ? (
-              <ul className="text-gray-300 text-sm space-y-2">
-                {experience.points.map((p, i) => (
-                  <li key={i}>• {p}</li>
-                ))}
-              </ul>
-            ) : null}
-          </div>
+          {open && (
+            <div id={detailsId} className="mt-3">
+              {experience.points?.length ? (
+                <ul className="text-gray-300 text-sm space-y-2">
+                  {experience.points.map((p, i) => (
+                    <li key={i}>• {p}</li>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
+          )}
         </div>
 
         <div className="mt-auto pt-8 flex flex-wrap gap-2">

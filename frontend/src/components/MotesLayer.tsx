@@ -47,7 +47,7 @@ const MotesLayer = memo(function MotesLayer({
       return {
         left,
         top,
-        size: 2 + rand() * 4,
+        size: 1.5 + rand() * 5,
         opacity: 0.3 + rand() * 0.4,
         // Small per-mote speed variance so movement is not too uniform.
         speedFactor: 0.88 + rand() * 0.24,

@@ -4,51 +4,28 @@ import type { Project } from "../types/project";
 export const myProjects: Project[] = [
   {
     id: 1,
-    title: "SkipCost",
-    year: "2025",
+    title: "MoodNest",
+    year: "2026",
     description:
-      "A tool for Waterloo students to calculate the cost of skipped lectures.",
-    technologies: ["React", "TypeScript", "RegEx"],
-    githubUrl: "https://github.com/RyanTandean/SkipCost",
-    isHackathon: false,
+      "An AI-powered home environment demo that listens to your voice, detects emotion, and adapts lighting, color, and music in real time.",
+    technologies: ["React", "JavaScript", "Node.js", "Python", "AI"],
+    githubUrl: "https://github.com/RyanTandeanUW/MoodNest.git",
+    isHackathon: true,
+    hackathonName: "CXC 2026 - AI Hackathon",
     image: quickPng,
     category: "Software",
     featured: true,
   },
   {
     id: 2,
-    title: "SYDE Research Assistant",
-    year: "2024",
-    description:
-      "Analyzing systems design data for the University of Waterloo.",
-    technologies: ["Python", "Data Analysis"],
-    isHackathon: false,
-    image: quickPng,
-    category: "Data Science",
-    featured: true,
-  },
-  {
-    id: 3,
-    title: "Dummy Project Alpha",
+    title: "Personal Website",
     year: "2026",
     description:
-      "A fake project for demonstration purposes. Showcases UI and API integration.",
-    technologies: ["Vue.js", "Node.js"],
+      "My personal portfolio website for showcasing projects, experience, and contact information.",
+    technologies: ["React", "TypeScript", "CSS"],
     isHackathon: false,
     image: quickPng,
     category: "Software",
     featured: true,
-  },
-  {
-    id: 4,
-    title: "Dummy Project Beta",
-    year: "2026",
-    description:
-      "Another fake project to fill out the project list. Includes testing and deployment.",
-    technologies: ["Python", "Flask"],
-    isHackathon: false,
-    image: "", // Add image path or URL
-    category: "AI/ML",
-    featured: false,
   },
 ];
