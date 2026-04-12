@@ -72,7 +72,7 @@ export default function KeyboardSection() {
           >
             <Keycap
               ariaLabel="Open resume (PDF)"
-              link="/resume.pdf"
+              link="/RyanTandeanResume.pdf"
               rotation={-17}
               yOffset={36}
               xOffset={8}

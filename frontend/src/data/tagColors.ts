@@ -80,6 +80,9 @@ export const tagMeta = {
   Azure: {
     classes: "bg-[#0078d4]/10 border-[#0078d4]/20 text-[#60a5fa]",
   },
+  AWS: {
+    classes: "bg-[#ff9900]/10 border-[#ff9900]/20 text-[#ffb84d]",
+  },
   AI: {
     classes: "bg-[#16a34a]/10 border-[#16a34a]/20 text-[#4ade80]",
   },

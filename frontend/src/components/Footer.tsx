@@ -7,8 +7,8 @@ const navLinks = [
   { label: "Experience", path: "/experience" },
   { label: "About", path: "/about" },
   { label: "Contact", path: "/contact" },
-  // Resume (static PDF served from public/resume.pdf)
-  { label: "Resume", path: "/resume.pdf", external: true },
+  // Resume (static PDF served from public/RyanTandeanResume.pdf)
+  { label: "Resume", path: "/RyanTandeanResume.pdf", external: true },
 ];
 
 export default function Footer() {

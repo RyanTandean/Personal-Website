@@ -89,13 +89,14 @@ export default function About() {
                 I’m a data science student at the University of Waterloo with a focus on turning messy, real-world problems into working software and models
               </p>
               <p className="text-white/60 leading-relaxed mt-3">
-                I've worked across research, product, and engineering roles, 
+                I've worked across research, product, and engineering roles.
+                My experience ranges from 
                 cleaning and analyzing large datasets, building predictive and simulation-based models, 
                 and developing user-facing software. 
                 I care about work that's both technically sound and actually useful to people.
               </p>
               <p className="text-white/60 leading-relaxed mt-3">
-                Outside of work, I’m usually at a piano, on a badminton court, or gaming. I also make time for a bit of photography, rock climbing, and running.
+                Outside of work, I’m usually at a piano, on a badminton court, or gaming. I also make time for a little bit of photography, rock climbing, and running.
               </p>
             </div>
           </div>
