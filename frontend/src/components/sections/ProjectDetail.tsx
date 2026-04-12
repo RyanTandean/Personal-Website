@@ -12,6 +12,17 @@ export default function ProjectDetail({
 }: ProjectDetailProps) {
   const project = myProjects.find((p) => p.id === projectId) || myProjects[0];
 
+  const renderTextBlocks = (text: string, className: string) => {
+    return text
+      .split(/\n\s*\n/g)
+      .filter((block) => block.trim().length > 0)
+      .map((block, i) => (
+        <p key={i} className={className}>
+          {block}
+        </p>
+      ));
+  };
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -97,9 +108,12 @@ export default function ProjectDetail({
               {project.title}
             </h1>
             <div className="h-1 w-20 bg-[#60a5fa]" />
-            <p className="text-lg text-gray-400 font-light leading-relaxed">
-              {project.description.summary}
-            </p>
+            <div className="space-y-4">
+              {renderTextBlocks(
+                project.description.summary,
+                "text-lg text-gray-400 font-light leading-relaxed whitespace-pre-line",
+              )}
+            </div>
 
             {/* MOBILE: show specs + TOC after hero/description */}
             <div className="lg:hidden space-y-8">{sidebarContent}</div>
@@ -118,9 +132,12 @@ export default function ProjectDetail({
 
                   {/* Main body (optional) */}
                   {section.body && (
-                    <p className="text-base text-gray-400 font-light leading-relaxed">
-                      {section.body}
-                    </p>
+                    <div className="space-y-4">
+                      {renderTextBlocks(
+                        section.body,
+                        "text-base text-gray-400 font-light leading-relaxed whitespace-pre-line",
+                      )}
+                    </div>
                   )}
 
                   {/* Subsections (optional) */}
@@ -135,9 +152,12 @@ export default function ProjectDetail({
                           <h3 className="text-lg font-medium text-white/90">
                             {subsection.heading}
                           </h3>
-                          <p className="text-sm text-gray-400 font-light leading-relaxed">
-                            {subsection.body}
-                          </p>
+                          <div className="space-y-3">
+                            {renderTextBlocks(
+                              subsection.body,
+                              "text-sm text-gray-400 font-light leading-relaxed whitespace-pre-line",
+                            )}
+                          </div>
                         </div>
                       ))}
                     </div>

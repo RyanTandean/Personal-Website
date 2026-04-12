@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const FULL_TEXT = "available_for_work!";
+const FULL_TEXT = "Looking for Fall 2026 Internships!";
 
 export default function TerminalBadge() {
   const [displayed, setDisplayed] = useState("");

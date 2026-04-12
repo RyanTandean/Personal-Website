@@ -89,32 +89,25 @@ export const myProjects: Project[] = [
     title: "Personal Website",
     year: "2026",
     description: {
-      summary: paragraph(
-        "A space for others to explore my experience and learn a bit about me.",
-        "This site showcases my projects, experiments, work experience, and the thinking behind my work.",
-      ),
+      summary: `A space for others to learn a little bit about me. This site showcases my projects, experiments, work experience, and the thinking behind my work.`,
       sections: [
         {
           heading: "Design",
-          body: paragraph(
-            "Visually, I wanted something that felt both minimal and striking.",
-            "The design draws inspiration from the deep ocean with a dark theme,",
-            "smooth page transitions, and interactive 3D elements like floating",
-            "keyboard keys and animated particles. Every visual detail exists",
-            "to create an engaging experience that matches how I approach my work.",
-          ),
+          body: `Visually, I wanted a look that is minimal but still has character. The design uses a dark theme, floating particles, and soft blue ambient light to create an atmosphere that feels intentional without being overdone.
+
+I wanted the space to feel fluid, so details are kept subtle enough to ensure the experience stays fast and responsive.
+
+If you have ever played Hollow Knight, the Lifeblood menu was the main inspiration for the aesthetic.`,
         },
         {
-          heading: "Engineering",
-          body: paragraph(
-            "Built with React, TypeScript, and Vite to prioritize performance.",
-            "The site is fully responsive with type-safe routing through React Router.",
-            "SEO is baked in with dynamic meta tags, OG images, and structured sitemaps.",
-            "Accessibility is just as important to me as the visual design,",
-            "so the entire site is WCAG compliant with proper keyboard navigation,",
-            "ARIA labels, and semantic HTML.",
-          ),
-        },
+          heading: "Architecture",
+          body: `This site is structured as a component-driven React and TypeScript app built with Vite. Pages are built from reusable sections and shared components, so the design stays consistent while the content stays easy to update. 
+
+Navigation and modal flows are state-driven and route-aware, including URL-based project modal state for direct linking and proper browser history behavior. 
+
+The visual system is layered intentionally: an atmospheric background engine, motion-tuned card interactions, and deterministic particle effects balanced for performance
+
+Reliability was treated as a first-class concern throughout, with typed data models, error boundaries, SEO metadata, and accessibility foundations including semantic structure, keyboard support, and ARIA labeling.`,        },
       ],
     },
     technologies: [
