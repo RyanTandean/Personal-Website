@@ -80,9 +80,9 @@ export const myProjects: Project[] = [
           body: paragraphs(
             "This site is structured as a component-driven React and TypeScript app built with Vite. Pages are built from reusable sections and shared components, so the design stays consistent while the content stays easy to update.",
             "Navigation and modal flows are state-driven and route-aware, including URL-based project modal state for direct linking and proper browser history behavior.",
-            "The site is deployed on AWS using S3 for static hosting and CloudFront for content delivery.",
             "The visual system is layered intentionally: an atmospheric background engine, motion-tuned card interactions, and deterministic particle effects balanced for performance.",
             "Reliability was treated as a first-class concern throughout, with typed data models, error boundaries, SEO metadata, and accessibility foundations including semantic structure, keyboard support, and ARIA labeling.",
+            "The site is deployed on AWS (S3 + CloudFront) with automated CI/CD via GitHub Actions for build and release.",
           ),
         },
       ],
