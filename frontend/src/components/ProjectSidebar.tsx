@@ -12,7 +12,8 @@ export default function ProjectSidebar({
 }: ProjectSidebarProps) {
   const hasLiveUrl = !!project.liveUrl;
   const hasGithubUrl = showSourceCode && !!project.githubUrl;
-  const hasLinks = hasLiveUrl || hasGithubUrl;
+  const hasDevpostUrl = !!project.devpostUrl;
+  const hasLinks = hasLiveUrl || hasGithubUrl || hasDevpostUrl;
 
   return (
     <div className="p-8 rounded-3xl bg-white/5 border border-white/10 space-y-8">
@@ -39,6 +40,17 @@ export default function ProjectSidebar({
               className="flex items-center justify-center py-3 rounded-xl bg-white/5 border border-white/10 text-white font-bold text-xs uppercase tracking-widest hover:bg-white/10 transition-all"
             >
               View Source Code
+            </a>
+          )}
+          {hasDevpostUrl && (
+            <a
+              href={project.devpostUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`View Devpost page for ${project.title} (opens in new tab)`}
+              className="flex items-center justify-center py-3 rounded-xl bg-white/5 border border-white/10 text-white font-bold text-xs uppercase tracking-widest hover:bg-white/10 transition-all"
+            >
+              View Devpost
             </a>
           )}
         </div>

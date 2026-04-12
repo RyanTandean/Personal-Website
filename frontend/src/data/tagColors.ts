@@ -83,6 +83,12 @@ export const tagMeta = {
   AI: {
     classes: "bg-[#16a34a]/10 border-[#16a34a]/20 text-[#4ade80]",
   },
+  Gemini: {
+    classes: "bg-[#2563eb]/10 border-[#2563eb]/20 text-[#60a5fa]",
+  },
+  ElevenLabs: {
+    classes: "bg-white/10 border-white/20 text-white",
+  },
   "ESP-IDF": {
     classes: "bg-[#a16207]/10 border-[#a16207]/20 text-[#facc15]",
   },

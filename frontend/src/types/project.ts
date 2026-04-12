@@ -21,6 +21,7 @@ export interface Project {
   };
   technologies: TagName[];
   githubUrl?: string;
+  devpostUrl?: string;
   liveUrl?: string; // For hosted web apps or demos
   isHackathon: boolean;
   hackathonName?: string; // e.g., "Waterloo Datafest" or "HackTheNorth"

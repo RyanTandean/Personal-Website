@@ -87,22 +87,17 @@ export default function About() {
               </p>
               <p className="text-white/60 leading-relaxed">
                 {/* Replace this with your real bio */}
-                I’m a data science student at the University of Waterloo who
-                loves building at the intersection of data and software.
+                I’m a data science student at the University of Waterloo with a focus on turning messy, real-world problems into working software and models
               </p>
               <p className="text-white/60 leading-relaxed mt-3">
                 {/* Replace this with your real bio */}
-                I’ve worked across research, product, and engineering roles,
-                using data analysis, and software development to solve practical
-                problems. My work includes cleaning and analyzing large
-                datasets, building predictive and simulation-based models, and
-                developing user-facing software people can actually use. I work
-                best when I can combine analytical thinking and technical
-                execution to build things with real impact.
+                I've worked across research, product, and engineering roles, 
+                cleaning and analyzing large datasets, building predictive and simulation-based models, 
+                and developing user-facing software. 
+                I care about work that's both technically sound and actually useful to people.
               </p>
               <p className="text-white/60 leading-relaxed mt-3">
-                Outside of coding, I recharge by playing piano, going for runs,
-                and gaming.
+                Outside of work, I’m usually at a piano, on a badminton court, or gaming. I also make time for a bit of photography, rock climbing, and running.
               </p>
             </div>
           </div>
