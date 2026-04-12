@@ -57,36 +57,43 @@ export default function Navbar() {
       className="fixed bottom-10 left-1/2 -translate-x-1/2 z-1001 antialiased"
     >
       {/* Container: We keep px-1.5 constant to avoid math shifts */}
-      <div className="relative flex items-center gap-1 bg-white/5 border border-white/10 backdrop-blur-2xl p-1.5 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.4)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-xl">
+      <div className="relative transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-xl">
         <div
-          className="absolute top-1.5 bottom-1.5 rounded-full bg-white/10 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
-          style={{
-            left: selectorStyle.left,
-            width: selectorStyle.width,
-            opacity: isLoaded ? 1 : 0,
-            transition: "all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)",
-          }}
+          aria-hidden="true"
+          className="absolute inset-0 rounded-full bg-white/5 border border-white/10 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
         />
 
-        {navItems.map((item, idx) => (
-          <Fragment key={item.label}>
-            {/* Divider before Contact (last item) */}
-            {idx === navItems.length - 1 && (
-              <div
-                aria-hidden="true"
-                className="w-px self-stretch mx-1 my-2 bg-white/15 rounded-full"
+        <div className="relative flex items-center gap-1 p-1.5 rounded-full">
+          <div
+            className="absolute top-1.5 bottom-1.5 rounded-full bg-white/10 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+            style={{
+              left: selectorStyle.left,
+              width: selectorStyle.width,
+              opacity: isLoaded ? 1 : 0,
+              transition: "all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)",
+            }}
+          />
+
+          {navItems.map((item, idx) => (
+            <Fragment key={item.label}>
+              {/* Divider before Contact (last item) */}
+              {idx === navItems.length - 1 && (
+                <div
+                  aria-hidden="true"
+                  className="w-px self-stretch mx-1 my-2 bg-white/15 rounded-full"
+                />
+              )}
+              <NavItem
+                {...item}
+                isActive={activeIndex === idx}
+                onClick={() => void navigate(item.path)}
+                setRef={(el) => {
+                  containerRefs.current[idx] = el;
+                }}
               />
-            )}
-            <NavItem
-              {...item}
-              isActive={activeIndex === idx}
-              onClick={() => void navigate(item.path)}
-              setRef={(el) => {
-                containerRefs.current[idx] = el;
-              }}
-            />
-          </Fragment>
-        ))}
+            </Fragment>
+          ))}
+        </div>
       </div>
     </nav>
   );

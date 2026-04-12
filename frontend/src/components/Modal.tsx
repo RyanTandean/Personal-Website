@@ -87,7 +87,7 @@ export default function Modal({
       {isOpen && (
         <motion.div
           key="modal-overlay"
-          className="fixed inset-0 z-50 flex items-start justify-center p-6 sm:p-12 overflow-auto"
+          className="fixed inset-0 z-50 flex items-start justify-center p-6 sm:p-12 overflow-hidden"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -96,17 +96,17 @@ export default function Modal({
             if (e.target === e.currentTarget) onClose();
           }}
         >
-          {/* Backdrop — plain div, fades with parent so blur leads panel */}
-          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm pointer-events-none" />
+          {/* Backdrop — fixed positioning covers entire viewport */}
+          <div className="fixed inset-0 bg-black/80 backdrop-blur-sm pointer-events-none" />
 
-          {/* Panel — 100ms delay so backdrop is visible first */}
+          {/* Panel — scrollable content area */}
           <motion.div
             ref={panelRef}
             role="dialog"
             aria-modal="true"
             aria-label={ariaLabel}
             tabIndex={-1}
-            className="relative z-10 w-full max-w-5xl bg-transparent outline-none"
+            className="scrollbar-thin relative z-10 w-full max-w-5xl bg-transparent outline-none max-h-[calc(100vh-6rem)] overflow-y-auto"
             initial={{ opacity: 0, y: 40, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.97 }}

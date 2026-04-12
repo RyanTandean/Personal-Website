@@ -46,7 +46,37 @@ html,
 body {
   background: var(--scene-base-5);
   color: #fff;
+  overscroll-behavior: none;
 }
+
+/* Shared thin scrollbar styling used by modal and side nav scrollers. */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(96, 165, 250, 0.55) transparent;
+  scrollbar-gutter: stable;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(96, 165, 250, 0.45);
+  border: 2px solid transparent;
+  border-radius: 9999px;
+  background-clip: padding-box;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: rgba(96, 165, 250, 0.7);
+  background-clip: padding-box;
+}
+
 .preload * {
   -webkit-transition: none !important;
   -moz-transition: none !important;

@@ -93,7 +93,7 @@ export default function Projects({ items }: ProjectsProps) {
               tabIndex={0}
               aria-haspopup="dialog"
               aria-label={`Open ${project.title} project details`}
-              className="w-full cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#60a5fa] focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-3xl"
+              className="w-full h-full cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#60a5fa] focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-3xl"
               onClick={() => openProject(project.id)}
               onKeyDown={(e) => {
                 if (

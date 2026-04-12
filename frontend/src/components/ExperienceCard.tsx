@@ -11,9 +11,10 @@ export default function ExperienceCard({
 
   const [overlayOpacity, setOverlayOpacity] = useState(0);
   const [open, setOpen] = useState(false);
-  const detailsId = `exp-${useId()}`;
-  const titleId = `exp-title-${useId()}`;
-  const descId = `exp-desc-${useId()}`;
+  const baseId = useId();
+  const detailsId = `exp-details-${baseId}`;
+  const titleId = `exp-title-${baseId}`;
+  const descId = `exp-desc-${baseId}`;
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
@@ -41,11 +42,14 @@ export default function ExperienceCard({
       role="article"
       aria-labelledby={titleId}
       aria-describedby={descId}
-      className="glow-breathe card-lift-smooth antialiased relative z-30 isolate group flex flex-col rounded-3xl min-h-48 sm:min-h-56 md:min-h-64 bg-white/2 backdrop-blur-xs border border-white/10 overflow-hidden hover:border-[#60a5fa]/35 hover:shadow-[0_0_40px_-10px_rgba(96,165,250,0.2)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#60a5fa] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+      className="glow-breathe card-lift-smooth antialiased relative z-30 transform-gpu group flex flex-col rounded-3xl min-h-48 sm:min-h-56 md:min-h-64 overflow-hidden hover:shadow-[0_0_40px_-10px_rgba(96,165,250,0.2)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#60a5fa] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
     >
+      {/* Keep backdrop blur on a separate non-transformed layer for better Edge rendering. */}
+      <div className="pointer-events-none absolute inset-0 z-0 rounded-3xl bg-white/2 backdrop-blur-sm will-change-[backdrop-filter] border border-white/10 transition-colors duration-300 group-hover:border-[#60a5fa]/35" />
+
       {/* THE SPOTLIGHT OVERLAY */}
       <div
-        className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-300 ease-out"
+        className="pointer-events-none absolute inset-0 z-10 transition-opacity duration-300 ease-out"
         style={{
           opacity: overlayOpacity,
           background: `
@@ -58,7 +62,7 @@ export default function ExperienceCard({
 
       {/* Border-adjacent glow without mask-composite to avoid Firefox artifacts */}
       <div
-        className="pointer-events-none absolute inset-0 z-10 rounded-3xl transition-opacity duration-300 ease-out"
+        className="pointer-events-none absolute inset-0 z-20 rounded-3xl transition-opacity duration-300 ease-out"
         style={{
           opacity: overlayOpacity,
           background: `
@@ -69,14 +73,14 @@ export default function ExperienceCard({
         }}
       />
 
-      <div className="relative z-20 p-6 sm:p-8 flex flex-col h-full">
+      <div className="relative z-30 p-6 sm:p-8 flex flex-col h-full">
         <div className="flex flex-wrap items-start justify-between gap-4">
-          <div className="flex items-center gap-4 min-w-0 flex-1">
+          <div className="flex items-start gap-4 min-w-0 flex-1">
             {experience.logo ? (
               <img
                 src={experience.logo}
                 alt={experience.logoAlt ?? `${experience.company} logo`}
-                className="w-12 h-12 rounded-md object-contain bg-white/5 p-1"
+                className="w-12 h-12 mt-0.5 rounded-md object-contain bg-white/5 p-1"
                 loading="lazy"
               />
             ) : null}
@@ -117,7 +121,7 @@ export default function ExperienceCard({
             }}
             aria-expanded={open}
             aria-controls={detailsId}
-            className="text-sm font-semibold text-white/70 hover:text-white transition-colors"
+            className="text-sm font-semibold text-white/70 hover:text-[#60a5fa] transition-colors duration-300"
           >
             {open ? "Show less" : "Read more"}
           </button>

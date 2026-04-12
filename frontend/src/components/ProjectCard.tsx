@@ -41,7 +41,7 @@ export default function ProjectCard({ project }: { project: Project }) {
       role="article"
       aria-labelledby={titleId}
       aria-describedby={descId}
-      className="glow-breathe card-lift-smooth group antialiased relative flex flex-col min-h-64 sm:min-h-80 md:min-h-105 lg:min-h-125 rounded-3xl bg-[#0a101f]/60 border border-white/10 backdrop-blur-xl overflow-hidden hover:border-[#60a5fa]/35 hover:shadow-[0_0_40px_-10px_rgba(96,165,250,0.2)] isolate focus:outline-none focus-visible:ring-2 focus-visible:ring-[#60a5fa] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+      className="glow-breathe card-lift-smooth group antialiased relative flex flex-col h-full min-h-64 sm:min-h-80 md:min-h-105 lg:min-h-125 rounded-3xl bg-[#0a101f]/60 border border-white/10 backdrop-blur-xl overflow-hidden hover:border-[#60a5fa]/35 hover:shadow-[0_0_40px_-10px_rgba(96,165,250,0.2)] isolate focus:outline-none focus-visible:ring-2 focus-visible:ring-[#60a5fa] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
     >
       {/* 1. IMAGE LAYER */}
       <div className="absolute inset-0 z-0">
@@ -103,7 +103,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           id={descId}
           className="mt-3 text-gray-300/90 font-light leading-relaxed text-base md:text-lg"
         >
-          {project.description}
+          {project.description.summary}
         </p>
 
         {/* REFINED LINKS: We stop propagation so clicking these doesn't trigger the card's page-swap */}

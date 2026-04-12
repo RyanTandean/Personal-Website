@@ -44,7 +44,7 @@ export default function App() {
       </div>
 
       {/* 2. CONTENT */}
-      <div className="relative z-30 w-full flex flex-col animate-in fade-in duration-1000">
+      <div className="relative w-full flex flex-col animate-in fade-in duration-1000">
         <HeroSection />
         <Experience items={myExperiences} />
         <Projects items={myProjects} />

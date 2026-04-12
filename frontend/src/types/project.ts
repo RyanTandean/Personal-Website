@@ -1,10 +1,24 @@
 import type { TagName } from "../data/tagColors";
 
+export interface ProjectSubsection {
+  heading: string;
+  body: string;
+}
+
+export interface ProjectSection {
+  heading: string;
+  body?: string;
+  subsections?: ProjectSubsection[]; // optional nested items
+}
+
 export interface Project {
   id: number;
   title: string;
   year: string;
-  description: string;
+  description: {
+    summary: string;
+    sections: ProjectSection[];
+  };
   technologies: TagName[];
   githubUrl?: string;
   liveUrl?: string; // For hosted web apps or demos

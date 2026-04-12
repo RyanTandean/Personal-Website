@@ -9,9 +9,7 @@ type Props = {
 };
 
 export default function Tag({ name, className = "", onClick, active }: Props) {
-  const meta = (tagMeta as Record<string, { classes: string; icon?: string }>)[
-    name
-  ];
+  const meta = (tagMeta as Record<string, { classes: string }>)[name];
   const base =
     "relative inline-flex items-center px-3 py-0.5 text-sm sm:text-base font-medium tracking-wider rounded-full z-30";
   const classes =

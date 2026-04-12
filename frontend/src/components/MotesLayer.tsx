@@ -43,14 +43,18 @@ const MotesLayer = memo(function MotesLayer({
     return Array.from({ length: count }).map(() => {
       // Normal-distributed spawn: cluster around center with fewer edge outliers.
       const left = randomNormal01(rand, 0.5, 0.23) * 120 - 10;
-      const top = randomNormal01(rand, 0.5, 0.2) * 100;
+      const top = randomNormal01(rand, 0.8, 0.2) * 100;
+      // Bias size upward so larger motes are more common while preserving variance.
+      const sizeVariance = rand();
+      const glowStrength = 0.18 + rand() * 0.22;
       return {
         left,
         top,
-        size: 1.5 + rand() * 5,
+        size: 2.6 + Math.pow(sizeVariance, 0.7) * 6.8,
         opacity: 0.3 + rand() * 0.4,
+        glowStrength,
         // Small per-mote speed variance so movement is not too uniform.
-        speedFactor: 0.88 + rand() * 0.24,
+        speedFactor: 0.5 + (rand() / 4) * 0.24,
       };
     });
   }, [count]);
@@ -77,7 +81,7 @@ const MotesLayer = memo(function MotesLayer({
         const rise66Vh = riseEndVh * 0.7;
 
         // Keep average vertical speed similar across different travel distances.
-        const baseRiseSpeedVhPerSecond = 3;
+        const baseRiseSpeedVhPerSecond = 0;
         const duration = Math.max(
           18,
           Math.min(
@@ -92,8 +96,14 @@ const MotesLayer = memo(function MotesLayer({
             className="mote-element absolute rounded-full"
             style={
               {
-                background:
-                  "radial-gradient(circle, #fff 0%, #7dd3fc 40%, transparent 100%)",
+                background: "rgba(92, 178, 255, 0.95)",
+                boxShadow: `
+                  0 0 ${mote.size * 1.0}px rgba(110, 194, 255, ${mote.glowStrength * 0.94}),
+                  0 0 ${mote.size * 3.0}px rgba(48, 154, 255, ${mote.glowStrength * 1.06}),
+                  0 0 ${mote.size * 7.2}px rgba(22, 112, 246, ${mote.glowStrength * 0.96}),
+                  0 ${mote.size * 0.45}px ${mote.size * 3.1}px rgba(12, 84, 224, ${mote.glowStrength * 0.62})
+                `,
+                filter: "blur(0.7px) saturate(1.44) brightness(1.08)",
                 width: `${mote.size}px`,
                 height: `${mote.size}px`,
                 left: `${mote.left}%`,

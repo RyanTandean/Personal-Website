@@ -12,6 +12,59 @@ export default function ProjectDetail({
 }: ProjectDetailProps) {
   const project = myProjects.find((p) => p.id === projectId) || myProjects[0];
 
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  const sidebarContent = (
+    <>
+      {/* PROJECT SIDEBAR SPECS */}
+      <ProjectSidebar project={project} />
+
+      {/* TABLE OF CONTENTS */}
+      {project.description.sections.length > 0 && (
+        <div className="space-y-4">
+          <h3 className="text-xs font-semibold tracking-[0.15em] uppercase text-white/50">
+            On this page
+          </h3>
+          <nav className="space-y-1 max-h-[30vh] overflow-y-auto pr-2 pb-2 scrollbar-thin">
+            {project.description.sections.map((section, idx) => (
+              <div key={idx} className="space-y-1">
+                {/* Main section heading */}
+                <button
+                  onClick={() => scrollToSection(`section-${idx}`)}
+                  className="block w-full text-left text-sm text-gray-400/80 hover:text-[#60a5fa] transition-colors duration-200 font-light"
+                >
+                  {section.heading}
+                </button>
+
+                {/* Subsections (indented) */}
+                {section.subsections && section.subsections.length > 0 && (
+                  <div className="space-y-1 pl-3 border-l border-white/10">
+                    {section.subsections.map((subsection, subIdx) => (
+                      <button
+                        key={subIdx}
+                        onClick={() =>
+                          scrollToSection(`section-${idx}-sub-${subIdx}`)
+                        }
+                        className="block w-full text-left text-xs text-gray-500/70 hover:text-[#60a5fa] transition-colors duration-200 font-light"
+                      >
+                        {subsection.heading}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </nav>
+        </div>
+      )}
+    </>
+  );
+
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 sm:pt-12 pb-20">
       {/* NAVIGATION / BACK BUTTON */}
@@ -22,7 +75,7 @@ export default function ProjectDetail({
         <span className="transition-transform group-hover:-translate-x-1">
           ←
         </span>
-        Back to Abyss
+        Return
       </button>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -39,20 +92,65 @@ export default function ProjectDetail({
           </div>
 
           {/* DESCRIPTION */}
-          <section className="space-y-6">
+          <section className="space-y-8">
             <h1 className="text-4xl md:text-6xl font-bold tracking-tighter text-white">
               {project.title}
             </h1>
             <div className="h-1 w-20 bg-[#60a5fa]" />
             <p className="text-lg text-gray-400 font-light leading-relaxed">
-              {project.description}
+              {project.description.summary}
             </p>
+
+            {/* MOBILE: show specs + TOC after hero/description */}
+            <div className="lg:hidden space-y-8">{sidebarContent}</div>
+
+            {/* SECTIONS */}
+            <div className="space-y-10 pt-6">
+              {project.description.sections.map((section, idx) => (
+                <div
+                  key={idx}
+                  id={`section-${idx}`}
+                  className="space-y-3 scroll-mt-20"
+                >
+                  <h2 className="text-2xl font-semibold text-white tracking-tight">
+                    {section.heading}
+                  </h2>
+
+                  {/* Main body (optional) */}
+                  {section.body && (
+                    <p className="text-base text-gray-400 font-light leading-relaxed">
+                      {section.body}
+                    </p>
+                  )}
+
+                  {/* Subsections (optional) */}
+                  {section.subsections && section.subsections.length > 0 && (
+                    <div className="space-y-5 pt-3">
+                      {section.subsections.map((subsection, subIdx) => (
+                        <div
+                          key={subIdx}
+                          id={`section-${idx}-sub-${subIdx}`}
+                          className="space-y-2 border-l border-white/10 pl-5"
+                        >
+                          <h3 className="text-lg font-medium text-white/90">
+                            {subsection.heading}
+                          </h3>
+                          <p className="text-sm text-gray-400 font-light leading-relaxed">
+                            {subsection.body}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </section>
         </div>
 
-        {/* RIGHT COLUMN: Sidebar Specs */}
-        <div className="space-y-8">
-          <ProjectSidebar project={project} />
+        {/* RIGHT COLUMN: Sidebar (Specs + TOC) */}
+        <div className="hidden lg:block space-y-8 lg:sticky lg:top-6 self-start">
+          {sidebarContent}
         </div>
       </div>
     </div>

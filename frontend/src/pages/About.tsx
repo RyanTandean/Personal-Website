@@ -3,20 +3,22 @@ import { Github, Linkedin, Mail } from "lucide-react";
 import BackgroundAbyss from "../components/BackgroundAbyss";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Tag from "../components/Tag";
 import { OG_IMAGE_URL, SITE_URL } from "../config/site";
 import profilePhoto from "../assets/pfp.jpg";
 
 const skills = [
   "Python",
-  "TypeScript",
-  "React",
-  "Node.js",
   "Pandas",
   "NumPy",
   "SQL",
-  "Git",
-  "Data Analysis",
+  "Statistical Modeling",
   "Machine Learning",
+  "Data Analysis",
+  "TypeScript",
+  "React",
+  "Node.js",
+  "Git",
   "Tailwind CSS",
   "Vite",
 ];
@@ -67,7 +69,7 @@ export default function About() {
         </div>
 
         {/* Bio card */}
-        <div className="rounded-3xl bg-white/1.5 border border-white/10 p-8 sm:p-10 mb-10">
+        <div className="rounded-3xl bg-white/2 backdrop-blur-xs border border-white/10 p-8 sm:p-10 mb-10">
           <div className="flex flex-col sm:flex-row gap-8 items-start">
             <img
               src={profilePhoto}
@@ -85,44 +87,43 @@ export default function About() {
               </p>
               <p className="text-white/60 leading-relaxed">
                 {/* Replace this with your real bio */}
-                I’m a data science student at the University of Waterloo who loves building at the intersection of data and software. 
+                I’m a data science student at the University of Waterloo who
+                loves building at the intersection of data and software.
               </p>
               <p className="text-white/60 leading-relaxed mt-3">
                 {/* Replace this with your real bio */}
-                I’ve worked across research, product, and engineering roles, using data analysis, 
-                and software development to solve practical problems. My work includes cleaning and analyzing large datasets, 
-                building predictive and simulation-based models, and developing user-facing software people can actually use. 
-                I work best when I can combine analytical thinking and technical execution to 
-                build things with real impact.
+                I’ve worked across research, product, and engineering roles,
+                using data analysis, and software development to solve practical
+                problems. My work includes cleaning and analyzing large
+                datasets, building predictive and simulation-based models, and
+                developing user-facing software people can actually use. I work
+                best when I can combine analytical thinking and technical
+                execution to build things with real impact.
               </p>
               <p className="text-white/60 leading-relaxed mt-3">
-                Outside of coding, I recharge by playing piano, going for runs, and gaming.
+                Outside of coding, I recharge by playing piano, going for runs,
+                and gaming.
               </p>
             </div>
           </div>
         </div>
 
         {/* Skills */}
-        <div className="rounded-3xl bg-white/1.5 border border-white/10 p-8 sm:p-10 mb-10">
+        <div className="rounded-3xl bg-white/2 backdrop-blur-xs border border-white/10 p-8 sm:p-10 mb-10">
           <h2 className="text-xl font-semibold text-white tracking-tight mb-6">
             Skills &amp; Tools
           </h2>
           <div className="flex flex-wrap gap-2">
             {skills.map((s) => (
-              <span
-                key={s}
-                className="px-3 py-1 rounded-full text-sm font-medium border border-white/10 bg-white/4 text-white/70"
-              >
-                {s}
-              </span>
+              <Tag key={s} name={s} />
             ))}
           </div>
         </div>
 
         {/* Links */}
-        <div className="rounded-3xl bg-white/1.5 border border-white/10 p-8 sm:p-10">
+        <div className="rounded-3xl bg-white/2 backdrop-blur-xs border border-white/10 p-8 sm:p-10">
           <h2 className="text-xl font-semibold text-white tracking-tight mb-6">
-            Find me
+            Links
           </h2>
           <div className="flex flex-col gap-4">
             <a

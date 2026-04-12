@@ -28,7 +28,7 @@ export default function Experiences({ items }: ExperiencesProps) {
   return (
     <section
       aria-label="Work experience"
-      className="relative w-full flex flex-col items-center py-32 z-30"
+      className="relative w-full flex flex-col items-center py-32"
     >
       <div className="w-full max-w-5xl px-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-10">
