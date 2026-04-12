@@ -89,6 +89,12 @@ export const tagMeta = {
   ElevenLabs: {
     classes: "bg-white/10 border-white/20 text-white",
   },
+  FastAPI: {
+    classes: "bg-[#10b981]/10 border-[#10b981]/20 text-[#34d399]",
+  },
+  "Three.js": {
+    classes: "bg-white/5 border-white/20 text-white/90",
+  },
   "ESP-IDF": {
     classes: "bg-[#a16207]/10 border-[#a16207]/20 text-[#facc15]",
   },

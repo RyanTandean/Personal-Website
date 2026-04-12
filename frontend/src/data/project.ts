@@ -50,6 +50,8 @@ export const myProjects: Project[] = [
       "Python",
       "Gemini",
       "ElevenLabs",
+      "FastAPI",
+      "Three.js",
     ],
     isHackathon: true,
     hackathonName: "CXC 2026 - AI Hackathon",

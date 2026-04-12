@@ -86,11 +86,9 @@ export default function About() {
                 Data Science @ University of Waterloo
               </p>
               <p className="text-white/60 leading-relaxed">
-                {/* Replace this with your real bio */}
                 I’m a data science student at the University of Waterloo with a focus on turning messy, real-world problems into working software and models
               </p>
               <p className="text-white/60 leading-relaxed mt-3">
-                {/* Replace this with your real bio */}
                 I've worked across research, product, and engineering roles, 
                 cleaning and analyzing large datasets, building predictive and simulation-based models, 
                 and developing user-facing software. 
