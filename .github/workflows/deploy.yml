@@ -1,11 +1,11 @@
 name: Deploy Portfolio
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 permissions:
   id-token: write # Required for requesting the JWT
-  contents: read  # Required for actions/checkout
+  contents: read # Required for actions/checkout
 
 jobs:
   build-and-deploy:
@@ -16,6 +16,8 @@ jobs:
 
       - name: Install and Build
         working-directory: ./frontend
+        env:
+          VITE_FORMSPREE_ID: ${{ secrets.VITE_FORMSPREE_ID }}
         run: |
           npm install --legacy-peer-deps
           npm run build
