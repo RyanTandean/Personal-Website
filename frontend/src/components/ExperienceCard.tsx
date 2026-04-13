@@ -23,13 +23,11 @@ export default function ExperienceCard({
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    // Set the CSS variables so the background can track the mouse
     cardRef.current.style.setProperty("--mouse-x", `${x}px`);
     cardRef.current.style.setProperty("--mouse-y", `${y}px`);
   };
 
   const handleMouseLeave = () => {
-    // Keep the last pointer position so the glow fades out in place.
     setOverlayOpacity(0);
   };
 
@@ -44,10 +42,8 @@ export default function ExperienceCard({
       aria-describedby={descId}
       className="glow-breathe card-lift-smooth antialiased relative z-30 transform-gpu group flex flex-col rounded-3xl min-h-48 sm:min-h-56 md:min-h-64 overflow-hidden hover:shadow-[0_0_40px_-10px_rgba(96,165,250,0.2)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#60a5fa] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
     >
-      {/* Keep backdrop blur on a separate non-transformed layer for better Edge rendering. */}
       <div className="pointer-events-none absolute inset-0 z-0 rounded-3xl bg-white/2 backdrop-blur-sm will-change-[backdrop-filter] border border-white/10 transition-colors duration-300 group-hover:border-[#60a5fa]/35" />
 
-      {/* THE SPOTLIGHT OVERLAY */}
       <div
         className="pointer-events-none absolute inset-0 z-10 transition-opacity duration-300 ease-out"
         style={{
@@ -60,7 +56,6 @@ export default function ExperienceCard({
         }}
       />
 
-      {/* Border-adjacent glow without mask-composite to avoid Firefox artifacts */}
       <div
         className="pointer-events-none absolute inset-0 z-20 rounded-3xl transition-opacity duration-300 ease-out"
         style={{
@@ -73,8 +68,8 @@ export default function ExperienceCard({
         }}
       />
 
-      <div className="relative z-30 p-6 sm:p-8 flex flex-col h-full">
-        <div className="flex flex-wrap items-start justify-between gap-4">
+      <div className="relative z-30 p-4 sm:p-8 flex flex-col h-full">
+        <div className="flex flex-col sm:flex-row flex-wrap items-start justify-between gap-2 sm:gap-4">
           <div className="flex items-start gap-4 min-w-0 flex-1">
             {experience.logo ? (
               <img
@@ -86,18 +81,21 @@ export default function ExperienceCard({
             ) : null}
 
             <div>
-              <h3
-                id={titleId}
-                className="text-xl md:text-2xl font-semibold text-white tracking-tight transition-colors duration-300 group-hover:text-[#60a5fa]"
-              >
-                {experience.company}
-              </h3>
-              <p className="text-[#60a5fa] text-base md:text-lg font-medium">
+              <div className="flex items-start gap-2">
+                <h3
+                  id={titleId}
+                  title={experience.company}
+                  className="text-lg sm:text-xl md:text-2xl font-semibold text-white tracking-tight leading-tight transition-colors duration-300 group-hover:text-[#60a5fa]"
+                >
+                  {experience.company}
+                </h3>
+              </div>
+              <p className="text-[#60a5fa] text-sm sm:text-base md:text-lg font-medium">
                 {experience.title}
               </p>
             </div>
           </div>
-          <div className="text-right shrink-0 max-w-[45%] sm:max-w-none">
+          <div className="text-left sm:text-right w-full sm:w-auto shrink-0 max-w-none sm:max-w-[45%]">
             <span className="block text-sm tracking-wider text-white/30 font-bold uppercase">
               {experience.location}
             </span>
